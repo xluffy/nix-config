@@ -3,6 +3,8 @@
 {
   imports = [
     ./modules/core/cli.nix
+    ./modules/programs/git.nix
+    ./modules/shell/bash.nix
   ];
 
   home = {

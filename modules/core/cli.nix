@@ -13,6 +13,7 @@
     gnupg
     htop
     jq
+    just
     kubectl
     kubectx
     ncdu
@@ -23,5 +24,6 @@
     tmux
     wget
     yq
+    zoxide
   ];
 }

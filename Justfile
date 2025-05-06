@@ -1,9 +1,11 @@
-default: setup
+default: build
 
 setup:
     mkdir -pv /Users/quanggg/.config/nix
     cp nix.conf /Users/quanggg/.config/nix/
 
-switch:
+build:
     nix build .#homeConfigurations."quanggg".activationPackage
-    home-manager -f home.nix switch
+
+switch:
+    home-manager switch --flake .

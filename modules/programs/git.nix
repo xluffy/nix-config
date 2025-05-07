@@ -7,15 +7,12 @@ _: {
       userEmail = "quang@2meo.com";
       userName = "xluffy";
 
-      signing = {
-        key = "B54B9C74B03CAAD3";
-      };
-
       aliases = {
         a = "add";
         p = "push";
         ci = "commit";
         st = "status -uno";
+        stt = "status -uno";
         co = "checkout";
         br = "branch";
         lol = "log --graph --decorate --pretty=oneline --abbrev-commit";
@@ -23,23 +20,27 @@ _: {
       };
 
       extraConfig = {
+        commit = {
+          gpgSign = true;
+        };
         branch = {
           sort = "-committerdate";
+        };
+
+        init = {
+          defaultBranch = "main";
+        };
+        gpg = {
+          format = "ssh";
+          ssh = {
+            defaultKeyCommand = "sh -c 'echo key::$(ssh-add -L | head -n1)'";
+          };
         };
         push = {
           default = "current";
         };
         pull = {
           rebase = false;
-        };
-        init = {
-          defaultBranch = "main";
-        };
-        gpg = {
-          format = "ssh";
-        };
-        commit = {
-          gpgSign = true;
         };
         tag = {
           gpgSign = true;

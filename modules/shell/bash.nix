@@ -1,9 +1,9 @@
-_: {
+{ pkgs, ... }: {
 
   programs = {
     bash = {
       enable = true;
-      enableCompletion = true;
+      enableCompletion = false;
 
       shellAliases = {
         awk = "goawk";
@@ -54,12 +54,16 @@ _: {
       '';
 
       bashrcExtra = ''
-        PS1='\[\e[0;32m\]:: \[\e[0;37m\]You are \[$(tput bold)\]\[\033[38;5;46m\]\u\[$(tput sgr0)\]\[$(tput sgr0)\]\[\033[38;5;15m\] \[$(tput sgr0)\]-at- \[\e[0;34m\]\h\[\e[0;37m\] [\[\e[0;32m\]\w\[\e[0;39m\]]\n\[\e[0;32m\]\$\[\e[m\] '
+        PS1='\[\e[0;32m\]:: \[\e[0;37m\]Youuuuuuuuuuuu are \[$(tput bold)\]\[\033[38;5;46m\]\u\[$(tput sgr0)\]\[$(tput sgr0)\]\[\033[38;5;15m\] \[$(tput sgr0)\]-at- \[\e[0;34m\]\h\[\e[0;37m\] [\[\e[0;32m\]\w\[\e[0;39m\]]\n\[\e[0;32m\]\$\[\e[m\] '
 
-        gshuf -n 1 /Users/quanggg/code/nix-config/modules/shell/quote.txt | cowsay
+        gshuf -n 1 /Users/quanggg/code/me/nix-config/modules/shell/quote.txt | cowsay
 
         bind '"\e[A": history-search-backward'
         bind '"\e[B": history-search-forward'
+
+        if [[ -z BASH_COMPLETION_VERSINFO ]]; then
+          . "${pkgs.bash-completion}/etc/profile.d/bash_completion.sh"
+        fi
       '';
     };
   };

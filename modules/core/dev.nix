@@ -5,7 +5,5 @@
     gnumake
     gcc
     go
-    ruff
-    uv
   ];
 }

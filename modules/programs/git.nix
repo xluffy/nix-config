@@ -44,7 +44,14 @@ _: {
         tag = {
           gpgSign = true;
         };
-        url."ssh://git@github.com".insteadOf = "https://github.com";
+        url = {
+          "git@github.com:" = {
+            insteadOf = "https://github.com";
+          };
+          "ssh://git@github.com" = {
+            insteadOf = "https://github.com";
+          };
+        };
       };
 
       diff-so-fancy = {

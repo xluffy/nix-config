@@ -17,7 +17,6 @@
     just
     kubectl
     kubectx
-    llm
     ncdu
     neovim
     pv

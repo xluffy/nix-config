@@ -45,7 +45,12 @@ _: {
         HISTTIMEFORMAT = "[%F %T] ";
         USE_GKE_GCLOUD_AUTH_PLUGIN = 1;
         CLOUDSDK_PYTHON_SITEPACKAGES = 1;
+        EDITOR = "nvim";
       };
+
+      initExtra = ''
+        eval "$(direnv hook bash) "
+      '';
 
       bashrcExtra = ''
         PS1='\[\e[0;32m\]:: \[\e[0;37m\]You are \[$(tput bold)\]\[\033[38;5;46m\]\u\[$(tput sgr0)\]\[$(tput sgr0)\]\[\033[38;5;15m\] \[$(tput sgr0)\]-at- \[\e[0;34m\]\h\[\e[0;37m\] [\[\e[0;32m\]\w\[\e[0;39m\]]\n\[\e[0;32m\]\$\[\e[m\] '

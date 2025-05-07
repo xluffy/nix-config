@@ -12,7 +12,7 @@ _: {
         p = "push";
         ci = "commit";
         st = "status -uno";
-        stt = "status -uno";
+        stt = "status";
         co = "checkout";
         br = "branch";
         lol = "log --graph --decorate --pretty=oneline --abbrev-commit";
@@ -20,9 +20,16 @@ _: {
       };
 
       extraConfig = {
+        color = {
+          branch = "auto";
+          diff = "auto";
+          status = "auto";
+        };
+
         commit = {
           gpgSign = true;
         };
+
         branch = {
           sort = "-committerdate";
         };
@@ -30,21 +37,26 @@ _: {
         init = {
           defaultBranch = "main";
         };
+
         gpg = {
           format = "ssh";
           ssh = {
             defaultKeyCommand = "sh -c 'echo key::$(ssh-add -L | head -n1)'";
           };
         };
+
         push = {
           default = "current";
         };
+
         pull = {
           rebase = false;
         };
+
         tag = {
           gpgSign = true;
         };
+
         url = {
           "git@github.com:" = {
             insteadOf = "https://github.com";

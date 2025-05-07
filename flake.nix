@@ -11,10 +11,10 @@
 
   outputs = { nixpkgs, home-manager, ... }: {
     homeConfigurations = {
-      "quanggg" = home-manager.lib.homeManagerConfiguration {
+      "quanggg@xluffys-MacBook-Air.local" = home-manager.lib.homeManagerConfiguration {
         pkgs = import nixpkgs { system = "aarch64-darwin"; };
 
-        modules = [ ./home.nix ];
+        modules = [ ./home-manager/home.nix ];
       };
     };
   };

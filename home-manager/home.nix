@@ -10,6 +10,12 @@
     ./modules/shell/bash.nix
   ];
 
+  nixpkgs = {
+    config = {
+      allowUnfree = true;
+    };
+  };
+
   home = {
     username = "quanggg";
     homeDirectory = "/Users/quanggg";

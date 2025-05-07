@@ -5,5 +5,6 @@
     gnumake
     gcc
     go
+    llm
   ];
 }

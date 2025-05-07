@@ -4,8 +4,9 @@
   imports = [
     ./modules/core/cli.nix
     ./modules/core/dev.nix
-    ./modules/programs/git.nix
     ./modules/programs/default.nix
+    ./modules/programs/fzf.nix
+    ./modules/programs/git.nix
     ./modules/programs/tmux.nix
     ./modules/shell/bash.nix
   ];

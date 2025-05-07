@@ -15,10 +15,10 @@
         grep = "grep --color=auto";
         j = "just";
         k = "kubectl";
-        l = "ls -larht";
-        ll = "ls -larht";
-        lll = "ls -larht";
-        ls = "ls -larth";
+        ls = "eza -larh --sort newest --icons=auto";
+        l = "ls";
+        ll = "ls";
+        lll = "ls";
         more = "less";
         p = "curl https://ipinfo.io/ip";
         ping = "ping -c 5";

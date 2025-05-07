@@ -8,6 +8,7 @@
     curl
     diff-so-fancy
     direnv
+    eza
     fzf
     gnumake
     gnupg

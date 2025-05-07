@@ -1,6 +1,5 @@
-{ pkgs, self, ... }:
+_: {
 
-{
   programs = {
     zoxide = {
       enable = true;

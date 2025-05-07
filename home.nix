@@ -4,6 +4,7 @@
   imports = [
     ./modules/core/cli.nix
     ./modules/programs/git.nix
+    ./modules/programs/default.nix
     ./modules/shell/bash.nix
   ];
 

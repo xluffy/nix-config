@@ -5,6 +5,7 @@ _: {
     };
     direnv = {
       enable = true;
+      nix-direnv.enable = true;
     };
     fzf = { enable = true; };
     zoxide = {

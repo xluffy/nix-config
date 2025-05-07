@@ -1,4 +1,4 @@
-_: {
+{ pkgs, ... }: {
 
   programs.tmux = {
     enable = true;
@@ -102,11 +102,4 @@ _: {
 
     '';
   };
-  environment.systemPackages = with pkgs; [
-    tmuxPlugins.sensible
-    tmuxPlugins.resurrect
-    tmuxPlugins.yank
-    tmuxPlugins.battery
-    tmuxPlugins.cpu
-  ];
 }

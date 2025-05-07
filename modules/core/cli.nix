@@ -20,6 +20,7 @@
     ncdu
     neovim
     pv
+    reattach-to-user-namespace
     ripgrep
     tig
     tmux

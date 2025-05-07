@@ -13,6 +13,7 @@ _: {
         df = "df -h | tail -n 8 | sort";
         du = "du -sch";
         grep = "grep --color=auto";
+        j = "just";
         k = "kubectl";
         l = "ls -larht";
         ll = "ls -larht";

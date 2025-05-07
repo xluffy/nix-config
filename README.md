@@ -16,3 +16,5 @@ home-manager -f "~/code/me/nix-config/home.nix"
 ```
 
 https://mynixos.com/home-manager/options/programs.bash
+
+https://github.com/Misterio77/nix-starter-configs/blob/main/README.md

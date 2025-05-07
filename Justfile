@@ -11,4 +11,4 @@ build:
     nix build .#homeConfigurations."quanggg".activationPackage
 
 switch:
-    home-manager switch --flake .
+    home-manager switch --flake .#quanggg@xluffys-MacBook-Air.local

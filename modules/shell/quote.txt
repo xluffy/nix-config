@@ -1,0 +1,27 @@
+My name is Linus, and I am your God. - Linus Torvalds
+Nobody actually creates perfect code the first time around, except me. But there's only one of me. — Linus Torvalds
+Software is like sex: it's better when it's free. - Linus Torvalds
+Nvidia, fuck you! - Linus Torvalds
+Talk is cheap. Show me the code. - Linus Torvalds
+Rules of Optimization: Rule 1: Don't do it. Rule 2 (for experts only): Don't do it yet. — Michael A. Jacksno
+If debugging is the process of removing software bugs, then programming must be the process of putting them in. — Edsger Dijkstra
+Perl – The only language that looks the same before and after RSA encryption. — Keith Bostic
+On the seventh day, God said, "Ship it! We'll release patches later. — Josh Flachsbart
+It's not a bug, it's a feature! - Unknown
+There, it should work now. - All programmers
+There Are Only 10 Types Of People In The World: Those Who Understand Binary, And Those Who Don't - Unknown
+Before Software Can Be Reusable It First Has To Be Usable. - Ralph Johnson
+Programming is like sex: One mistake and you have to support it for the rest of your life. - Unknown
+Why programmers like UNIX: unzip, strip, touch, finger, grep, mount, fsck, more, yes, fsck, fsck, fsck, umount, sleep - Unknown
+Some people, when confronted with a problem, think "I know, I'll use regular expressions. Now they have two problems - Jamie Zawinski
+If debugging is the process of removing software bugs, then programming must be the process of putting them in.  — Edsger Dijkstra
+Code formatting is important. It is too important to ignore and it is too important to treat religiously. Code formatting is about communication, and communication is the professional
+developer’s first order of business. Perhaps you thought that “getting it working” was the first order of business for a professional developer. - Clean Code - Robert Martin
+Hacker is a person who is trying to steal your grandma's bank password - Unknown
+I don’t need tests: tests are for people who write bugs. – @hipsterhacker
+Simplicity is prerequisite for reliability - Edsger Dijkstra
+John is a man of focus, commitment, of sheer will.- Viggo Tarasov
+Programs must be written for people to read, and only incidentally for machines to execute. - Hal Abelson
+The answer to every question in software is ‘it depends. - Sandi Metz
+Nothing is faster than doing nothing. Nothing.
+To make error is human. To propagate error to all server in automatic way is #devops.

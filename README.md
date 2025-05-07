@@ -14,3 +14,5 @@ To manage them, I will use Home Manager. Home Manager can be configured as a use
 ```
 home-manager -f "~/code/me/nix-config/home.nix"
 ```
+
+https://mynixos.com/home-manager/options/programs.bash

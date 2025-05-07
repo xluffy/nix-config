@@ -1,4 +1,4 @@
-default: build
+default: build switch
 
 alias b := build
 alias s := switch

@@ -15,7 +15,7 @@
         grep = "grep --color=auto";
         j = "just";
         k = "kubectl";
-        ls = "eza -larh --sort newest --icons=auto";
+        ls = "ls --color=auto -larth";
         l = "ls";
         ll = "ls";
         lll = "ls";

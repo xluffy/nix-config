@@ -1,9 +1,12 @@
-{ pkgs, ... }:
+{ pkgs, pkgs-unstable, ... }:
 
 {
   home.packages = with pkgs; [
+    bun
+    go
     gnumake
     gcc
-    go
+    postgresql
+    pkgs-unstable.libpq
   ];
 }

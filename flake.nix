@@ -3,22 +3,30 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+
     home-manager = {
       url = "github:nix-community/home-manager/release-24.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
-  outputs = { nixpkgs, home-manager, ... }:
+  outputs = { nixpkgs, nixpkgs-unstable, home-manager, ... }:
     let
       system = "aarch64-darwin";
       pkgs = import nixpkgs {
+        inherit system;
+      };
+      pkgsUnstable = import nixpkgs-unstable {
         inherit system;
       };
 
       generateHomeConfig = username: home-manager.lib.homeManagerConfiguration {
         pkgs = pkgs;
         modules = [ ./home-manager/home.nix ];
+        extraSpecialArgs = {
+          pkgs-unstable = pkgsUnstable;
+        };
       };
     in
     {

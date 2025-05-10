@@ -2,7 +2,7 @@
 
 {
   home.packages = with pkgs; [
-    bun
+    pkgs-unstable.bun
     go
     gnumake
     gcc

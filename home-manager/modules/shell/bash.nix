@@ -51,6 +51,7 @@
 
       initExtra = ''
         eval "$(direnv hook bash) "
+        source /Users/quanggg/code/me/nix-config/home-manager/modules/shell/function.sh
       '';
 
       bashrcExtra = ''

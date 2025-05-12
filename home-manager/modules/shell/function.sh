@@ -80,7 +80,7 @@ bz() {
 }
 
 f() {
-  commit_msg=$(git diff --cached | llm -m 4o-mini "$(cat ~/code/me/nix-config/home-manager/modules/shell/prompts/commit-prompt.txt)")
+  commit_msg=$(git diff --cached | llm -m 4o-mini "$(cat ~/code/me/nix-config/home-manager/modules/shell/commit-prompt.txt)")
   printf "Commit message:\n${commit_msg} \n";
   read -p "Do you want to commit with this message? [y/N]: " confirm;
 

@@ -32,7 +32,7 @@
       # empty mean unlimit
       historySize = 999999999;
       historyFileSize = 999999999;
-      historyFile = "~/.bash_history";
+      historyFile = "/Users/quanggg/.bash_history";
 
       historyControl = [
         "ignoredups"
@@ -55,6 +55,7 @@
         source ~/code/me/nix-config/home-manager/modules/shell/function.sh
         source <(helm completion bash)
         source <(kubectl completion bash)
+        PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
       '';
 
       bashrcExtra = ''

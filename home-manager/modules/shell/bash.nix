@@ -32,7 +32,7 @@
       # empty mean unlimit
       historySize = 999999999;
       historyFileSize = 999999999;
-      historyFile = "~/.bash_unlimit_history";
+      historyFile = "~/.bash_history";
 
       historyControl = [
         "ignoredups"
@@ -51,7 +51,12 @@
 
       initExtra = ''
         eval "$(direnv hook bash) "
+        eval "$(fzf --bash)"
+        source "${pkgs.fzf}/share/fzf/key-bindings.bash"
+        source "${pkgs.fzf}/share/fzf/completion.bash"
         source ~/code/me/nix-config/home-manager/modules/shell/function.sh
+        source <(helm completion bash)
+        source <(kubectl completion bash)
       '';
 
       bashrcExtra = ''

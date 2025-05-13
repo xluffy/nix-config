@@ -13,3 +13,6 @@ switch:
 
 list:
     home-manager packages
+
+gc:
+    nix-collect-garbage --delete-older-than 2d --dry-run

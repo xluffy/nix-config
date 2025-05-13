@@ -52,8 +52,6 @@
       initExtra = ''
         eval "$(direnv hook bash) "
         eval "$(fzf --bash)"
-        source "${pkgs.fzf}/share/fzf/key-bindings.bash"
-        source "${pkgs.fzf}/share/fzf/completion.bash"
         source ~/code/me/nix-config/home-manager/modules/shell/function.sh
         source <(helm completion bash)
         source <(kubectl completion bash)

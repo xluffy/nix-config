@@ -1,10 +1,9 @@
-{ pkgs, ... }:
+{ pkgs, pkgs-unstable, ... }:
 
 {
   home.packages = with pkgs; [
-    _1password-gui
-    betterdisplay
-    karabiner-elements
-    microsoft-edge
+    pkgs-unstable.betterdisplay
+    pkgs-unstable.karabiner-elements
+    pkgs-unstable.microsoft-edge
   ];
 }

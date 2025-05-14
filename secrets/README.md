@@ -17,3 +17,7 @@ Rekey
 ```bash
 > agenix --rekey
 ```
+
+Ref:
+
+- https://lgug2z.com/articles/handling-secrets-in-nixos-an-overview

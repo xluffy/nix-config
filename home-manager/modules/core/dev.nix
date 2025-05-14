@@ -8,5 +8,7 @@
     gcc
     postgresql
     pkgs-unstable.libpq
+    rustc
+    rustup
   ];
 }

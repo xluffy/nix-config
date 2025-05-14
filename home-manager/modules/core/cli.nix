@@ -2,6 +2,7 @@
 
 {
   home.packages = with pkgs; [
+    _1password-cli
     bat
     coreutils
     cowsay

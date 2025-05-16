@@ -40,7 +40,8 @@ _: {
         gpg = {
           format = "ssh";
           ssh = {
-            defaultKeyCommand = "sh -c 'echo key::$(ssh-add -L | head -n1)'";
+            # "${pkgs._1password-gui}/bin/op-ssh-sign";
+            program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign";
           };
         };
 
@@ -63,6 +64,10 @@ _: {
           "ssh://git@github.com" = {
             insteadOf = "https://github.com";
           };
+        };
+
+        user = {
+          signingkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAII6gzw6c40c8zowzZ6nR8iRwsYy0qg2sNvro09nFtTzF";
         };
       };
 

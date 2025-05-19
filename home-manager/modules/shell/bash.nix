@@ -3,7 +3,7 @@
   programs = {
     bash = {
       enable = true;
-      enableCompletion = true;
+      enableCompletion = false;
 
       shellAliases = {
         awk = "goawk";

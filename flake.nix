@@ -16,9 +16,11 @@
       system = "aarch64-darwin";
       pkgs = import nixpkgs {
         inherit system;
+        config.allowUnfree = true;
       };
       pkgsUnstable = import nixpkgs-unstable {
         inherit system;
+        config.allowUnfree = true;
       };
 
       generateHomeConfig = username: home-manager.lib.homeManagerConfiguration {

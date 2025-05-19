@@ -3,6 +3,7 @@
 {
   imports = [
     ./modules/core/cli.nix
+    ./modules/core/gui.nix
     ./modules/core/dev.nix
     ./modules/core/font.nix
     ./modules/programs/1password.nix
@@ -13,12 +14,6 @@
     ./modules/programs/tmux.nix
     ./modules/shell/bash.nix
   ];
-
-  nixpkgs = {
-    config = {
-      allowUnfree = true;
-    };
-  };
 
   home = {
     username = "quanggg";

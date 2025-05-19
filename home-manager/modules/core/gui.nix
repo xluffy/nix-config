@@ -4,6 +4,6 @@
   home.packages = with pkgs; [
     pkgs-unstable.betterdisplay
     pkgs-unstable.karabiner-elements
-    pkgs-unstable.microsoft-edge
+    pkgs-unstable.telegram-desktop
   ];
 }

@@ -8,6 +8,7 @@
     ./modules/programs/default.nix
     ./modules/programs/fzf.nix
     ./modules/programs/git.nix
+    ./modules/programs/ssh.nix
     ./modules/programs/tmux.nix
     ./modules/shell/bash.nix
   ];

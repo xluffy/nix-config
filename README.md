@@ -3,7 +3,7 @@
 To install Nix on macOS as a multi-user installtion, run this command:
 
 ```bash
-bash <(curl -L https://nixos.org/nix/install) --daemon
+sh <(curl -L https://nixos.org/nix/install) --daemon --yes
 ```
 
 If you want to configure the OS via Nix, you can install Nix Darwin. For me, I just want to use Nix for managing package and user environment config in home directory

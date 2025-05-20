@@ -10,6 +10,10 @@ _: {
       [[ssh-keys]]
       vault = "Private"
       item = "ozvndytabt4gd7maq22nj3ekwa"
+
+      [[ssh-keys]]
+      vault = "Private"
+      item = "uktlnxwdowdzgb6aeq37ugbhlm"
     '';
   };
 }

@@ -2,6 +2,10 @@ _: {
   programs = {
     bat = {
       enable = true;
+      config = {
+        theme = "Monokai Extended Origin";
+        pager = "less -FR";
+      };
     };
     direnv = {
       enable = true;

@@ -18,6 +18,7 @@
     just
     kubectl
     kubectx
+    kubernetes-helm
     ncdu
     neovim
     pv

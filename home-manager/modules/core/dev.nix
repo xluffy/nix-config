@@ -6,12 +6,11 @@
     gcc
     gnumake
     go
-    google-cloud-sdk
+    (google-cloud-sdk.withExtraComponents [ google-cloud-sdk.components.gke-gcloud-auth-plugin ])
     pkgs-unstable.bun
     pkgs-unstable.libpq
     postgresql
     python313
-    nodejs_20
     regal
     rustc
     rustup

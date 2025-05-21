@@ -6,10 +6,12 @@
     gcc
     gnumake
     go
+    google-cloud-sdk
     pkgs-unstable.bun
     pkgs-unstable.libpq
     postgresql
     python313
+    nodejs_20
     regal
     rustc
     rustup

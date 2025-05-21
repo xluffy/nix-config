@@ -12,7 +12,8 @@
     pkgs-unstable.libpq
     pkgs-unstable.nodejs_20
     postgresql
-    python313
+    python39
+    poetry
     regal
     rustc
     rustup

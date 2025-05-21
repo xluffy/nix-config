@@ -12,6 +12,7 @@ _: {
       nix-direnv.enable = true;
     };
     fzf = { enable = true; };
+    jq = { enable = true; };
     zoxide = {
       enable = true;
       enableBashIntegration = true;

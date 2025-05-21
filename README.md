@@ -31,3 +31,24 @@ https://unmovedcentre.com/posts/secrets-management/#inputting-nix-secrets-to-nix
 ```bash
 > openssl version -a
 ```
+
+## devenv
+
+```bash
+> devenv init
+
+> cat devenv.nix
+{ pkgs, ... }:
+
+{
+  packages = [
+    # pkgs.openssl_1_1
+  ];
+
+  languages.python.enable = true;
+  languages.python.version = "3.9.21";
+  languages.python.venv.enable = true;
+  languages.python.poetry.enable = true;
+  languages.python.poetry.install.enable = true;
+}
+```

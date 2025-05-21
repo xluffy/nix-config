@@ -3,6 +3,7 @@
 {
   home.packages = with pkgs; [
     conftest
+    devenv
     gcc
     gnumake
     go
@@ -15,6 +16,9 @@
     pkgs-unstable.terraform
     postgresql
     python39
+    # (python39.withPackages (ppkgs: [
+    #   ppkgs.llm
+    # ]))
     poetry
     regal
     rustc

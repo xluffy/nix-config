@@ -18,6 +18,7 @@
     rustc
     rustup
     scc
+    sops
     pkgs-unstable.terraform
     terragrunt
     terraform-ls

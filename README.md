@@ -25,3 +25,9 @@ https://mynixos.com/home-manager/options/programs.bash
 https://github.com/Misterio77/nix-starter-configs/blob/main/README.md
 https://home-manager-options.extranix.com/?query=git.&release=release-24.11
 https://unmovedcentre.com/posts/secrets-management/#inputting-nix-secrets-to-nix-config
+
+## OpenSSL
+
+```bash
+> openssl version -a
+```

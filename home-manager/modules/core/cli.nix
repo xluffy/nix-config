@@ -10,10 +10,12 @@
     diff-so-fancy
     direnv
     fzf
+    glab
     gnumake
     gnupg
     goawk
     htop
+    inetutils
     jq
     just
     kubectl
@@ -21,11 +23,14 @@
     kubernetes-helm
     ncdu
     neovim
+    nix-tree
     pv
     reattach-to-user-namespace
     ripgrep
     tig
     tmux
+    tree
+    tree-sitter
     wget
     yq
     zoxide

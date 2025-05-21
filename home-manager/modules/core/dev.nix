@@ -2,14 +2,20 @@
 
 {
   home.packages = with pkgs; [
-    pkgs-unstable.bun
-    go
-    gnumake
+    # ansible-lint
     gcc
+    gnumake
+    go
+    pkgs-unstable.bun
+    pkgs-unstable.libpq
     postgresql
     python313
-    pkgs-unstable.libpq
+    regal
     rustc
     rustup
+    scc
+    terraform-ls
+    tflint
+    tfsec
   ];
 }

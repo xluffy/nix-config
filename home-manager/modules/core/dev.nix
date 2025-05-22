@@ -1,13 +1,15 @@
-{ pkgs, pkgs-unstable, ... }:
-
 {
+  pkgs,
+  pkgs-unstable,
+  ...
+}: {
   home.packages = with pkgs; [
     conftest
     devenv
     gcc
     gnumake
     go
-    (google-cloud-sdk.withExtraComponents [ google-cloud-sdk.components.gke-gcloud-auth-plugin ])
+    (google-cloud-sdk.withExtraComponents [google-cloud-sdk.components.gke-gcloud-auth-plugin])
     openssl_1_1
     pkgs-unstable.ansible-lint
     pkgs-unstable.bun

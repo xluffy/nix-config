@@ -1,6 +1,4 @@
-_:
-
-{
+_: {
   imports = [
     ./modules/core/cli.nix
     ./modules/core/dev.nix

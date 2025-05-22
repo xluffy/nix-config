@@ -1,5 +1,4 @@
-{ pkgs, ... }: {
-
+{pkgs, ...}: {
   programs = {
     bash = {
       enable = true;
@@ -38,7 +37,7 @@
         "ignoredups"
       ];
 
-      shellOptions = [ "histappend" ];
+      shellOptions = ["histappend"];
 
       sessionVariables = {
         BASH_SILENCE_DEPRECATION_WARNING = 1;

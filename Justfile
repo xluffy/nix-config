@@ -21,9 +21,11 @@ gc:
   nix-collect-garbage --delete-older-than 2d
 
 check:
-  statix check .
+  alejandra --check .
   deadnix .
+  statix check .
 
 fix:
-  statix fix .
+  alejandra .
   deadnix --edit .
+  statix fix .

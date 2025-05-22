@@ -1,6 +1,8 @@
-{ pkgs, pkgs-unstable, ... }:
 {
-
+  pkgs,
+  pkgs-unstable,
+  ...
+}: {
   fonts.fontconfig.enable = true;
   home.packages = with pkgs; [
     pkgs-unstable.hackgen-nf-font

@@ -33,8 +33,8 @@
         ];
       };
 
-      generateHomeConfig = username: home-manager.lib.homeManagerConfiguration {
-        pkgs = pkgs;
+      generateHomeConfig = _username: home-manager.lib.homeManagerConfiguration {
+        inherit pkgs;
         modules = [
           ./home-manager/home.nix
           nix-index-database.hmModules.nix-index
@@ -52,7 +52,7 @@
 
       devShells = {
         aarch64-darwin.default = import ./shell.nix {
-          pkgs = pkgs;
+          inherit pkgs;
         };
       };
     };

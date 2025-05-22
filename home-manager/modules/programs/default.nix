@@ -13,11 +13,17 @@ _: {
       nix-direnv.enable = true;
     };
 
-    fzf = { enable = true; };
+    fzf = {
+      enable = true;
+    };
 
-    jq = { enable = true; };
+    jq = {
+      enable = true;
+    };
 
-    nix-index = { enable = true; };
+    nix-index = {
+      enable = true;
+    };
 
     zoxide = {
       enable = true;

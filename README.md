@@ -52,3 +52,29 @@ https://unmovedcentre.com/posts/secrets-management/#inputting-nix-secrets-to-nix
   languages.python.poetry.install.enable = true;
 }
 ```
+
+## Specific package version
+
+https://mplanchard.com/posts/installing-a-specific-version-of-a-package-with-nix.html
+
+```nix
+  inputs = {
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    # Some particular revision for installing fd
+    nixpkgs-fd.url = "github:nixos/nixpkgs/bf972dc380f36a3bf83db052380e55f0eaa7dcb6";
+
+    home-manager = {
+      url = "github:nix-community/home-manager/release-24.11";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+  };
+
+```
+
+```nix
+  outputs = { nixpkgs, nixpkgs-unstable, home-manager, nixpkgs-fd, ... }:
+  {
+    #...
+  };
+```

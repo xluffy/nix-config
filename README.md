@@ -25,6 +25,7 @@ https://mynixos.com/home-manager/options/programs.bash
 https://github.com/Misterio77/nix-starter-configs/blob/main/README.md
 https://home-manager-options.extranix.com/?query=git.&release=release-24.11
 https://unmovedcentre.com/posts/secrets-management/#inputting-nix-secrets-to-nix-config
+https://home-manager-options.extranix.com/
 
 ## OpenSSL
 
@@ -77,4 +78,49 @@ https://mplanchard.com/posts/installing-a-specific-version-of-a-package-with-nix
   {
     #...
   };
+```
+
+## NixOS vs home-manager
+
+```nix
+# configuration.nix
+{config, pkgs, ...}: {
+  environment.systemPackages = with pkgs; [
+    rsync
+  ];
+
+  services.nginx = {
+    enable = true;
+  };
+}
+```
+
+```nix
+# home.nix
+{config, pkgs, ...}: {
+  home.file.foo.text = "bar";
+
+  programs.fish = {
+    enable = true;
+  };
+}
+```
+
+##  How to locate nix packages with specific files
+
+[nix-index](https://github.com/nix-community/nix-index) is a tool to quickly locate the package providing a certain file in nixpkgs. But you need to generate a database locally and run this command to search
+
+```bash
+# create locally database
+> nix run github:nix-community/nix-index#nix-index
+
+# query
+> nix run github:nix-community/nix-index#nix-locate -- bin/ip
+```
+
+In another side, [nix-index-database](https://github.com/nix-community/nix-index-database) provides pre-generated databases if you don't want to generate a database locally.
+
+
+```bash
+> nix run github:nix-community/nix-index-database bin/ip
 ```

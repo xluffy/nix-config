@@ -3,9 +3,8 @@ let
   tqn = "";
   vm = "";
 
-  allKeys = [ xluffy tqn vm ];
-in
-{
+  allKeys = [xluffy tqn vm];
+in {
   "password.age".publicKeys = allKeys;
-  "password.age".publicKeys = [ xluffy ];
+  "password.age".publicKeys = [xluffy];
 }

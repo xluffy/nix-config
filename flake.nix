@@ -33,7 +33,7 @@
         ];
       };
 
-      generateHomeConfig = username: home-manager.lib.homeManagerConfiguration {
+      generateHomeConfig = _username: home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         modules = [
           ./home-manager/home.nix

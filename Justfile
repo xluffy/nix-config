@@ -22,3 +22,8 @@ gc:
 
 check:
   statix check .
+  deadnix .
+
+fix:
+  statix fix .
+  deadnix --edit .

@@ -56,6 +56,7 @@
         source <(helm completion bash)
         source <(kubectl completion bash)
         PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
+        source ${pkgs.nix-index}/etc/profile.d/command-not-found.sh
       '';
 
       bashrcExtra = ''

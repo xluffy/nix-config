@@ -4,6 +4,7 @@
   home.packages = with pkgs; [
     _1password-cli
     age
+    bashInteractive
     bat
     coreutils
     cowsay

@@ -14,6 +14,7 @@
     pkgs-unstable.ansible-lint
     pkgs-unstable.bun
     pkgs-unstable.libpq
+    pkgs-unstable.llm
     pkgs-unstable.nodejs_20
     pkgs-unstable.terraform
     postgresql

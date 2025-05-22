@@ -25,7 +25,6 @@
     kubernetes-helm
     ncdu
     neovim
-    nix-tree
     pkgs-unstable.iproute2mac
     pv
     reattach-to-user-namespace

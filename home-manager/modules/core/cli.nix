@@ -14,7 +14,7 @@
     diff-so-fancy
     direnv
     fzf
-    glab
+    pkgs-unstable.glab
     gnumake
     gnupg
     goawk

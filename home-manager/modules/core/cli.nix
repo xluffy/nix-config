@@ -14,7 +14,6 @@
     diff-so-fancy
     direnv
     fzf
-    pkgs-unstable.glab
     gnumake
     gnupg
     goawk
@@ -26,15 +25,16 @@
     kubectx
     kubernetes-helm
     ncdu
-    neovim
     pkgs-unstable.iproute2mac
+    pkgs-unstable.glab
+    pkgs-unstable.neovim
+    pkgs-unstable.tree-sitter
     pv
     reattach-to-user-namespace
     ripgrep
     tig
     tmux
     tree
-    tree-sitter
     wget
     yq
     zoxide

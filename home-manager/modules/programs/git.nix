@@ -74,6 +74,18 @@ _: {
       diff-so-fancy = {
         enable = true;
       };
+
+      ignores = [
+        ".DS_Store"
+        ".env"
+        "__pycache__"
+        ".terraform"
+        "terraform.tfvars"
+        "*.key"
+        "*.pem"
+        "*.crt"
+        ".vault_*"
+      ];
     };
   };
 }

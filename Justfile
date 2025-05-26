@@ -27,7 +27,7 @@ check:
   deadnix .
   statix check .
 
-fix: check
+fix:
   alejandra .
   deadnix --edit .
   statix fix .

@@ -4,11 +4,13 @@ alias b := bootstrap
 alias s := switch
 alias l := list
 alias ls := list
+alias f := fix
+alias c := check
 
 bootstrap:
   nix develop
 
-switch:
+switch: fix
   home-manager switch --flake .#quanggg@xluffys-MacBook-Air.local
 
 list:
@@ -25,7 +27,7 @@ check:
   deadnix .
   statix check .
 
-fix:
+fix: check
   alejandra .
   deadnix --edit .
   statix fix .

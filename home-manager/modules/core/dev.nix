@@ -18,7 +18,7 @@
     pkgs-unstable.nodejs_20
     pkgs-unstable.terraform
     postgresql
-    python39
+    python314
     # (python39.withPackages (ppkgs: [
     #   ppkgs.llm
     # ]))

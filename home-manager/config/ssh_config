@@ -1,4 +1,4 @@
-Host *
+Host * !127.0.0.1
   ForwardAgent no
   AddKeysToAgent no
   Compression yes

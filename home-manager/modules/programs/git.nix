@@ -6,6 +6,18 @@ _: {
       userEmail = "quang@2meo.com";
       userName = "xluffy";
 
+      includes = [
+        {
+          contents = {
+            user = {
+              email = "quang@2meo.com";
+            };
+            url = {};
+          };
+          condition = "gitdir:~/code/me/";
+        }
+      ];
+
       aliases = {
         a = "add";
         p = "push";

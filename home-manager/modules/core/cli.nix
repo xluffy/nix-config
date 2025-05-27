@@ -14,6 +14,7 @@
     diff-so-fancy
     direnv
     fzf
+    glow
     gnumake
     gnupg
     goawk

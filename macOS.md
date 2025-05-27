@@ -16,7 +16,9 @@ Dock
 - Battery -> "Show Percentage"
 
 Security: Touch ID
+
 Notifications: Off, except for Calendar
+
 Siri: Disabled
 
 Trackpad
@@ -25,7 +27,7 @@ Trackpad
   - More Gestures -> Notification Centre off
 
 Keyboard
-  - Text
+  - Text Input
     - disable "Capitalise word automatically"
     - disable "Add full stop with double-space"
     - disable "Use smart quotes and dashes"
@@ -43,7 +45,8 @@ Finder
     - New Finder windows show: [Downloads]
     - Show these items on the desktop: disable all
   - Sidebar:
-    - activate all Favorites
+    - activate all Favorites (except Recents, Movies, Music)
+    - disable all Location (except iCloud Driver)
     - move Library to Favorites
   - Show only:
     - Desktop

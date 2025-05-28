@@ -19,3 +19,6 @@ defaults write com.apple.finder ShowPathbar -bool true
 defaults write com.apple.finder ShowStatusBar -bool true
 
 killall Finder;
+
+defaults write -g InitialKeyRepeat -float 10.0 # normal minimum is 15 (225 ms)
+defaults write -g KeyRepeat -float 1.0 # normal minimum is 2 (30 ms)

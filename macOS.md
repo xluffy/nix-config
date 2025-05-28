@@ -17,7 +17,7 @@ Dock
 
 Security: Touch ID
 
-Notifications: Off, except for Calendar
+Notifications: Off, except for Calendar, Slack, Telegram
 
 Siri: Disabled
 
@@ -27,16 +27,23 @@ Trackpad
   - More Gestures -> Notification Centre off
 
 Keyboard
+  - Key repeat rate -> Fast
+  - Delay until repeat -> Short
   - Text Input
     - disable "Capitalise word automatically"
     - disable "Add full stop with double-space"
     - disable "Use smart quotes and dashes"
     - use " for double quotes
     - use ' for single quotes
-  - Keyboard -> Mission Control -> disable all
+  - Keyboard -> Mission Control -> disable all, except:
+    - Mission Control
+    - Application windows
+    - Move left a space -> disable (prepare for moving in Terminal)
+    - Move right a space -> disable (prepare for moving in Terminal)
   - Press FN to -> "Do Nothing"
   - Keyboard Shortcuts -> Spotlight -> CMD + Space disable
   - We will be using Raycast instead
+  - Input Sources (Disable all)
 
 Mission Control: Hot Corners: disable all
 

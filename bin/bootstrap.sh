@@ -10,7 +10,7 @@ defaults write com.apple.Preview ApplePersistenceIgnoreState YES
 chflags nohidden ~/Library
 
 # show hidden files
-defaults write com.apple.finder AppleShowAllFiles YES
+defaults write com.apple.finder AppleShowAllFiles NO
 
 # show path bar
 defaults write com.apple.finder ShowPathbar -bool true

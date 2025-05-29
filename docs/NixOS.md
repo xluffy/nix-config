@@ -1,6 +1,6 @@
 # NixOS setup
 
-Install NixOS for Dell Wyse 5070 (x86_64)
+Install NixOS for **Dell Wyse 5070 (x86_64)**
 
 - First, Just install NixOS via USB same with another distribution
 - After that, we will config via `/etc/nixos`
@@ -8,7 +8,6 @@ Install NixOS for Dell Wyse 5070 (x86_64)
   - `hardware-configuration.nix` for hardware
 
 We will not try to manage booting or disk partition ([disko](https://github.com/nix-community/disko)), just install NixOS same Ubuntu.
-
 Ref: https://tech.aufomm.com/my-nixos-journey-intro-and-installation/
 
 ## Prepare step
@@ -37,10 +36,16 @@ Boot Settings (F10 or Del)
 - Ensure UEFI Mode is Enabled.
 - Ensure Boot from USB is Enabled.
 
-## Install step (nixos-minimal-25)
+Boot security:
+
+- Admin Password
+- System Password
+- Internal HDD-0 Password
+
+## Install step (NixOS minial 25.05)
 
 - Prepare wifi
-- Partition GPT (ESP(512MB), boot (512MB), /, /home)
+- Partition GPT (ESP - boot (512MB), / (64GB), /home (remaining space))
   - M$ recommends 100 MB for its operating systems
   - The author of `gdisk` suggests 550 MiB.
   - As per the Arch Linux wiki, to avoid potential problems with some EFIs, ESP size should be at least 512 MiB. 550 MiB is recommended to avoid MiB/MB confusion and accidentally creating FAT16.
@@ -102,7 +107,7 @@ sudo cryptsetup open /dev/sda3 crypthome
 ```bash
 sudo mkfs.ext4 /dev/mapper/cryptroot -L /
 sudo mkfs.ext4 /dev/mapper/crypthome -L home
-sudo mkfs.fat -F 32 /dev/sda1 -n boot  # plese not encrypt boot
+sudo mkfs.fat -F 32 /dev/sda1 -n boot
 
 # Mount
 sudo mount /dev/mapper/cryptroot /mnt
@@ -161,3 +166,13 @@ environment.systemPackages = with pkgs; [ tailscale ];
 ```
 
 Run `sudo nixos-rebuild switch` to apply new config and check tailscale service `systemctl status tailscaled.service`
+
+## Tailscale
+
+Create a link to login Tailscale from CLI
+
+```bash
+sudo tailscale login
+```
+
+Using another device (PC or Phone) to open the URL output and login

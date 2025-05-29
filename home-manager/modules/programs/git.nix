@@ -8,19 +8,31 @@ _: {
 
       includes = [
         {
+          condition = "gitdir:~/code/me/";
           contents = {
             user = {
+              user = "xluffy";
               email = "quang@2meo.com";
             };
             url = {};
           };
-          condition = "gitdir:~/code/me/";
+        }
+        {
+          condition = "gitdir:~/code/work/";
+          contents = {
+            user = {
+              user = "Quang";
+              email = "quang@p0rnhub.cc";
+            };
+            url = {};
+          };
         }
       ];
 
       aliases = {
         a = "add";
         p = "push";
+        pul = "pull";
         ci = "commit";
         st = "status -uno";
         stt = "status";

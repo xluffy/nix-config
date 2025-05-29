@@ -1,0 +1,3 @@
+enc:
+  curl https://github.com/xluffy.keys | age -R - kube_config > kube_config.age
+

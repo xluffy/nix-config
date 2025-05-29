@@ -1,5 +1,7 @@
 # Setup with Nix on macOS
 
+[![built with nix](https://builtwithnix.org/badge.svg)](https://builtwithnix.org)
+
 To install Nix on macOS as a multi-user installtion, run this command:
 
 ```bash

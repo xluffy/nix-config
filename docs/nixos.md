@@ -54,7 +54,7 @@ sudo systemctl status wpa_supplicant.service
 Generate Wifi access config
 
 ```bash
-wpa_passphrase <SSID> > | sudo tee >/etc/wpa_supplicant.conf
+wpa_passphrase <SSID> > | sudo tee /etc/wpa_supplicant.conf
 sudo systemctl restart wpa_supplicant.service
 ```
 
@@ -80,8 +80,7 @@ Create boot, / and home for remaining space
 ```bash
 # mkpart PART-TYPE [FS-TYPE] START END
 # part-type is one of 'primary', 'extended' or 'logical'
-(parted) mkpart boot ext4 512MiB 1GiB
-(parted) mkpart / ext4 1GiB 100GiB
+(parted) mkpart / ext4 1GiB 64GiB
 (parted) mkpart home ext4 100GiB -1MiB
 (parted) print
 (parted) quit
@@ -91,19 +90,19 @@ Format and LUKS
 
 ```bash
 # Root
-sudo cryptsetup luksFormat /dev/sda3
+sudo cryptsetup luksFormat /dev/sda2
 # YES not yes not Yes
-sudo ryptsetup open /dev/sda3 cryptroot
+sudo cryptsetup open /dev/sda2 cryptroot
 
 # Home
-sudo cryptsetup luksFormat /dev/sda4
-sudo cryptsetup open /dev/sda4 crypthome
+sudo cryptsetup luksFormat /dev/sda3
+sudo cryptsetup open /dev/sda3 crypthome
 ```
 
 ```bash
 sudo mkfs.ext4 /dev/mapper/cryptroot -L /
 sudo mkfs.ext4 /dev/mapper/crypthome -L home
-sudo mkfs.ext4 /dev/sda2 -L boot  # plese not encrypt boot
+sudo mkfs.fat -F 32 /dev/sda1 -n boot  # plese not encrypt boot
 
 # Mount
 sudo mount /dev/mapper/cryptroot /mnt

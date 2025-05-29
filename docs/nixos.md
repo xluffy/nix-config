@@ -89,13 +89,13 @@ Create boot, / and home for remaining space
 Format and LUKS
 
 ```bash
-# Root
+# root/home
 sudo cryptsetup luksFormat /dev/sda2
-# YES not yes not Yes
-sudo cryptsetup open /dev/sda2 cryptroot
-
-# Home
 sudo cryptsetup luksFormat /dev/sda3
+# YES not yes not Yes
+
+# decrypt before mount
+sudo cryptsetup open /dev/sda2 cryptroot
 sudo cryptsetup open /dev/sda3 crypthome
 ```
 
@@ -128,3 +128,36 @@ sudo nixos-install
 
 after installation: Run passwd to change user password.
 If internet broke/breaks, set wpa_supplicant config flags to connect to wifi.
+
+## chroot for disk with luks
+
+Decrypt / and home first
+
+```bash
+sudo cryptsetup open /dev/sda2 cryptroot
+sudo cryptsetup open /dev/sda3 crypthome
+
+sudo mount /dev/mapper/cryptroot /mnt
+sudo mkdir /mnt/home /mnt/boot
+sudo mount /dev/mapper/crypthome /mnt/home
+sudo mount /dev/sda2 /mnt/boot
+```
+
+chroot
+
+```bash
+sudo nixos-enter
+passwd ...
+```
+
+## Login and update
+
+I want to use Tailscale, so I need to enable tailscale service and install `tailscale` cli to login
+
+```
+# /etc/nixos/configuration.nix
+services.tailscale.enable = true;
+environment.systemPackages = with pkgs; [ tailscale ];
+```
+
+Run `sudo nixos-rebuild switch` to apply new config and check tailscale service `systemctl status tailscaled.service`

@@ -11,7 +11,7 @@ We will not try to manage booting or disk partition ([disko](https://github.com/
 
 Ref: https://tech.aufomm.com/my-nixos-journey-intro-and-installation/
 
-## Step
+## Prepare step
 
 Download
 
@@ -29,3 +29,16 @@ Create a Bootable USB
 > lsblk
 > sudo dd if=nixos-minimal-25.05.802674.7848cd8c982f-x86_64-linux.iso of=/dev/sdb bs=1M status=progress
 ```
+
+Boot Settings (F10 or Del)
+
+- Ensure Safe Boot is Disabled.
+- Ensure Fast Boot is Disabled.
+- Ensure UEFI Mode is Enabled.
+- Ensure Boot from USB is Enabled.
+
+## Install step
+
+Partition disk and encrypt `/home` with `luks`
+
+Optional: We can download `configuration.nix` from github and put to `/mnt/etc/nixos/configuration.nix`

@@ -22,8 +22,8 @@ _: {
           condition = "gitdir:~/code/work/";
           contents = {
             user = {
-              user = "Quang";
-              email = "quang@p0rnhub.cc";
+              user = "xluffy";
+              email = "quang@2meo.com";
             };
             url = {};
           };

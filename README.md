@@ -9,9 +9,7 @@ sh <(curl -L https://nixos.org/nix/install) --daemon --yes
 ```
 
 If you want to configure the OS via Nix, you can install Nix Darwin. For me, I just want to use Nix for managing package and user environment config in home directory
-
 When using `nix`, we still need some tools before using home-manager, so take a look at `shell.nix` — it's a bootstrap script to set up those tools.
-
 👆 This adds tools to your shell environment.
 
 - `nix`: gives you the nix CLI.
@@ -22,12 +20,6 @@ They'll be available whenever you run `nix develop` or `nix-shell`.
 
 - You can run `nix develop` (flake)
 - Or `nix-shell` (legacy)
-
-- https://mynixos.com/home-manager/options/programs.bash
-- https://github.com/Misterio77/nix-starter-configs/blob/main/README.md
-- https://home-manager-options.extranix.com/?query=git.&release=release-24.11
-- https://unmovedcentre.com/posts/secrets-management/#inputting-nix-secrets-to-nix-config
-- https://home-manager-options.extranix.com/
 
 ## OpenSSL
 
@@ -57,8 +49,6 @@ They'll be available whenever you run `nix develop` or `nix-shell`.
 ```
 
 ## Specific package version
-
-https://mplanchard.com/posts/installing-a-specific-version-of-a-package-with-nix.html
 
 ```nix
   inputs = {
@@ -122,7 +112,15 @@ https://mplanchard.com/posts/installing-a-specific-version-of-a-package-with-nix
 
 In another side, [nix-index-database](https://github.com/nix-community/nix-index-database) provides pre-generated databases if you don't want to generate a database locally.
 
-
 ```bash
 > nix run github:nix-community/nix-index-database bin/ip
 ```
+
+## Ref
+
+- https://mynixos.com/home-manager/options/programs.bash
+- https://github.com/Misterio77/nix-starter-configs/blob/main/README.md
+- https://home-manager-options.extranix.com/?query=git.&release=release-24.11
+- https://unmovedcentre.com/posts/secrets-management/#inputting-nix-secrets-to-nix-config
+- https://home-manager-options.extranix.com/
+- https://mplanchard.com/posts/installing-a-specific-version-of-a-package-with-nix.html

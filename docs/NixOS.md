@@ -122,7 +122,54 @@ sudo mount /dev/sda2 /mnt/boot
 sudo nixos-generate-config --root /mnt
 ```
 
-Then, edit the config using `sudo vim /mnt/etc/nixos/configuration.nix`
+Then, edit the config using `sudo vim /mnt/etc/nixos/configuration.nix`, this is simple version
+
+```nix
+{ config, lib, pkgs, ... }:
+
+{
+  imports =
+    [ # Include the results of the hardware scan.
+      ./hardware-configuration.nix
+    ];
+
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
+
+  networking.hostName = "nixos";
+  networking.wireless.enable = true;
+
+  time.timeZone = "Asia/Ho_Chi_Minh";
+
+  i18n.defaultLocale = "en_US.UTF-8";
+
+  services.xserver.xkb.layout = "us";
+
+  users.users.qbot = {
+    isNormalUser = true;
+    extraGroups = [ "wheel" ];
+    packages = with pkgs; [
+      tree
+      wget
+      curl
+      htop
+      git
+      just
+    ];
+  };
+
+  environment.systemPackages = with pkgs; [
+    tailscale
+    vim
+    wget
+  ];
+
+  services.openssh.enable = true;
+  services.tailscale.enable = true;
+
+  system.stateVersion = "25.05";
+}
+```
 
 ```bash
 cd /mnt

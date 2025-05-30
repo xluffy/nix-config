@@ -35,7 +35,7 @@ _: {
         a = "add";
         p = "push";
         pul = "pull";
-        ci = "commit";
+        ci = "commit -S -m";
         st = "status -uno";
         stt = "status";
         co = "checkout";

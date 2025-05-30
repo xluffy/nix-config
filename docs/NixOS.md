@@ -116,23 +116,20 @@ sudo mount /dev/mapper/crypthome /mnt/home
 sudo mount /dev/sda2 /mnt/boot
 ```
 
-/etc/crypttab and /etc/fstab
-
 ## Create NixOS config
 
 ```bash
 sudo nixos-generate-config --root /mnt
 ```
 
-Then, edit the config using `sudo -e /mnt/etc/nixos/configuration.nix`
+Then, edit the config using `sudo vim /mnt/etc/nixos/configuration.nix`
 
 ```bash
 cd /mnt
 sudo nixos-install
 ```
 
-after installation: Run passwd to change user password.
-If internet broke/breaks, set wpa_supplicant config flags to connect to wifi.
+After installation: Run passwd to change user password. If internet broke/breaks, set `wpa_supplicant` config flags to connect to wifi.
 
 ## chroot for disk with luks
 
@@ -159,7 +156,7 @@ passwd ...
 
 I want to use Tailscale, so I need to enable tailscale service and install `tailscale` cli to login
 
-```
+```bash
 # /etc/nixos/configuration.nix
 services.tailscale.enable = true;
 environment.systemPackages = with pkgs; [ tailscale ];

@@ -10,6 +10,15 @@
     gnumake
     go
     (google-cloud-sdk.withExtraComponents [google-cloud-sdk.components.gke-gcloud-auth-plugin])
+    kubectl
+    kubectx
+    kubernetes-helm
+    (wrapHelm kubernetes-helm {
+      plugins = with kubernetes-helmPlugins; [
+        helm-diff
+        helm-secrets
+      ];
+    })
     openssl_1_1
     pkgs-unstable.ansible-lint
     pkgs-unstable.bun

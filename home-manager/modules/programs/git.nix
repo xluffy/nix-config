@@ -16,6 +16,7 @@ _: {
             };
             url = {};
           };
+          path = "~/.gitconfig-me";
         }
         {
           condition = "gitdir:~/code/work/";
@@ -26,6 +27,7 @@ _: {
             };
             url = {};
           };
+          path = "~/.gitconfig-work";
         }
       ];
 

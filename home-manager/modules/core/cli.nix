@@ -22,9 +22,6 @@
     inetutils
     jq
     just
-    kubectl
-    kubectx
-    kubernetes-helm
     ncdu
     pkgs-unstable.iproute2mac
     pkgs-unstable.glab

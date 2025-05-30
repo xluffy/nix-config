@@ -11,7 +11,9 @@ bootstrap:
   nix develop
 
 switch: fix
-  home-manager switch --flake .#quanggg@xluffys-MacBook-Air.local
+  home-manager switch --flake .#xluffyg@xluffys-MacBook-Air.local
+  home-manager switch --flake .#xluffy@Nguyens-MacBook-Pro.local
+  home-manager switch --flake .#xluffy@nixos-dell-wyse-5070
 
 list:
   home-manager packages

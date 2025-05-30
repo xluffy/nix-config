@@ -29,6 +29,7 @@
     pkgs-unstable.iproute2mac
     pkgs-unstable.glab
     pkgs-unstable.neovim
+    pkgs-unstable.tailscale
     pkgs-unstable.tree-sitter
     pv
     reattach-to-user-namespace

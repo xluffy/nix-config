@@ -2,6 +2,12 @@
 
 [![built with nix](https://builtwithnix.org/badge.svg)](https://builtwithnix.org)
 
+`hosts` (personal):
+  - Apple Mac Mini M4
+  - Dell Wyse 5070 Thin Client
+  - TinyPC
+  - Apple Mac Air M1
+
 To install Nix on macOS as a multi-user installtion, run this command:
 
 ```bash

@@ -6,3 +6,5 @@
 - [Install NixOS with disko disk partitioning](https://nixos.asia/en/nixos-install-disko)
 - [Installing NixOS, Take 2](https://lonami.dev/blog/installing-nixos-2/)
 - [Framework and NixOS - Day Two](https://0xda.de/blog/2024/06/framework-and-nixos-day-two/)
+- [NixOS Secrets Management](https://unmovedcentre.com/posts/secrets-management/)
+- [Nix secrets for dummies](https://fzakaria.com/2024/07/12/nix-secrets-for-dummies)

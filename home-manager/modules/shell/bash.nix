@@ -24,6 +24,7 @@
         pong = "ping google.com.vn";
         pv = "pv -pert";
         r = "openssl rand -base64 15";
+        rg = "rg --hidden --glob '!.git'";
         ssh-keygen = "ssh-keygen -o -a 100 -t ed25519 -b 4096";
         vim = "nvim";
       };

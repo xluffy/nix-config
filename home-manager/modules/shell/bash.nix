@@ -8,7 +8,6 @@
         awk = "goawk";
         bcat = "bat";
         cd = "z";
-        date = "gdate '+%A, %B %d, %Y [%T]";
         df = "df -h | tail -n 8 | sort";
         du = "du -sch";
         grep = "grep --color=auto";

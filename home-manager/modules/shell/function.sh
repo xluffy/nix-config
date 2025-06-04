@@ -20,7 +20,7 @@ enc() {
     if [[ -d "$1" ]]; then
       if [[ -f "$1/secrets.yaml.dec" ]]; then
         if ! grep "sops:" "$1/secrets.yaml.dec" &> /dev/null; then
-          helm secrets enc "$1/secrets.yaml.dec" && mv "$1/secrets.yaml.dec" "$1/secrets.yaml"
+          helm secrets encrypt "$1/secrets.yaml.dec" && mv "$1/secrets.yaml.dec" "$1/secrets.yaml"
         else
           mv "$1/secrets.yaml.dec" "$1/secrets.yaml"
           echo "secrets.yaml.dec is already encrypted"
@@ -32,7 +32,7 @@ enc() {
   elif [[ $# -eq 0 ]]; then
     if [[ -f secrets.yaml.dec ]]; then
       if ! grep "sops:" secrets.yaml.dec &> /dev/null; then
-        helm secrets enc secrets.yaml.dec && mv secrets.yaml.dec secrets.yaml
+        helm secrets encrypt secrets.yaml.dec && mv secrets.yaml.dec secrets.yaml
       else
         mv secrets.yaml.dec secrets.yaml
         echo "secrets.yaml.dec is already encrypted"
@@ -45,13 +45,13 @@ dec() {
   if [[ $# -eq 1 ]]; then
     if [[ -d "$1" ]]; then
       if [[ -f "$1/secrets.yaml" ]]; then
-        helm secrets dec "$1/secrets.yaml"
+        helm secrets decrypt "$1/secrets.yaml"
       fi
     else
       echo "$1" | gbase64 -d
     fi
   elif [[ $# -eq 0 ]]; then
-    helm secrets dec secrets.yaml
+    helm secrets decrypt secrets.yaml
   fi
 }
 

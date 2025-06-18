@@ -19,7 +19,7 @@ enc() {
   if [[ $# -eq 1 ]]; then
     if [[ -d "$1" ]]; then
       if [[ -f "$1/secrets.yaml.dec" ]]; then
-        if ! grep "sops:" "$1/secrets.yaml.dec" &> /dev/null; then
+        if ! grep "sops:" "$1/secrets.yaml.dec" &>/dev/null; then
           helm secrets encrypt "$1/secrets.yaml.dec" && mv "$1/secrets.yaml.dec" "$1/secrets.yaml"
         else
           mv "$1/secrets.yaml.dec" "$1/secrets.yaml"
@@ -27,11 +27,11 @@ enc() {
         fi
       fi
     else
-      echo "$1" | tr -d "\n" | gbase64 -w0
+      echo "$1" | tr -d "\n" | base64 -w0
     fi
   elif [[ $# -eq 0 ]]; then
     if [[ -f secrets.yaml.dec ]]; then
-      if ! grep "sops:" secrets.yaml.dec &> /dev/null; then
+      if ! grep "sops:" secrets.yaml.dec &>/dev/null; then
         helm secrets encrypt secrets.yaml.dec && mv secrets.yaml.dec secrets.yaml
       else
         mv secrets.yaml.dec secrets.yaml
@@ -48,7 +48,7 @@ dec() {
         helm secrets decrypt "$1/secrets.yaml"
       fi
     else
-      echo "$1" | gbase64 -d
+      echo "$1" | base64 -d
     fi
   elif [[ $# -eq 0 ]]; then
     helm secrets decrypt secrets.yaml
@@ -81,13 +81,13 @@ bz() {
 
 f() {
   commit_msg=$(git diff --cached | llm -m 4o-mini "$(cat ~/code/me/nix-config/home-manager/modules/shell/commit-prompt.txt)")
-  printf "Commit message:\n${commit_msg} \n";
-  read -p "Do you want to commit with this message? [y/N]: " confirm;
+  printf "Commit message:\n %s \n" "${commit_msg}"
+  read -pr "Do you want to commit with this message? [y/N]: " confirm
 
   if [[ ${confirm} =~ ^[Yy]$ ]]; then
-    git commit -m "${commit_msg}";
+    git commit -m "${commit_msg}"
   else
-    git reset HEAD .;
-    echo "Commit aborted.";
-  fi;
+    git reset HEAD .
+    echo "Commit aborted."
+  fi
 }

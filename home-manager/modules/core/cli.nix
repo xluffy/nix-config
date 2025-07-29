@@ -13,29 +13,36 @@
     curl
     diff-so-fancy
     direnv
+    ffmpeg
     fzf
     glow
     gnumake
     gnupg
+    gnused
     goawk
     htop
     inetutils
+    jdk17
     jq
     just
+    libiconv
+    mtr
     ncdu
-    pkgs-unstable.iproute2mac
     pkgs-unstable.glab
+    pkgs-unstable.iproute2mac
     pkgs-unstable.neovim
     pkgs-unstable.tailscale
     pkgs-unstable.tree-sitter
     pv
     reattach-to-user-namespace
+    redis
     ripgrep
     tig
     tmux
     tree
+    unixtools.watch
     wget
     yq
-    zoxide
+    zlib
   ];
 }

@@ -8,7 +8,6 @@
     pkgs-unstable.betterdisplay
     pkgs-unstable.karabiner-elements
     pkgs-unstable.flameshot
-    pkgs-unstable.telegram-desktop
     pkgs-unstable.tailscale
   ];
 }

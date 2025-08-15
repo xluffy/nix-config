@@ -6,16 +6,27 @@ on:
       - master
 
 jobs:
+  setup:
+    runs-on: ubuntu-22.04
+    environment: prod
+    steps:
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5
+      - name: Setup
+        run: echo "🎉 Install some dependencies ...."
+
+  test:
+    runs-on: ubuntu-22.04
+    needs: setup
+    environment: prod
+    steps:
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5
+      - name: Test
+        run: echo "🎉 Run test suite ...."
   release:
     runs-on: ubuntu-22.04
     environment: prod
     steps:
       - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5
-      - name: Test
-        run: echo "🎉 Test ...."
-      - name: Build
-        run: echo "🎉 Build ...."
-
       - name: Release
         run: echo "🛳️ Ship this build"
         env:

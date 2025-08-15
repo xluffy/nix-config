@@ -8,14 +8,27 @@ on:
 jobs:
   setup:
     runs-on: ubuntu-22.04
-    environment: prod
     steps:
       - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5
       - name: Setup
         run: echo "🎉 Install some dependencies ...."
-  test:
+  build:
     runs-on: ubuntu-22.04
     needs: setup
+    steps:
+      - name: Build artifact
+        run: |
+          echo "🚀 Building binary..."
+          echo "hehe" > gog
+          echo "✅ Build done"
+      - name: Upload artifact
+        uses: actions/upload-artifact@834a144ee2d810ac153d4c240eec8d6e4ffdbb1f
+        with:
+          name: gog-${{ github.sha }}
+          path: gog
+  test:
+    runs-on: ubuntu-22.04
+    needs: build
     environment: prod
     steps:
       - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5
@@ -24,10 +37,16 @@ jobs:
   release:
     runs-on: ubuntu-22.04
     needs: test
-    environment: prod
     steps:
-      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5
+      - name: Download artifact
+        uses: actions/download-artifact@f44cd7b40bfd40b7eade724c13f3c8f17f4a4280
+        with:
+          name: gog-${{ github.sha }}
       - name: Release
-        run: echo "🛳️ Ship this build"
+        run: |
+          echo "🛳️ Ship this build"
+          echo "Environment: ${{ job.environment.name }}"
+          echo "Actor: $GITHUB_ACTOR"
+          echo "Branch: $GITHUB_REF_NAME"
         env:
           GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}

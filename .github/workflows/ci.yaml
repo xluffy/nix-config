@@ -22,7 +22,7 @@ jobs:
           echo "hehe" > gog
           echo "✅ Build done"
       - name: Upload artifact
-        uses: actions/upload-artifact@834a144ee2d810ac153d4c240eec8d6e4ffdbb1f
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: gog-${{ github.sha }}
           path: gog
@@ -39,7 +39,7 @@ jobs:
     needs: test
     steps:
       - name: Download artifact
-        uses: actions/download-artifact@f44cd7b40bfd40b7eade724c13f3c8f17f4a4280
+        uses: actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0
         with:
           name: gog-${{ github.sha }}
       - name: Release

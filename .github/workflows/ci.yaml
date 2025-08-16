@@ -21,11 +21,16 @@ jobs:
           echo "🚀 Building binary..."
           echo "hehe" > gog
           echo "✅ Build done"
+      - name: Set short-hash commit
+        id: vars
+        run: echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
+      - name: Check outputs
+        run: echo ${{ steps.vars.outputs.sha_short }}
       - name: Upload artifact
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
-          name: gog-${{ github.sha }}
-          path: gog-${GITHUB_SHA::7}
+          name: gog-${{ steps.vars.outputs.sha_short }}
+          path: gog-${{ steps.vars.outputs.sha_short }}
   test:
     runs-on: ubuntu-22.04
     needs: build
@@ -38,10 +43,13 @@ jobs:
     runs-on: ubuntu-22.04
     needs: test
     steps:
+      - name: Set short-hash commit
+        id: vars
+        run: echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
       - name: Download artifact
         uses: actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0
         with:
-          name: gog-${{ github.sha }}
+          name: gog-${{ steps.vars.outputs.sha_short }}
       - name: Release
         run: |
           echo "🛳️ Ship this build"

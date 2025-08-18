@@ -110,14 +110,22 @@ jobs:
           echo "Release ${{ github.event.inputs.docker_image }}"
 
       - name: Post a message in a channel
-        uses: slackapi/slack-github-action@91efab103c0de0a537f72a35f6b8cda0ee76bf0a #v2.1.1
-        with:
-          webhook: ${{ secrets.SLACK_WEBHOOK_URL }}
-          webhook-type: incoming-webhook
-          payload: |
-            text: "*GitHub Action build result*: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}"
-            blocks:
-              - type: "section"
-                text:
-                  type: "mrkdwn"
-                  text: "GitHub Action build result: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}"
+        uses: slackapi/slack-github-action@91efab103c0de0a537f72a35f6b8cda0ee76bf0a #v2.1.1
+        with:
+          webhook: ${{ secrets.SLACK_WEBHOOK_URL }}
+          payload: |
+            text: "GitHub Action build result: ${{ job.status }}"
+            blocks:
+              - type: "section"
+                text:
+                  type: "mrkdwn"
+                  text: "*GitHub Action build result*: `${{ job.status }}`\n*URL*: ${{ github.event.pull_request.html_url || github.event.head_commit.url }}"
+              - type: "divider"
+              - type: "section"
+                fields:
+                  - type: "mrkdwn"
+                    text: "*Environment*:\n${{ github.job }}"
+                  - type: "mrkdwn"
+                    text: "*Docker Image*:\n`${{ github.event.inputs.docker_image }}`"
+                  - type: "mrkdwn"
+                    text: "*Docker Tags*:\n`${{ steps.meta.outputs.version }}`"

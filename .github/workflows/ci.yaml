@@ -17,17 +17,27 @@ jobs:
     runs-on: ubuntu-22.04
     needs: setup
     steps:
+      - id: 'meta'
+        name: 'Docker Meta'
+        uses: 'docker/metadata-action@c1e51972afc2121e065aed6d45c65596fe445f3f' #v5.8.1
+        env:
+          DOCKER_METADATA_PR_HEAD_SHA: 'true'
+        with:
+          images: sample/nix-config
+          tags: |
+            type=ref,suffix=-{{sha}},event=branch
+            type=semver,event=tag,pattern={{raw}}
+
       - name: Build artifact
         run: |
           echo "🚀 Building binary..."
           mkdir -pv s/target/
           echo "hello" > s/target/gogo.txt
-      - name: Step
-        run: echo ${GITHUB_SHA::7}
+
       - name: Upload artifact
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
-          name: gog-${GITHUB_SHA::7}
+          name: gog-${{ steps.meta.outputs.tags }}
           path: s/target/gogo.txt
 
   release-game-server-olek:
@@ -35,10 +45,22 @@ jobs:
     needs: build
     environment: prod-gs-olek
     steps:
+      - id: 'meta'
+        name: 'Docker Meta'
+        uses: 'docker/metadata-action@c1e51972afc2121e065aed6d45c65596fe445f3f' #v5.8.1
+        env:
+          DOCKER_METADATA_PR_HEAD_SHA: 'true'
+        with:
+          images: sample/nix-config
+          tags: |
+            type=ref,suffix=-{{sha}},event=branch
+            type=semver,event=tag,pattern={{raw}}
+
       - name: Download artifact
         uses: actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0
         with:
-          name: gog-${GITHUB_SHA::7}
+          name: gog-${{ steps.meta.outputs.tags }}
+
       - name: Release
         run: |
           echo "🛳️ Ship this build"
@@ -51,10 +73,22 @@ jobs:
     needs: build
     environment: prod-gs-puffy
     steps:
+      - id: 'meta'
+        name: 'Docker Meta'
+        uses: 'docker/metadata-action@c1e51972afc2121e065aed6d45c65596fe445f3f' #v5.8.1
+        env:
+          DOCKER_METADATA_PR_HEAD_SHA: 'true'
+        with:
+          images: sample/nix-config
+          tags: |
+            type=ref,suffix=-{{sha}},event=branch
+            type=semver,event=tag,pattern={{raw}}
+
       - name: Download artifact
         uses: actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0
         with:
-          name: gog-${GITHUB_SHA::7}
+          name: gog-${{ steps.meta.outputs.tags }}
+
       - name: Release
         run: |
           echo "🛳️ Ship this build"

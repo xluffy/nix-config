@@ -20,7 +20,7 @@ jobs:
       - name: Build artifact
         run: |
           echo "🚀 Building binary..."
-          mkdir -pv /s/target/
+          mkdir -pv s/target/
           echo "hello" > s/target/gogo.txt
       - name: Step
         run: echo ${GITHUB_SHA::7}

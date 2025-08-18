@@ -12,6 +12,7 @@ jobs:
       - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5
       - name: Setup
         run: echo "🎉 Install some dependencies ...."
+
   build:
     runs-on: ubuntu-22.04
     needs: setup
@@ -19,44 +20,44 @@ jobs:
       - name: Build artifact
         run: |
           echo "🚀 Building binary..."
-          echo "hehe" > gog
-          echo "✅ Build done"
-      - name: Set short-hash commit
-        id: vars
-        run: echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
-      - name: Check outputs
-        run: echo ${{ steps.vars.outputs.sha_short }}
+          mkdir -pv /s/target/
+          echo "hello" > /s/target/gogo.txt
       - name: Step
         run: echo ${GITHUB_SHA::7}
       - name: Upload artifact
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
-          name: gog-${{ steps.vars.outputs.sha_short }}
-          path: gog-${{ steps.vars.outputs.sha_short }}
-  test:
+          name: gog-${GITHUB_SHA::7}
+          path: /s/target/gogo.txt
+
+  release-game-server-olek:
     runs-on: ubuntu-22.04
     needs: build
-    environment: prod
+    environment: prod-gs-olek
     steps:
-      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5
-      - name: Test
-        run: echo "🎉 Run test suite ...."
-  release:
-    runs-on: ubuntu-22.04
-    needs: test
-    steps:
-      - name: Set short-hash commit
-        id: vars
-        run: echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
       - name: Download artifact
         uses: actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0
         with:
-          name: gog-${{ steps.vars.outputs.sha_short }}
+          name: gog-${GITHUB_SHA::7}
       - name: Release
         run: |
           echo "🛳️ Ship this build"
           echo "Environment: ${{ job.environment.name }}"
-          echo "Actor: $GITHUB_ACTOR"
-          echo "Branch: $GITHUB_REF_NAME"
+        env:
+          GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
+
+  release-game-server-puffy:
+    runs-on: ubuntu-22.04
+    needs: build
+    environment: prod-gs-puffy
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0
+        with:
+          name: gog-${GITHUB_SHA::7}
+      - name: Release
+        run: |
+          echo "🛳️ Ship this build"
+          echo "Environment: ${{ job.environment.name }}"
         env:
           GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}

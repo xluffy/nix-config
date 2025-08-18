@@ -75,12 +75,18 @@ jobs:
           webhook: ${{ secrets.SLACK_WEBHOOK_URL }}
           webhook-type: incoming-webhook
           payload: |
-            text: "*GitHub Action build result*: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}"
             blocks:
-              - type: "section"
-                text:
-                  type: "mrkdwn"
-                  text: "GitHub Action build result: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}"
+            - type: "section"
+              text:
+                type: "mrkdwn"
+                text: "*:github: GitHub Action build result:* `${{ job.status }}`
+            - type: "divider"
+            - type: "section"
+              fileds
+                - type: "mrkdwn"
+                  text: "*Env*: `${{ github.job }}`"
+                - type: "mrkdwn"
+                  text: "*Docker Image:* `${{ github.event.inputs.docker_image }}`"
 
   release-game-server-puffy:
     runs-on: ubuntu-22.04
@@ -119,13 +125,11 @@ jobs:
             - type: "section"
               text:
                 type: "mrkdwn"
-                text: "*GitHub Action build result*: `${{ job.status }}`\n*URL*: ${{ github.event.pull_request.html_url || github.event.head_commit.url }}"
+                text: "*:github: GitHub Action build result:* `${{ job.status }}`
             - type: "divider"
             - type: "section"
-              fields:
+              fileds
                 - type: "mrkdwn"
-                  text: "*Environment*:\n${{ github.job }}"
+                  text: "*Env*: `${{ github.job }}`"
                 - type: "mrkdwn"
-                  text: "*Docker Image*:\n`${{ github.event.inputs.docker_image }}`"
-                - type: "mrkdwn"
-                  text: "*Docker Tags*:\n`${{ steps.meta.outputs.version }}`"
+                  text: "*Docker Image:* `${{ github.event.inputs.docker_image }}`"

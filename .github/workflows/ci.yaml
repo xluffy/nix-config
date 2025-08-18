@@ -85,7 +85,7 @@ jobs:
               - type: "section"
                 fields:
                   - type: "mrkdwn"
-                    text: "*Environment*: `${{ github.job }}`"
+                    text: "*Environment*: `${{ github.job }}`\n"
                   - type: "mrkdwn"
                     text: "*Docker Image*: `${{ github.event.inputs.docker_image }}`"
 
@@ -132,6 +132,6 @@ jobs:
               - type: "section"
                 fields:
                   - type: "mrkdwn"
-                    text: "*Environment*: `${{ github.job }}`"
+                    text: "*Environment*: `${{ github.job }}`\n"
                   - type: "mrkdwn"
                     text: "*Docker Image*: `${{ github.event.inputs.docker_image }}`"

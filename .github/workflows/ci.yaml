@@ -4,6 +4,11 @@ on:
   push:
     branches:
       - master
+  workflow_dispatch:
+    inputs:
+      docker_image:
+        type: string
+        required: false
 
 jobs:
   setup:
@@ -64,7 +69,8 @@ jobs:
       - name: Release
         run: |
           echo "🛳️ Ship this build"
-          echo "Environment: ${{ job.environment.name }}"
+          echo "Release gog-${{ steps.meta.outputs.version }}"
+          echo "Release ${{ github.event.inputs.docker_image }}"
         env:
           GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
 
@@ -92,6 +98,7 @@ jobs:
       - name: Release
         run: |
           echo "🛳️ Ship this build"
-          echo "Environment: ${{ job.environment.name }}"
+          echo "Release gog-${{ steps.meta.outputs.version }}"
+          echo "Release ${{ github.event.inputs.docker_image }}"
         env:
           GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}

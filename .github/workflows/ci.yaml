@@ -1,4 +1,4 @@
-name: ci
+name: 'Deploy nix-config to multi servers'
 
 on:
   workflow_dispatch:

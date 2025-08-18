@@ -70,23 +70,24 @@ jobs:
           echo "Release ${{ github.event.inputs.docker_image }}"
 
       - name: Post a message in a channel
-        uses: slackapi/slack-github-action@91efab103c0de0a537f72a35f6b8cda0ee76bf0a #v2.1.1
+        uses: slackapi/slack-github-action@91efab103c0de0a537f72a35f6b8cda0ee76bf0a # v2.1.1
         with:
           webhook: ${{ secrets.SLACK_WEBHOOK_URL }}
           webhook-type: incoming-webhook
           payload: |
+            text: "GitHub Action build result: ${{ job.status }}"
             blocks:
-            - type: "section"
-              text:
-                type: "mrkdwn"
-                text: "*:github: GitHub Action build result:* `${{ job.status }}`
-            - type: "divider"
-            - type: "section"
-              fileds
-                - type: "mrkdwn"
-                  text: "*Env*: `${{ github.job }}`"
-                - type: "mrkdwn"
-                  text: "*Docker Image:* `${{ github.event.inputs.docker_image }}`"
+              - type: "section"
+                text:
+                  type: "mrkdwn"
+                  text: ":github: *GitHub Action build result*: `${{ job.status }}`"
+              - type: "divider"
+              - type: "section"
+                fields:
+                  - type: "mrkdwn"
+                    text: "*Environment*: `${{ github.job }}`"
+                  - type: "mrkdwn"
+                    text: "*Docker Image*: `${{ github.event.inputs.docker_image }}`"
 
   release-game-server-puffy:
     runs-on: ubuntu-22.04
@@ -116,20 +117,21 @@ jobs:
           echo "Release ${{ github.event.inputs.docker_image }}"
 
       - name: Post a message in a channel
-        uses: slackapi/slack-github-action@91efab103c0de0a537f72a35f6b8cda0ee76bf0a #v2.1.1
+        uses: slackapi/slack-github-action@91efab103c0de0a537f72a35f6b8cda0ee76bf0a # v2.1.1
         with:
           webhook: ${{ secrets.SLACK_WEBHOOK_URL }}
           webhook-type: incoming-webhook
           payload: |
+            text: "GitHub Action build result: ${{ job.status }}"
             blocks:
-            - type: "section"
-              text:
-                type: "mrkdwn"
-                text: "*:github: GitHub Action build result:* `${{ job.status }}`
-            - type: "divider"
-            - type: "section"
-              fileds
-                - type: "mrkdwn"
-                  text: "*Env*: `${{ github.job }}`"
-                - type: "mrkdwn"
-                  text: "*Docker Image:* `${{ github.event.inputs.docker_image }}`"
+              - type: "section"
+                text:
+                  type: "mrkdwn"
+                  text: ":github: *GitHub Action build result*: `${{ job.status }}`"
+              - type: "divider"
+              - type: "section"
+                fields:
+                  - type: "mrkdwn"
+                    text: "*Environment*: `${{ github.job }}`"
+                  - type: "mrkdwn"
+                    text: "*Docker Image*: `${{ github.event.inputs.docker_image }}`"

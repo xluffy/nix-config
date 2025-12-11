@@ -43,7 +43,7 @@
         inherit pkgs;
         modules = [
           ./home-manager/home.nix
-          nix-index-database.hmModules.nix-index
+          nix-index-database.homeModules.nix-index
         ];
         extraSpecialArgs = {
           pkgs-unstable = pkgsUnstable;
@@ -52,7 +52,7 @@
   in {
     homeConfigurations = {
       "quanggg@xluffys-MacBook-Air.local" = generateHomeConfig "quanggg";
-      "quanggg@xluffys-mini.local" = generateHomeConfig "quanggg";
+      "quang.van.nguyen@Nguyens-MacBook-Pro.local" = generateHomeConfig "quang.van.nguyen";
     };
 
     devShells = {

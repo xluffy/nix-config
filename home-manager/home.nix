@@ -15,8 +15,8 @@ _: {
   ];
 
   home = {
-    username = "quanggg";
-    homeDirectory = "/Users/quanggg";
+    username = "quang.van.nguyen";
+    homeDirectory = "/Users/quang.van.nguyen/";
     stateVersion = "25.05";
   };
 

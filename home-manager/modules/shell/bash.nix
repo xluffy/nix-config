@@ -31,7 +31,7 @@
       # empty mean unlimit
       historySize = 999999999;
       historyFileSize = 999999999;
-      historyFile = "/Users/quanggg/.bash_history";
+      historyFile = "/Users/quang.van.nguyen/.bash_history";
 
       historyControl = [
         "ignoredups"

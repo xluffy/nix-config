@@ -44,5 +44,14 @@
     wget
     yq
     zlib
+    typst
+    k6
+    zstd
+    ghostscript
+    aws-vault
+    awscli2
+    eksctl
+    yarn
+    foundry
   ];
 }

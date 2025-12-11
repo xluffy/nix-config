@@ -69,13 +69,19 @@ bz() {
     _setup=$(yq '.setup[0]' .bazooka.yaml | tr -d '"')
     eval "${_setup}"
     _plan=$(yq '.tasks.plan[]' .bazooka.yaml | tr -d '"')
-    eval "${_plan}"
+    while IFS= read -r line; do
+      _log "Execute ${line}"
+      eval "${line}"
+    done <<<"${_plan}"
   elif [[ $1 == 'deploy' ]] || [[ $1 == 'apply' ]]; then
     _log "Bazooka deploy $(pwd) ❯❯❯"
     _setup=$(yq '.setup[0]' .bazooka.yaml | tr -d '"')
     eval "${_setup}"
     _deploy=$(yq '.tasks.deploy[]' .bazooka.yaml | tr -d '"')
-    eval "${_deploy}"
+    while IFS= read -r line; do
+      _log "Execute ${line}"
+      eval "${line}"
+    done <<<"${_deploy}"
   fi
 }
 

@@ -8,8 +8,8 @@
     devenv
     gcc
     gnumake
-    go
-    (google-cloud-sdk.withExtraComponents [google-cloud-sdk.components.gke-gcloud-auth-plugin])
+    pkgs-unstable.go
+    (pkgs-unstable.google-cloud-sdk.withExtraComponents [google-cloud-sdk.components.gke-gcloud-auth-plugin])
     kubectl
     kubectx
     kubernetes-helm
@@ -24,22 +24,35 @@
     pkgs-unstable.bun
     pkgs-unstable.libpq
     pkgs-unstable.llm
+    pkgs-unstable.node-gyp
     pkgs-unstable.nodejs_20
     pkgs-unstable.terraform
-    postgresql
-    python314
-    # (python39.withPackages (ppkgs: [
-    #   ppkgs.llm
-    # ]))
+    postgresql_16
+    pixman
+    prometheus.cli
+    docker-client
+    python310
+    texliveBasic
+    pixman
+    cairo
+    pango
+    libjpeg
+    libpng
+    libpng
+    librsvg
+    giflib
+    pkg-config
     poetry
     regal
     rustc
     rustup
     scc
-    sops
+    pkgs-unstable.sops
     terragrunt
     terraform-ls
     tflint
     tfsec
+    podman
+    k9s
   ];
 }

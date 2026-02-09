@@ -34,6 +34,10 @@
     python310
     texliveBasic
     pixman
+    wrangler
+    uv
+    dos2unix
+    csvkit
     cairo
     pango
     libjpeg
@@ -53,6 +57,16 @@
     tflint
     tfsec
     podman
+    fd
     k9s
+    phpactor
+    php
+    php84Packages.composer
+    golangci-lint
+    nmap
+    hugo
+    mkcert
+    maple-mono.truetype
+    maple-mono.NF-unhinted
   ];
 }

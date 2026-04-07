@@ -1,15 +1,26 @@
 {
   pkgs,
   pkgs-unstable,
+  llm-agents,
   ...
 }: {
   home.packages = with pkgs; [
+    aws-vault
+    awscli2
+    cairo
     conftest
     devenv
+    docker-client
+    eksctl
+    foundry
     gcc
+    giflib
     gnumake
-    pkgs-unstable.go
-    (pkgs-unstable.google-cloud-sdk.withExtraComponents [google-cloud-sdk.components.gke-gcloud-auth-plugin])
+    golangci-lint
+    hugo
+    jdk17
+    k6
+    k9s
     kubectl
     kubectx
     kubernetes-helm
@@ -19,54 +30,51 @@
         helm-secrets
       ];
     })
+    libjpeg
+    libpng
+    librsvg
+    llm-agents.claude-code
+    llm-agents.codex
+    llm-agents.gemini-cli
+    maple-mono.NF-unhinted
+    maple-mono.truetype
+    mkcert
     openssl_1_1
+    pango
+    php
+    php84Packages.composer
+    phpactor
+    pixman
+    pkg-config
     pkgs-unstable.ansible-lint
     pkgs-unstable.bun
+    pkgs-unstable.go
+    (pkgs-unstable.google-cloud-sdk.withExtraComponents [google-cloud-sdk.components.gke-gcloud-auth-plugin])
     pkgs-unstable.libpq
     pkgs-unstable.llm
     pkgs-unstable.node-gyp
     pkgs-unstable.nodejs_20
+    pkgs-unstable.sops
     pkgs-unstable.terraform
-    postgresql_16
-    pixman
-    prometheus.cli
-    docker-client
-    python310
-    texliveBasic
-    pixman
-    wrangler
-    uv
-    dos2unix
-    csvkit
-    cairo
-    pango
-    libjpeg
-    libpng
-    libpng
-    librsvg
-    giflib
-    pkg-config
+    podman
     poetry
+    postgresql_17
+    prometheus.cli
+    python310
+    redis
     regal
     rustc
     rustup
     scc
-    pkgs-unstable.sops
-    terragrunt
     terraform-ls
+    terragrunt
+    texliveBasic
     tflint
     tfsec
-    podman
-    fd
-    k9s
-    phpactor
-    php
-    php84Packages.composer
-    golangci-lint
-    nmap
-    hugo
-    mkcert
-    maple-mono.truetype
-    maple-mono.NF-unhinted
+    uv
+    wrangler
+    jdk17
+    yarn
+    zlib
   ];
 }

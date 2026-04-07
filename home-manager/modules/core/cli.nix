@@ -10,48 +10,44 @@
     bat
     coreutils
     cowsay
+    csvkit
     curl
     diff-so-fancy
     direnv
+    dos2unix
+    fd
     ffmpeg
     fzf
+    ghostscript
     glow
-    gnumake
     gnupg
     gnused
     goawk
     htop
     inetutils
-    jdk17
     jq
     just
+    kcat
     libiconv
     mtr
     ncdu
+    nmap
     pkgs-unstable.glab
+    pkgs-unstable.gh
     pkgs-unstable.iproute2mac
     pkgs-unstable.neovim
     pkgs-unstable.tailscale
     pkgs-unstable.tree-sitter
     pv
     reattach-to-user-namespace
-    redis
     ripgrep
     tig
     tmux
     tree
+    typst
     unixtools.watch
     wget
     yq
-    zlib
-    typst
-    k6
     zstd
-    ghostscript
-    aws-vault
-    awscli2
-    eksctl
-    yarn
-    foundry
   ];
 }

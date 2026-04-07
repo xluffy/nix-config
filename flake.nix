@@ -4,6 +4,7 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    llm-agents.url = "github:numtide/llm-agents.nix";
 
     home-manager = {
       url = "github:nix-community/home-manager/release-25.05";
@@ -17,6 +18,7 @@
   outputs = {
     nixpkgs,
     nixpkgs-unstable,
+    llm-agents,
     home-manager,
     nix-index-database,
     ...
@@ -47,12 +49,12 @@
         ];
         extraSpecialArgs = {
           pkgs-unstable = pkgsUnstable;
+          llm-agents = llm-agents.packages.${system};
         };
       };
   in {
     homeConfigurations = {
       "quanggg@xluffys-MacBook-Air.local" = generateHomeConfig "quanggg";
-      "quang.van.nguyen@Nguyens-MacBook-Pro.local" = generateHomeConfig "quang.van.nguyen";
     };
 
     devShells = {

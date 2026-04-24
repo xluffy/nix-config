@@ -36,6 +36,7 @@
     llm-agents.claude-code
     llm-agents.codex
     llm-agents.gemini-cli
+    llama-cpp
     maple-mono.NF-unhinted
     maple-mono.truetype
     mkcert

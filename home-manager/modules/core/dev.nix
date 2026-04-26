@@ -37,6 +37,7 @@
     llm-agents.codex
     llm-agents.gemini-cli
     llama-cpp
+    pkgs-unstable.git-xet
     maple-mono.NF-unhinted
     maple-mono.truetype
     mkcert

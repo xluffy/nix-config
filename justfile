@@ -33,3 +33,7 @@ fix:
   alejandra .
   deadnix --edit .
   statix fix .
+
+# fix for: error: attribute 'git-xet' missing
+update:
+  nix flake update nixpkgs-unstable

@@ -35,7 +35,7 @@
     pkgs-unstable.glab
     pkgs-unstable.gh
     pkgs-unstable.iproute2mac
-    pkgs-unstable.neovim
+    neovim
     pkgs-unstable.tailscale
     pkgs-unstable.tree-sitter
     pv

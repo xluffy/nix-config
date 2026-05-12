@@ -8,6 +8,7 @@
         awk = "goawk";
         bcat = "bat";
         cd = "z";
+        cc = "claude";
         df = "df -h | tail -n 8 | sort";
         du = "du -sch";
         grep = "grep --color=auto";

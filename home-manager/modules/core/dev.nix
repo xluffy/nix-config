@@ -77,7 +77,6 @@
     tfsec
     uv
     wrangler
-    jdk17
     yarn
     zlib
   ];

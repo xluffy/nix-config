@@ -8,7 +8,9 @@
         awk = "goawk";
         bcat = "bat";
         cd = "z";
+        ca = "cursor-agent";
         cc = "claude";
+        cx = "codex";
         df = "df -h | tail -n 8 | sort";
         du = "du -sch";
         grep = "grep --color=auto";

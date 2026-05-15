@@ -36,6 +36,7 @@
     llm-agents.claude-code
     llm-agents.codex
     llm-agents.gemini-cli
+    llm-agents.qwen-code
     llama-cpp
     pkgs-unstable.git-xet
     maple-mono.NF-unhinted
@@ -50,6 +51,7 @@
     pkg-config
     pkgs-unstable.ansible-lint
     pkgs-unstable.bun
+    pkgs-unstable.cursor-cli
     pkgs-unstable.go
     (pkgs-unstable.google-cloud-sdk.withExtraComponents [google-cloud-sdk.components.gke-gcloud-auth-plugin])
     pkgs-unstable.libpq

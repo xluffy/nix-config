@@ -40,21 +40,20 @@
       ];
     };
 
-    generateHomeConfig = _username:
-      home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
-        modules = [
-          ./home-manager/home.nix
-          nix-index-database.homeModules.nix-index
-        ];
-        extraSpecialArgs = {
-          pkgs-unstable = pkgsUnstable;
-          llm-agents = llm-agents.packages.${system};
-        };
+    homeConfiguration = home-manager.lib.homeManagerConfiguration {
+      inherit pkgs;
+      modules = [
+        ./home-manager/home.nix
+        nix-index-database.homeModules.nix-index
+      ];
+      extraSpecialArgs = {
+        pkgs-unstable = pkgsUnstable;
+        llm-agents = llm-agents.packages.${system};
       };
+    };
   in {
     homeConfigurations = {
-      "quanggg@xluffys-MacBook-Air.local" = generateHomeConfig "quanggg";
+      "quang.van.nguyen@Nguyens-MacBook-Pro.local" = homeConfiguration;
     };
 
     devShells = {

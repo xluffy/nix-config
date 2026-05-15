@@ -10,10 +10,9 @@ alias c := check
 bootstrap:
   nix develop
 
+# Set HM_FLAKE_ATTR to your flake output name (user@hostname). Use .envrc.local (gitignored) or shell rc so each machine can differ without editing this file.
 switch: fix
-  home-manager switch --flake .#xluffyg@xluffys-MacBook-Air.local
-  home-manager switch --flake .#xluffy@Nguyens-MacBook-Pro.local
-  home-manager switch --flake .#xluffy@nixos-dell-wyse-5070
+  home-manager switch --flake ".#${HM_FLAKE_ATTR}"
 
 list:
   home-manager packages

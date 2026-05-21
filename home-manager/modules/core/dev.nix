@@ -60,6 +60,7 @@
     pkgs-unstable.nodejs_20
     pkgs-unstable.sops
     pkgs-unstable.terraform
+    pkgs-unstable.mariadb_1011
     podman
     poetry
     postgresql_17

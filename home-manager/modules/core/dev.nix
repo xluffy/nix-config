@@ -1,17 +1,11 @@
 {
   pkgs,
   pkgs-unstable,
-  llm-agents,
   ...
 }: {
   home.packages = with pkgs; [
-    aws-vault
-    awscli2
     cairo
-    conftest
     devenv
-    docker-client
-    eksctl
     foundry
     gcc
     giflib
@@ -20,62 +14,32 @@
     hugo
     jdk17
     k6
-    k9s
-    kubectl
-    kubectx
-    kubernetes-helm
-    (wrapHelm kubernetes-helm {
-      plugins = with kubernetes-helmPlugins; [
-        helm-diff
-        helm-secrets
-      ];
-    })
     libjpeg
     libpng
     librsvg
-    llm-agents.claude-code
-    llm-agents.codex
-    llm-agents.gemini-cli
-    llm-agents.qwen-code
-    llama-cpp
     pkgs-unstable.git-xet
     maple-mono.NF-unhinted
     maple-mono.truetype
     mkcert
     openssl_1_1
     pango
-    php
-    php84Packages.composer
-    phpactor
     pixman
     pkg-config
     pkgs-unstable.ansible-lint
     pkgs-unstable.bun
     pkgs-unstable.cursor-cli
     pkgs-unstable.go
-    (pkgs-unstable.google-cloud-sdk.withExtraComponents [google-cloud-sdk.components.gke-gcloud-auth-plugin])
-    pkgs-unstable.libpq
-    pkgs-unstable.llm
     pkgs-unstable.node-gyp
     pkgs-unstable.nodejs_20
-    pkgs-unstable.sops
-    pkgs-unstable.terraform
-    pkgs-unstable.mariadb_1011
     podman
     poetry
-    postgresql_17
     prometheus.cli
     python310
-    redis
     regal
     rustc
     rustup
     scc
-    terraform-ls
-    terragrunt
     texliveBasic
-    tflint
-    tfsec
     uv
     wrangler
     yarn

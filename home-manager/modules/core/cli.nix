@@ -38,6 +38,7 @@
     neovim
     pkgs-unstable.tailscale
     pkgs-unstable.tree-sitter
+    pkgs-unstable.nss
     pv
     reattach-to-user-namespace
     ripgrep

@@ -17,7 +17,6 @@
     libjpeg
     libpng
     librsvg
-    pkgs-unstable.git-xet
     maple-mono.NF-unhinted
     maple-mono.truetype
     mkcert
@@ -28,6 +27,7 @@
     pkgs-unstable.ansible-lint
     pkgs-unstable.bun
     pkgs-unstable.cursor-cli
+    pkgs-unstable.git-xet
     pkgs-unstable.go
     pkgs-unstable.node-gyp
     pkgs-unstable.nodejs_20

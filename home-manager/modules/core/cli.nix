@@ -31,14 +31,14 @@
     libiconv
     mtr
     ncdu
-    nmap
-    pkgs-unstable.glab
-    pkgs-unstable.gh
-    pkgs-unstable.iproute2mac
     neovim
+    nmap
+    pkgs-unstable.gh
+    pkgs-unstable.glab
+    pkgs-unstable.iproute2mac
+    pkgs-unstable.nss
     pkgs-unstable.tailscale
     pkgs-unstable.tree-sitter
-    pkgs-unstable.nss
     pv
     reattach-to-user-namespace
     ripgrep

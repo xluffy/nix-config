@@ -7,17 +7,14 @@
     _1password-cli
     age
     bashInteractive
-    bat
     coreutils
     cowsay
     csvkit
     curl
     diff-so-fancy
-    direnv
     dos2unix
     fd
     ffmpeg
-    fzf
     ghostscript
     glow
     gnupg
@@ -25,7 +22,6 @@
     goawk
     htop
     inetutils
-    jq
     just
     kcat
     libiconv
@@ -43,7 +39,6 @@
     reattach-to-user-namespace
     ripgrep
     tig
-    tmux
     tree
     typst
     unixtools.watch

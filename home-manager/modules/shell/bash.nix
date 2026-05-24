@@ -57,13 +57,10 @@
       };
 
       initExtra = ''
-        eval "$(direnv hook bash) "
-        eval "$(fzf --bash)"
-        source ${config.home.homeDirectory}/code/me/nix-config/home-manager/modules/shell/function.sh
+        source ${config.home.homeDirectory}/.config/nix-config/function.sh
         source <(helm completion bash)
         source <(kubectl completion bash)
         PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
-        source ${pkgs.nix-index}/etc/profile.d/command-not-found.sh
       '';
 
       bashrcExtra = ''
@@ -71,7 +68,7 @@
         export NODE_PATH=~/.npm-packages/lib/node_modules
         PS1='\[\e[0;32m\]:: \[\e[0;37m\]You are \[$(tput bold)\]\[\033[38;5;46m\]\u\[$(tput sgr0)\]\[$(tput sgr0)\]\[\033[38;5;15m\] \[$(tput sgr0)\]-at- \[\e[0;34m\]\h\[\e[0;37m\] [\[\e[0;32m\]\w\[\e[0;39m\]]\n\[\e[0;32m\]\$\[\e[m\] '
 
-        shuf -n 1 ${config.home.homeDirectory}/code/me/nix-config/home-manager/modules/shell/quote.txt | cowsay
+        shuf -n 1 ${config.home.homeDirectory}/.config/nix-config/quote.txt | cowsay
 
         bind '"\e[A": history-search-backward'
         bind '"\e[B": history-search-forward'

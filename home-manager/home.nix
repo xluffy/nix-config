@@ -1,22 +1,8 @@
 _: {
   imports = [
-    ./modules/core/cli.nix
-    ./modules/core/dev.nix
-    ./modules/core/dev-db.nix
-    ./modules/core/dev-llm.nix
-    ./modules/core/dev-ops.nix
-    ./modules/core/dev-php.nix
-    ./modules/core/dev-terraform.nix
-    ./modules/core/font.nix
-    ./modules/core/gui.nix
-    ./modules/core/nix.nix
-    ./modules/programs/1password.nix
-    ./modules/programs/default.nix
-    ./modules/programs/fzf.nix
-    ./modules/programs/git.nix
-    ./modules/programs/ssh.nix
-    ./modules/programs/tmux.nix
-    ./modules/shell/bash.nix
+    ./modules/core
+    ./modules/programs
+    ./modules/shell
   ];
 
   home = {

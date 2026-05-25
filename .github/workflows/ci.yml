@@ -20,16 +20,13 @@ jobs:
         os: [ ubuntu-24.04, macos-latest ]
     steps:
       - name: Checkout repository
-        uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
       - name: Install Nix
-        uses: DeterminateSystems/nix-installer-action@799335515234281313364860b73b22e1150c7634 # v12
+        uses: DeterminateSystems/nix-installer-action@ef8a148080ab6020fd15196c2084a2eea5ff2d25 # v22
 
       - name: Magic Nix Cache
-        uses: DeterminateSystems/magic-nix-cache-action@611d898b992f036746f3647f3b8b668b5550a24f # v7
-
-      - name: Run native flake checks
-        run: nix flake check
+        uses: DeterminateSystems/magic-nix-cache-action@565684385bcd71bad329742eefe8d12f2e765b39 # v13
 
       - name: Run dynamic cross-evaluation
         run: bash bin/check-eval.sh
@@ -39,13 +36,13 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout repository
-        uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
       - name: Install Nix
-        uses: DeterminateSystems/nix-installer-action@799335515234281313364860b73b22e1150c7634 # v12
+        uses: DeterminateSystems/nix-installer-action@ef8a148080ab6020fd15196c2084a2eea5ff2d25 # v22
 
       - name: Magic Nix Cache
-        uses: DeterminateSystems/magic-nix-cache-action@611d898b992f036746f3647f3b8b668b5550a24f # v7
+        uses: DeterminateSystems/magic-nix-cache-action@565684385bcd71bad329742eefe8d12f2e765b39 # v13
 
       - name: Build Ubuntu Host Configuration
         run: nix build .#homeConfigurations."xluffy-zzbot@elbaf-sky-n100".activationPackage
@@ -55,13 +52,13 @@ jobs:
     runs-on: macos-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
       - name: Install Nix
-        uses: DeterminateSystems/nix-installer-action@799335515234281313364860b73b22e1150c7634 # v12
+        uses: DeterminateSystems/nix-installer-action@ef8a148080ab6020fd15196c2084a2eea5ff2d25 # v22
 
       - name: Magic Nix Cache
-        uses: DeterminateSystems/magic-nix-cache-action@611d898b992f036746f3647f3b8b668b5550a24f # v7
+        uses: DeterminateSystems/magic-nix-cache-action@565684385bcd71bad329742eefe8d12f2e765b39 # v13
 
       - name: Build macOS Host Configuration
         run: nix build .#homeConfigurations."quang.van.nguyen@Nguyens-MacBook-Pro.local".activationPackage

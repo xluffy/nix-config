@@ -81,9 +81,9 @@
         extraModules = [
           {
             custom.shell.promptColor = {
-              primary = "35"; # Magenta
-              host = "36";    # Cyan
-              user = "38;5;201"; # Pink username
+              primary = "32";
+              host = "34";
+              user = "38;5;46";
             };
           }
         ];

@@ -6,5 +6,6 @@
     ./git.nix
     ./ssh.nix
     ./tmux.nix
+    ./pi.nix
   ];
 }

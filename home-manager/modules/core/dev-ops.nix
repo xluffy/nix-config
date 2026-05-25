@@ -9,7 +9,6 @@
     conftest
     docker-client
     eksctl
-    k9s
     kubectl
     kubectx
     kubernetes-helm

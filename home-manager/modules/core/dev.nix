@@ -4,15 +4,10 @@
   ...
 }: {
   home.packages = with pkgs; [
-    cairo
-    devenv
-    foundry
     gcc
-    giflib
     gnumake
     golangci-lint
     hugo
-    jdk17
     k6
     libjpeg
     libpng
@@ -21,8 +16,6 @@
     maple-mono.truetype
     mkcert
     openssl_1_1
-    pango
-    pixman
     pkg-config
     pkgs-unstable.ansible-lint
     pkgs-unstable.bun
@@ -31,17 +24,13 @@
     pkgs-unstable.go
     pkgs-unstable.node-gyp
     pkgs-unstable.nodejs_20
-    podman
-    poetry
     prometheus.cli
     python310
     regal
     rustc
     rustup
     scc
-    texliveBasic
     uv
-    wrangler
     yarn
     zlib
   ];

@@ -1,13 +1,16 @@
 {
   pkgs,
   pkgs-unstable,
+  hasGUI ? true,
   ...
 }: {
-  home.packages = with pkgs; [
-    _1password-gui
-    pkgs-unstable.betterdisplay
-    pkgs-unstable.flameshot
-    pkgs-unstable.karabiner-elements
-    pkgs-unstable.tailscale
-  ];
+  home.packages = pkgs.lib.optionals hasGUI (with pkgs;
+    [
+      _1password-gui
+      pkgs-unstable.tailscale
+    ]
+    ++ (pkgs.lib.optionals pkgs.stdenv.isDarwin [
+      pkgs-unstable.betterdisplay
+      pkgs-unstable.karabiner-elements
+    ]));
 }

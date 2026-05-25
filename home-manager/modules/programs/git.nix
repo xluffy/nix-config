@@ -1,4 +1,4 @@
-_: {
+{pkgs, ...}: {
   programs = {
     git = {
       enable = true;
@@ -67,8 +67,10 @@ _: {
         gpg = {
           format = "ssh";
           ssh = {
-            # "${pkgs._1password-gui}/bin/op-ssh-sign";
-            program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign";
+            program =
+              if pkgs.stdenv.isDarwin
+              then "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
+              else "/opt/1Password/op-ssh-sign";
           };
         };
 

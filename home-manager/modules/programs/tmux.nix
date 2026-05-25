@@ -1,4 +1,4 @@
-_: {
+{pkgs, ...}: {
   programs.tmux = {
     enable = true;
 
@@ -97,7 +97,12 @@ _: {
       set-environment -g 'SSH_AUTH_SOCK' ~/.ssh/ssh_auth_sock
 
       # config tmux-yank
-      set-option -g default-command "reattach-to-user-namespace -l $SHELL"
+      ${pkgs.lib.optionalString pkgs.stdenv.isDarwin ''
+        set-option -g default-command "reattach-to-user-namespace -l $SHELL"
+      ''}
+
+      # require for pi setup
+      set -g extended-keys on
 
     '';
   };

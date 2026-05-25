@@ -34,7 +34,6 @@
       pkgs-unstable.glab
       pkgs-unstable.nss
       pkgs-unstable.tailscale
-      pkgs-unstable.tree-sitter
       pv
       ripgrep
       tig

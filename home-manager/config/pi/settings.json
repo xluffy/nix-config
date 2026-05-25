@@ -1,0 +1,10 @@
+{
+  "defaultProvider": "gemini",
+  "defaultModel": "gemini-3.5-pro",
+  "enabledModels": [
+    "gemini-*",
+    "claude-*"
+  ],
+  "theme": "dark",
+  "enableInstallTelemetry": false
+}

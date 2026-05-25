@@ -46,7 +46,7 @@ jobs:
         uses: DeterminateSystems/magic-nix-cache-action@565684385bcd71bad329742eefe8d12f2e765b39 # v13
 
       - name: Build Ubuntu Host Configuration
-        run: nix build .#homeConfigurations."xluffy-zzbot@elbaf-sky-n100".activationPackage
+        run: nix build '.#homeConfigurations."xluffy-zzbot@elbaf-sky-n100".activationPackage'
 
   native-build-macos:
     name: Build Native macOS Config
@@ -63,4 +63,4 @@ jobs:
         uses: DeterminateSystems/magic-nix-cache-action@565684385bcd71bad329742eefe8d12f2e765b39 # v13
 
       - name: Build macOS Host Configuration
-        run: nix build .#homeConfigurations."quang.van.nguyen@Nguyens-MacBook-Pro.local".activationPackage
+        run: nix build '.#homeConfigurations."quang.van.nguyen@Nguyens-MacBook-Pro.local".activationPackage'

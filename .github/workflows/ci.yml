@@ -1,0 +1,67 @@
+name: CI
+
+on:
+  push:
+    branches: [ master]
+  pull_request:
+    branches: [ master ]
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  test-and-eval:
+    name: Run checks & cross-eval
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ ubuntu-24.04, macos-latest ]
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
+
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@799335515234281313364860b73b22e1150c7634 # v12
+
+      - name: Magic Nix Cache
+        uses: DeterminateSystems/magic-nix-cache-action@611d898b992f036746f3647f3b8b668b5550a24f # v7
+
+      - name: Run native flake checks
+        run: nix flake check
+
+      - name: Run dynamic cross-evaluation
+        run: bash bin/check-eval.sh
+
+  native-build-linux:
+    name: Build Native Linux Config
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
+
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@799335515234281313364860b73b22e1150c7634 # v12
+
+      - name: Magic Nix Cache
+        uses: DeterminateSystems/magic-nix-cache-action@611d898b992f036746f3647f3b8b668b5550a24f # v7
+
+      - name: Build Ubuntu Host Configuration
+        run: nix build .#homeConfigurations."xluffy-zzbot@elbaf-sky-n100".activationPackage
+
+  native-build-macos:
+    name: Build Native macOS Config
+    runs-on: macos-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
+
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@799335515234281313364860b73b22e1150c7634 # v12
+
+      - name: Magic Nix Cache
+        uses: DeterminateSystems/magic-nix-cache-action@611d898b992f036746f3647f3b8b668b5550a24f # v7
+
+      - name: Build macOS Host Configuration
+        run: nix build .#homeConfigurations."quang.van.nguyen@Nguyens-MacBook-Pro.local".activationPackage

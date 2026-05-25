@@ -24,9 +24,10 @@ gc:
   nix-collect-garbage --delete-older-than 2d
 
 check:
-  alejandra --check .
-  deadnix .
-  statix check .
+  just check-eval
+
+check-eval:
+  bash bin/check-eval.sh
 
 fix:
   alejandra .

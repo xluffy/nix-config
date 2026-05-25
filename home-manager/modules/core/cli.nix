@@ -6,6 +6,7 @@
   home.packages = with pkgs;
     [
       _1password-cli
+      antigravity-cli
       age
       bashInteractive
       coreutils

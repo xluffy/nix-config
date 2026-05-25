@@ -28,6 +28,7 @@
       username,
       homeDirectory ? null,
       hasGUI ? true,
+      extraModules ? [ ],
     }: let
       pkgs = import nixpkgs {
         inherit system;
@@ -64,7 +65,7 @@
               homeDirectory = resolvedHomeDir;
             };
           }
-        ];
+        ] ++ extraModules;
         extraSpecialArgs = {
           pkgs-unstable = pkgsUnstable;
           llm-agents = llm-agents.packages.${system};
@@ -77,11 +78,29 @@
         system = "aarch64-darwin";
         username = "quang.van.nguyen";
         hasGUI = true;
+        extraModules = [
+          {
+            custom.shell.promptColor = {
+              primary = "35"; # Magenta
+              host = "36";    # Cyan
+              user = "38;5;201"; # Pink username
+            };
+          }
+        ];
       };
       "xluffy-zzbot@elbaf-sky-n100" = mkHomeConfig {
         system = "x86_64-linux";
         username = "xluffy-zzbot";
         hasGUI = false;
+        extraModules = [
+          {
+            custom.shell.promptColor = {
+              primary = "33"; # Yellow
+              host = "31";    # Red
+              user = "38;5;214"; # Orange username
+            };
+          }
+        ];
       };
     };
 

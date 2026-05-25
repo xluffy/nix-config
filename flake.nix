@@ -81,10 +81,11 @@
         extraModules = [
           {
             custom.shell.promptColor = {
-              primary = "32";
-              host = "34";
-              user = "38;5;46";
+              primary = "35"; # Magenta
+              host = "36";    # Cyan
+              user = "38;5;201"; # Pink username
             };
+            custom.ssh.identityFile = "~/.ssh/ssh-ed25519:quang@2meo.com.pub";
           }
         ];
       };
@@ -99,6 +100,7 @@
               host = "31";    # Red
               user = "38;5;214"; # Orange username
             };
+            custom.ssh.identityFile = "~/.ssh/id_ed25519";
           }
         ];
       };

@@ -63,7 +63,7 @@ cp .envrc.local.example .envrc.local
 Edit `.envrc.local` and set your HM_FLAKE_ATTR to match your Ubuntu host name in `flake.nix` (e.g., `quang.van.nguyen@ubuntu` or `xluffy@ubuntu`):
 
 ```bash
-nano .envrc.local
+vim .envrc.local
 # set export HM_FLAKE_ATTR=xluffy-zzbot@elbaf-sky-n100
 ```
 

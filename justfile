@@ -11,7 +11,7 @@ bootstrap:
   nix develop
 
 # Set HM_FLAKE_ATTR to your flake output name (user@hostname). Use .envrc.local (gitignored) or shell rc so each machine can differ without editing this file.
-switch: fix
+switch:
   home-manager switch --flake ".#${HM_FLAKE_ATTR}"
 
 list:

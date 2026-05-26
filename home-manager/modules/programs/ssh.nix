@@ -5,10 +5,10 @@
   ...
 }: let
   cfg = config.custom.ssh;
-  identityAgentPath =
+  identityAgentLine =
     if pkgs.stdenv.isDarwin
-    then "~/Library/Group\\ Containers/2BUA8C4S2C.com.1password/t/agent.sock"
-    else "~/.1password/agent.sock";
+    then "IdentityAgent ~/Library/Group\\ Containers/2BUA8C4S2C.com.1password/t/agent.sock"
+    else "";
 in {
   options.custom.ssh = {
     identityFile = lib.mkOption {
@@ -32,10 +32,10 @@ in {
       Host github.com
         User xluffy
         IdentityFile ${cfg.identityFile}
-        IdentityAgent ${identityAgentPath}
+        ${identityAgentLine}
 
       Host 172.20.0.21
-        IdentityAgent ${identityAgentPath}
+        ${identityAgentLine}
 
       Host * !127.0.0.1
         ForwardAgent no
@@ -56,7 +56,7 @@ in {
         CASignatureAlgorithms sk-ssh-ed25519@openssh.com,ssh-ed25519,rsa-sha2-512,rsa-sha2-256
         HostbasedAcceptedAlgorithms sk-ssh-ed25519-cert-v01@openssh.com,ssh-ed25519-cert-v01@openssh.com,rsa-sha2-512-cert-v01@openssh.com,rsa-sha2-256-cert-v01@openssh.com,sk-ssh-ed25519@openssh.com,ssh-ed25519,rsa-sha2-512,rsa-sha2-256
         PubkeyAcceptedAlgorithms sk-ssh-ed25519-cert-v01@openssh.com,ssh-ed25519-cert-v01@openssh.com,rsa-sha2-512-cert-v01@openssh.com,rsa-sha2-256-cert-v01@openssh.com,sk-ssh-ed25519@openssh.com,ssh-ed25519,rsa-sha2-512,rsa-sha2-256
-        IdentityAgent ${identityAgentPath}
+        ${identityAgentLine}
     '';
   };
 }

@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{pkgs, config, ...}: {
   programs = {
     git = {
       enable = true;
@@ -66,13 +66,11 @@
 
         gpg = {
           format = "ssh";
+        } // (if pkgs.stdenv.isDarwin then {
           ssh = {
-            program =
-              if pkgs.stdenv.isDarwin
-              then "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
-              else "/opt/1Password/op-ssh-sign";
+            program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign";
           };
-        };
+        } else {});
 
         push = {
           default = "current";
@@ -96,7 +94,10 @@
         };
 
         user = {
-          signingkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAII6gzw6c40c8zowzZ6nR8iRwsYy0qg2sNvro09nFtTzF";
+          signingkey =
+            if pkgs.stdenv.isDarwin
+            then "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAII6gzw6c40c8zowzZ6nR8iRwsYy0qg2sNvro09nFtTzF"
+            else "${config.custom.ssh.identityFile}.pub";
         };
         lfs."customtransfer.xet" = {
           path = "git-xet";

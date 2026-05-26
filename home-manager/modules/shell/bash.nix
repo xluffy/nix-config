@@ -83,6 +83,26 @@ in {
           source <(helm completion bash)
           source <(kubectl completion bash)
           PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
+        '' + lib.optionalString pkgs.stdenv.isLinux ''
+          # Start and reuse ssh-agent on Linux/Ubuntu
+          if [ -z "$SSH_AUTH_SOCK" ]; then
+              if [ -f "$HOME/.ssh/agent.env" ]; then
+                  . "$HOME/.ssh/agent.env" >/dev/null
+              fi
+              if [ -z "$SSH_AGENT_PID" ] || ! kill -0 "$SSH_AGENT_PID" 2>/dev/null; then
+                  eval "$(ssh-agent -s)" >/dev/null
+                  echo "export SSH_AUTH_SOCK=$SSH_AUTH_SOCK" > "$HOME/.ssh/agent.env"
+                  echo "export SSH_AGENT_PID=$SSH_AGENT_PID" >> "$HOME/.ssh/agent.env"
+              fi
+          fi
+
+          # Load private key if not already loaded
+          if [ -n "$SSH_AUTH_SOCK" ]; then
+              ssh-add -l >/dev/null 2>&1
+              if [ $? -eq 1 ]; then
+                  ssh-add ${config.custom.ssh.identityFile}
+              fi
+          fi
         '';
 
         bashrcExtra = ''

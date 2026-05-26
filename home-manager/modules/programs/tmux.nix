@@ -2,7 +2,6 @@
   programs.tmux = {
     enable = true;
 
-    prefix = "C-a";
     baseIndex = 1;
     clock24 = true;
     escapeTime = 1;
@@ -19,8 +18,8 @@
       # auto rename windows
       setw -g automatic-rename on
 
-      # send prefix twice to other app (vim, bash)
-      bind C-a send-prefix
+      # Bind specific prefix based on OS
+      bind ${if pkgs.stdenv.isDarwin then "C-a" else "C-b"} send-prefix
 
       # split panes with current pwd
       bind | split-window -h -c "#{pane_current_path}"

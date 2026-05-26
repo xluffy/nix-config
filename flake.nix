@@ -13,6 +13,11 @@
 
     nix-index-database.url = "github:nix-community/nix-index-database";
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
+
+    agenix = {
+      url = "github:ryantm/agenix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
@@ -21,6 +26,7 @@
     llm-agents,
     home-manager,
     nix-index-database,
+    agenix,
     ...
   }: let
     mkHomeConfig = {
@@ -59,6 +65,7 @@
         modules = [
           ./home-manager/home.nix
           nix-index-database.homeModules.nix-index
+          agenix.homeManagerModules.default
           {
             home = {
               inherit username;
@@ -69,6 +76,7 @@
         extraSpecialArgs = {
           pkgs-unstable = pkgsUnstable;
           llm-agents = llm-agents.packages.${system};
+          agenix-cli = agenix.packages.${system}.default;
           inherit hasGUI;
         };
       };

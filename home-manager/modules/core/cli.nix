@@ -1,10 +1,12 @@
 {
   pkgs,
   pkgs-unstable,
+  agenix-cli,
   ...
 }: {
   home.packages = with pkgs;
     [
+      agenix-cli
       _1password-cli
       age
       bashInteractive

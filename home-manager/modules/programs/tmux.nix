@@ -1,7 +1,10 @@
-{pkgs, ...}: {
+{pkgs, ...}: let
+  prefixKey = if pkgs.stdenv.isDarwin then "C-a" else "C-b";
+in {
   programs.tmux = {
     enable = true;
 
+    prefix = prefixKey;
     baseIndex = 1;
     clock24 = true;
     escapeTime = 1;
@@ -19,7 +22,7 @@
       setw -g automatic-rename on
 
       # Bind specific prefix based on OS
-      bind ${if pkgs.stdenv.isDarwin then "C-a" else "C-b"} send-prefix
+      bind ${prefixKey} send-prefix
 
       # split panes with current pwd
       bind | split-window -h -c "#{pane_current_path}"

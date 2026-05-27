@@ -35,13 +35,29 @@ Use the native macOS Keychain to store the secret securely with zero plaintext f
    ```
    *(Note: The first time `pi` runs, macOS will ask you to approve terminal/application access to the Keychain item, which is a one-time prompt.)*
 
-### Option C: 1Password CLI (`op`)
-If you use 1Password to manage secrets:
+### Option C: 1Password CLI (`op`) with TTL Caching
+If you use 1Password to manage secrets, use the `cached-op.sh` wrapper to avoid hitting 1Password on every single API call:
 
 1. **Update your `models.json`**:
    ```json
-   "apiKey": "!op read op://private/deepseek-api-key/credential"
+   "apiKey": "!~/.pi/agent/cached-op.sh 'op://private/deepseek-api-key/credential' 4"
    ```
+   This caches the key for 4 hours (configurable). Subsequent calls within the TTL use the cache.
+
+### Option D: Plaintext File (Ubuntu Server, No 1Password CLI)
+For headless Ubuntu servers or environments where the 1Password CLI is not available, use a local plaintext file with the `--file` flag:
+
+1. **Create a plaintext key file**:
+   ```bash
+   mkdir -p ~/.cache/pi-op
+   echo "your-deepseek-api-key" > ~/.cache/pi-op/deepseek.key
+   chmod 600 ~/.cache/pi-op/deepseek.key
+   ```
+2. **Update your `models.json`**:
+   ```json
+   "apiKey": "!~/.pi/agent/cached-op.sh --file ~/.cache/pi-op/deepseek.key 4"
+   ```
+   The script reads the key from the file and caches it in memory for the TTL duration, just like the 1Password mode.
 
 ---
 

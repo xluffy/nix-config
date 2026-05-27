@@ -1,10 +1,9 @@
 {
-  "defaultProvider": "gemini",
-  "defaultModel": "gemini-3.5-pro",
+  "defaultProvider": "deepseek",
+  "defaultModel": "deepseek-chat",
   "defaultThinkingLevel": "high",
   "enabledModels": [
-    "gemini-3*",
-    "claude-*"
+    "deepseek-*"
   ],
   "theme": "dark",
   "enableInstallTelemetry": false,

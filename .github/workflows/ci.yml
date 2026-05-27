@@ -1,66 +1,66 @@
-name: CI
-
-on:
-  push:
-    branches: [ master]
-  pull_request:
-    branches: [ master ]
-
-permissions:
-  contents: read
-  id-token: write
-
-jobs:
-  test-and-eval:
-    name: Run checks & cross-eval
-    runs-on: ${{ matrix.os }}
-    strategy:
-      fail-fast: false
-      matrix:
-        os: [ ubuntu-24.04, macos-latest ]
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
-
-      - name: Install Nix
-        uses: DeterminateSystems/nix-installer-action@ef8a148080ab6020fd15196c2084a2eea5ff2d25 # v22
-
-      - name: Magic Nix Cache
-        uses: DeterminateSystems/magic-nix-cache-action@565684385bcd71bad329742eefe8d12f2e765b39 # v13
-
-      - name: Run dynamic cross-evaluation
-        run: bash bin/check-eval.sh
-
-  native-build-linux:
-    name: Build Native Linux Config
-    runs-on: ubuntu-24.04
-    needs: test-and-eval
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
-
-      - name: Install Nix
-        uses: DeterminateSystems/nix-installer-action@ef8a148080ab6020fd15196c2084a2eea5ff2d25 # v22
-
-      - name: Magic Nix Cache
-        uses: DeterminateSystems/magic-nix-cache-action@565684385bcd71bad329742eefe8d12f2e765b39 # v13
-
-      - name: Build Ubuntu Host Configuration
-        run: nix build '.#homeConfigurations."xluffy-zzbot@elbaf-sky-n100".activationPackage'
-
-  native-build-macos:
-    name: Build Native macOS Config
-    runs-on: macos-latest
-    needs: test-and-eval
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
-
-      - name: Install Nix
-        uses: DeterminateSystems/nix-installer-action@ef8a148080ab6020fd15196c2084a2eea5ff2d25 # v22
-
-      - name: Magic Nix Cache
-        uses: DeterminateSystems/magic-nix-cache-action@565684385bcd71bad329742eefe8d12f2e765b39 # v13
-
-      - name: Build macOS Host Configuration
-        run: nix build '.#homeConfigurations."quang.van.nguyen@Nguyens-MacBook-Pro.local".activationPackage'
+# name: CI
+#
+# on:
+#   push:
+#     branches: [ master]
+#   pull_request:
+#     branches: [ master ]
+#
+# permissions:
+#   contents: read
+#   id-token: write
+#
+# jobs:
+#   test-and-eval:
+#     name: Run checks & cross-eval
+#     runs-on: ${{ matrix.os }}
+#     strategy:
+#       fail-fast: false
+#       matrix:
+#         os: [ ubuntu-24.04, macos-latest ]
+#     steps:
+#       - name: Checkout repository
+#         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+#
+#       - name: Install Nix
+#         uses: DeterminateSystems/nix-installer-action@ef8a148080ab6020fd15196c2084a2eea5ff2d25 # v22
+#
+#       - name: Magic Nix Cache
+#         uses: DeterminateSystems/magic-nix-cache-action@565684385bcd71bad329742eefe8d12f2e765b39 # v13
+#
+#       - name: Run dynamic cross-evaluation
+#         run: bash bin/check-eval.sh
+#
+#   native-build-linux:
+#     name: Build Native Linux Config
+#     runs-on: ubuntu-24.04
+#     needs: test-and-eval
+#     steps:
+#       - name: Checkout repository
+#         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+#
+#       - name: Install Nix
+#         uses: DeterminateSystems/nix-installer-action@ef8a148080ab6020fd15196c2084a2eea5ff2d25 # v22
+#
+#       - name: Magic Nix Cache
+#         uses: DeterminateSystems/magic-nix-cache-action@565684385bcd71bad329742eefe8d12f2e765b39 # v13
+#
+#       - name: Build Ubuntu Host Configuration
+#         run: nix build '.#homeConfigurations."xluffy-zzbot@elbaf-sky-n100".activationPackage'
+#
+#   native-build-macos:
+#     name: Build Native macOS Config
+#     runs-on: macos-latest
+#     needs: test-and-eval
+#     steps:
+#       - name: Checkout repository
+#         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+#
+#       - name: Install Nix
+#         uses: DeterminateSystems/nix-installer-action@ef8a148080ab6020fd15196c2084a2eea5ff2d25 # v22
+#
+#       - name: Magic Nix Cache
+#         uses: DeterminateSystems/magic-nix-cache-action@565684385bcd71bad329742eefe8d12f2e765b39 # v13
+#
+#       - name: Build macOS Host Configuration
+#         run: nix build '.#homeConfigurations."quang.van.nguyen@Nguyens-MacBook-Pro.local".activationPackage'

@@ -8,7 +8,6 @@
     [
       agenix-cli
       _1password-cli
-      antigravity-cli
       age
       bashInteractive
       coreutils

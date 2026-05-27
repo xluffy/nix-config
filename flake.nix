@@ -42,6 +42,11 @@
         config.permittedInsecurePackages = [
           "openssl-1.1.1w"
         ];
+        overlays = [
+          (final: prev: {
+            antigravity-cli = final.callPackage ./pkgs/antigravity-cli.nix {};
+          })
+        ];
       };
       pkgsUnstable = import nixpkgs-unstable {
         inherit system;

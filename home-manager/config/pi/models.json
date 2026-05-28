@@ -3,7 +3,7 @@
     "deepseek": {
       "baseUrl": "https://api.deepseek.com",
       "api": "openai-completions",
-      "apiKey": "!~/.pi/agent/cached-op.sh 'op://private/deepseek-api-key/credential' 4",
+      "apiKey": "!~/.pi/agent/cached-op.sh 'op://private/deepseek-api-key/credential'",
       "models": [
         {
           "id": "deepseek-v4-pro",

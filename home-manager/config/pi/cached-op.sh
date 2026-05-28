@@ -1,11 +1,9 @@
 #!/usr/bin/env bash
 # cached-op.sh - wraps 'op read' with a TTL cache, or reads from a plaintext file
 # Usage:
-#   cached-op.sh <op-path>                       # 1Password mode
-#   cached-op.sh --file <plaintext-file-path>    # plaintext file mode (Ubuntu server, no op CLI)
+#   cached-op.sh <op-path>  # 1Password mode
 # Examples:
 #   cached-op.sh "op://private/deepseek-api-key/credential"
-#   cached-op.sh --file ~/.cache/pi-op/deepseek.key
 
 set -euo pipefail
 

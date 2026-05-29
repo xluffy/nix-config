@@ -22,3 +22,5 @@ Summary of changes
 Then, on a new line after the commit message, suggest a git branch name following the repo's convention (e.g., `feat/<scope>/<what>`, `fix/<scope>/<what>`, `refactor/<scope>/<what>`):
 
 Branch: <suggested-branch-name>
+
+Finally, ask the user to review the changes. If they approve, create a new branch, commit the changes, and push them to the repository.

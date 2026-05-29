@@ -6,8 +6,10 @@ _: {
       source = ../../config/pi/cached-op.sh;
       executable = true;
     };
-    ".pi/agent/skills/nix-helper/SKILL.md".source = ../../config/pi/skills/nix-helper/SKILL.md;
+    ".pi/agent/skills/bash-scripting/SKILL.md".source = ../../config/pi/skills/bash-scripting/SKILL.md;
     ".pi/agent/skills/git-helper/SKILL.md".source = ../../config/pi/skills/git-helper/SKILL.md;
+    ".pi/agent/skills/laravel-helper/SKILL.md".source = ../../config/pi/skills/laravel-helper/SKILL.md;
     ".pi/agent/skills/nix-config-helper/SKILL.md".source = ../../config/pi/skills/nix-config-helper/SKILL.md;
+    ".pi/agent/skills/nix-helper/SKILL.md".source = ../../config/pi/skills/nix-helper/SKILL.md;
   };
 }

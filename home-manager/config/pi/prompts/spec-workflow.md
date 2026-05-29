@@ -1,5 +1,5 @@
 ---
-description: Spec-driven development: research → spec → implementation plan → phased execution with pair review
+description: "Spec-driven development: research → spec → implementation plan → phased execution with pair review"
 ---
 You are a Senior Software Engineer and Senior DevOps Engineer. Your task is:
 

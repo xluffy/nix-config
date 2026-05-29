@@ -11,15 +11,17 @@ Follow this disciplined, spec-driven workflow. Do NOT skip steps or jump ahead.
 
 ## File Naming Convention
 
-All documents live under `~/code/me/spec/YYYY-MM-DD/` where `YYYY-MM-DD` is today's date (infer from context or ask if unsure).
+All documents live under `~/code/me/spec/YYYY-MM-DD/` where `YYYY-MM-DD` is today's date (infer from context or ask if unsure). If there are multiple spec/impl files in the directory, number them sequentially to keep them organized more easily.
 
 Given a title (lowercase, hyphenated), the files are:
+
 - **Spec**: `spec-<title>.md`
 - **Implementation plan**: `impl-<title>.md`
 
 Example: if the title is `add-login-rate-limiter`, files go to:
-- `~/code/me/spec/2026-05-29/spec-add-login-rate-limiter.md`
-- `~/code/me/spec/2026-05-29/impl-add-login-rate-limiter.md`
+
+- `~/code/me/spec/2026-05-29/01-spec-add-login-rate-limiter.md`
+- `~/code/me/spec/2026-05-29/01-impl-add-login-rate-limiter.md`
 
 Determine the title from the task description `$ARGUMENTS`. Convert it to lowercase, hyphenated form. Create the directory if it does not exist.
 
@@ -49,41 +51,51 @@ The spec must include:
 
 ```markdown
 # Spec: [Title]
+# Tags: [Tags should be generated based on the topic, programming language (go, php, python, ruby)/framework (laravel, rails, go-chi ...), architecture (MVCC, SQL, RDBMS, Redis ..), and other relevant attributes]
 
 ## Problem Statement
+
 - What pain are we solving? In 1-2 sentences.
 
 ## Goals & Non-Goals
+
 - Goals: What this WILL do
 - Non-Goals: What this will NOT do (scope boundary)
 
 ## User Stories / Use Cases
+
 - As a [role], I want [capability] so that [value]
 
 ## Functional Requirements
+
 - FR1: ...
 - FR2: ...
 
 ## Non-Functional Requirements
+
 - Performance: ...
 - Security: ...
 - Observability: ...
 - Maintainability: ...
 
 ## Technical Approach
+
 - High-level architecture decisions
 - Key technology choices with rationale
 - Data model / schema (if applicable)
 - API contracts (if applicable)
 
 ## Edge Cases & Error Handling
+
 - What happens when things go wrong?
 
 ## Assumptions & Risks
+
 - Documented assumptions
 - Known risks and mitigations
 
 ## Out of Scope (explicitly)
+
 - What we are deliberately NOT doing
 ```
 
@@ -106,8 +118,10 @@ Format:
 
 ```markdown
 # Implementation Plan: [Title]
+# Tags: [Tags should be generated based on the topic, programming language (go, php, python, ruby)/framework (laravel, rails, go-chi ...), architecture (MVCC, SQL, RDBMS, Redis ..), and other relevant attributes]
 
 ## Phase 1: [Name]
+
 - **Goal**: What this phase delivers
 - **Depends on**: Nothing / Phase 0 research
 - **Verification**: How to confirm this phase is done correctly

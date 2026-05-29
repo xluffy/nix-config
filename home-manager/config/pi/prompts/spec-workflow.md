@@ -9,6 +9,22 @@ Follow this disciplined, spec-driven workflow. Do NOT skip steps or jump ahead.
 
 ---
 
+## File Naming Convention
+
+All documents live under `~/code/me/spec/YYYY-MM-DD/` where `YYYY-MM-DD` is today's date (infer from context or ask if unsure).
+
+Given a title (lowercase, hyphenated), the files are:
+- **Spec**: `spec-<title>.md`
+- **Implementation plan**: `impl-<title>.md`
+
+Example: if the title is `add-login-rate-limiter`, files go to:
+- `~/code/me/spec/2026-05-29/spec-add-login-rate-limiter.md`
+- `~/code/me/spec/2026-05-29/impl-add-login-rate-limiter.md`
+
+Determine the title from the task description `$ARGUMENTS`. Convert it to lowercase, hyphenated form. Create the directory if it does not exist.
+
+---
+
 ## Phase 0: Deep Research & Discovery
 
 Before writing any spec or code, thoroughly research the problem space:
@@ -27,7 +43,7 @@ Output your findings as a concise research summary. Ask me clarifying questions 
 
 Once research is complete and questions are resolved, write a specification document.
 
-Create the file at `~/code/me/spec/spec.md` (create the directory if needed).
+Create the file at `~/code/me/spec/YYYY-MM-DD/spec-<title>.md` (create the directory if needed).
 
 The spec must include:
 
@@ -75,9 +91,9 @@ Present the spec to me for review. Do NOT proceed until I approve it. Expect at 
 
 ---
 
-## Phase 2: Write implementation.md
+## Phase 2: Write impl.md
 
-After the spec is approved, create `~/code/me/spec/implementation.md`.
+After the spec is approved, create `~/code/me/spec/YYYY-MM-DD/impl-<title>.md`.
 
 This document breaks the spec into concrete, sequential implementation phases. Rules:
 
@@ -120,14 +136,14 @@ For each phase, in order:
    - Does this match your expectations?
    - Any edge cases I missed?
    - Any adjustments needed before Phase N+1?
-5. **Iterate**: If I request changes, update the implementation AND update `spec.md` / `implementation.md` if the changes affect the spec or plan. Keep all documents in sync.
+5. **Iterate**: If I request changes, update the implementation AND update `spec-<title>.md` / `impl-<title>.md` if the changes affect the spec or plan. Keep all documents in sync.
 6. **Lock**: Only proceed to the next phase after I confirm this phase is done.
 
 ---
 
 ## Ground Rules (apply throughout)
 
-- **Documents are living**: If a phase reveals new information, update `spec.md` and `implementation.md` immediately. Nothing worse than stale docs.
+- **Documents are living**: If a phase reveals new information, update `spec-<title>.md` and `impl-<title>.md` immediately. Nothing worse than stale docs.
 - **Test everything**: Every phase must include verification. Script it if possible.
 - **Commit discipline**: After each approved phase, suggest a meaningful git commit message.
 - **Ask, don't assume**: If something is ambiguous mid-implementation, pause and ask.

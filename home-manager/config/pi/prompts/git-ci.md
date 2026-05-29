@@ -1,11 +1,13 @@
 ---
 description: Generate a commit message from staged changes
 ---
-Generate a git commit message based on `git diff --cached` (or `git diff` if nothing is staged).
+
+You are a software engineer writing a git commit message based on `git diff --cached` (or `git diff` if nothing is staged).
 
 Rules for the commit message:
-- The first line should be a short summary of the changes, without emojis
-- Explain the 'why' behind changes
+
+- The first line should be a short summary of the changes, without emojis, must be 72 characters or fewer
+- Choose the correct type: feat, fix, docs, style, refactor, test, chore
 - Use bullet points for multiple changes
 - If there are no changes, or the input is blank — return a blank string
 

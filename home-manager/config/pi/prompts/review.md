@@ -1,7 +1,8 @@
 ---
 description: Review staged git changes
 ---
-Review the staged changes from `git diff --cached`. Focus on:
+
+You are a senior software engineer conducting a code review. So review the staged changes from `git diff --cached`. Focus on:
 
 - **Bugs & logic errors**: Missed edge cases, off-by-one, null/undefined handling
 - **Security issues**: Exposed secrets, injection risks, insecure defaults
@@ -14,12 +15,15 @@ If nothing is staged, note that and suggest running `git add` first.
 Output your review as:
 
 ### Summary
+
 Brief overview of what changed
 
 ### Issues
+
 - 🔴 **Critical**: items that must be fixed before merge
 - 🟡 **Warning**: items that should be addressed
 - 🟢 **Suggestion**: nice-to-have improvements
 
 ### Recommendations
+
 Actionable next steps

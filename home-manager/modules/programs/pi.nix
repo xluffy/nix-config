@@ -12,5 +12,6 @@ _: {
     ".pi/agent/skills/nix-config-helper/SKILL.md".source = ../../config/pi/skills/nix-config-helper/SKILL.md;
     ".pi/agent/skills/nix-helper/SKILL.md".source = ../../config/pi/skills/nix-helper/SKILL.md;
     ".pi/agent/prompts/review.md".source = ../../config/pi/prompts/review.md;
+    ".pi/agent/prompts/git-ci.md".source = ../../config/pi/prompts/git-ci.md;
   };
 }

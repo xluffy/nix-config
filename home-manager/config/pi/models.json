@@ -14,6 +14,13 @@
             "text"
           ],
           "reasoning": true,
+          "thinkingLevelMap": {
+            "minimal": null,
+            "low": null,
+            "medium": null,
+            "high": "high",
+            "xhigh": "max"
+          },
           "cost": {
             "input": 1.74,
             "output": 3.48,
@@ -41,6 +48,13 @@
             "text"
           ],
           "reasoning": true,
+          "thinkingLevelMap": {
+            "minimal": null,
+            "low": null,
+            "medium": null,
+            "high": "high",
+            "xhigh": "max"
+          },
           "cost": {
             "input": 0.14,
             "output": 0.28,

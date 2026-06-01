@@ -33,18 +33,13 @@ Every script follows this skeleton:
 
 set -uo pipefail
 
-# ---- constants ---------------------------------------------------------------
-
 readonly CONFIG_DIR="/etc/myapp"
 # … runtime-computed constants locked immediately, see §Naming Conventions
 
-# ---- helpers -----------------------------------------------------------------
 # Small, reusable utility functions (logging, cleanup, validation)
 
-# ---- functions ---------------------------------------------------------------
 # Domain functions, grouped by concern
 
-# ---- main --------------------------------------------------------------------
 # Entry point; always the last function defined
 
 main() {
@@ -682,7 +677,7 @@ Every script starts with a header block:
 
 ### Function or Implementation Comments
 
-Less comments, code is documentation, no need explain again
+Less comments, code is documentation, no need explain again. I prefer not to use comments before lines of code. In general, no comments is better.
 
 ### TODO Comments
 

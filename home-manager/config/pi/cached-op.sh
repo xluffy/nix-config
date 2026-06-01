@@ -11,7 +11,10 @@ OP_PATH="${1:?Usage: cached-op.sh <op-path>}"
 
 CACHE_DIR="${HOME}/.cache/pi-op"
 mkdir -p "${CACHE_DIR}"
-FILE_PATH="${CACHE_DIR}/deepseek.key"
+
+# Derive a unique filename from the OP_PATH hash (supports multiple keys)
+KEY_NAME=$(echo -n "${OP_PATH}" | shasum -a 256 | cut -d' ' -f1 | head -c 12)
+FILE_PATH="${CACHE_DIR}/${KEY_NAME}.key"
 
 DATE=$(date +"%Y-%m-%d")
 CACHE_KEY=$(echo -n "${DATE}" | shasum -a 256 | cut -d' ' -f1)

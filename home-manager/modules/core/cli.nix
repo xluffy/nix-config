@@ -43,6 +43,7 @@
       typst
       unixtools.watch
       wget
+      xz
       yq
       zstd
     ]

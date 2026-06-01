@@ -2,6 +2,7 @@ _: {
   home.file = {
     ".pi/agent/settings.json".source = ../../config/pi/settings.json;
     ".pi/agent/models.json".source = ../../config/pi/models.json;
+    ".pi/agent/auth.json".source = ../../config/pi/auth.json;
     ".pi/agent/cached-op.sh" = {
       source = ../../config/pi/cached-op.sh;
       executable = true;

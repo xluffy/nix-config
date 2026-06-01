@@ -3,7 +3,9 @@
   "defaultModel": "deepseek-chat",
   "defaultThinkingLevel": "high",
   "enabledModels": [
-    "deepseek-*"
+    "deepseek-*",
+    "claude-sonnet-*",
+    "claude-opus-*"
   ],
   "theme": "dark",
   "enableInstallTelemetry": false,

@@ -9,6 +9,18 @@ Follow this disciplined, spec-driven workflow. Do NOT skip steps or jump ahead.
 
 ---
 
+## Prerequisite: Load Repo Context (do NOT re-scan)
+
+Before doing any research, check if the project has an architecture document:
+
+1. Read `AGENTS.md` in the project root (it's already in your context).
+2. If it doesn't exist or is stale, read `CLAUDE.md`, `.cursor/rules/`, or any `docs/architecture*.md`.
+3. Only if none of these exist, do a lightweight scan: `ls` the top-level + one level deep. Do NOT recursively read every file.
+
+**Key principle**: The `AGENTS.md` file is the cached repo memory. Trust it. Don't re-scan what's already documented.
+
+---
+
 ## File Naming Convention
 
 All documents live under `~/code/me/spec/YYYY-MM-DD/` where `YYYY-MM-DD` is today's date (infer from context or ask if unsure). If there are multiple spec/impl files in the directory, number them sequentially to keep them organized more easily.
@@ -163,3 +175,4 @@ For each phase, in order:
 - **Ask, don't assume**: If something is ambiguous mid-implementation, pause and ask.
 - **Senior-level quality**: Error handling, logging, edge cases, and clean code are non-negotiable.
 - **DevOps mindset**: Consider deployment, CI/CD, monitoring, and operability from the start.
+- **Update AGENTS.md**: After completing the implementation, suggest additions/updates to `AGENTS.md` if new patterns, modules, or architecture decisions were introduced. This keeps the cached repo memory fresh for future sessions.

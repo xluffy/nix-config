@@ -27,27 +27,6 @@ They'll be available whenever you run `nix develop` or `nix-shell`.
 > openssl version -a
 ```
 
-## devenv
-
-```bash
-> devenv init
-
-> cat devenv.nix
-{ pkgs, ... }:
-
-{
-  packages = [
-    # pkgs.openssl_1_1
-  ];
-
-  languages.python.enable = true;
-  languages.python.version = "3.9.21";
-  languages.python.venv.enable = true;
-  languages.python.poetry.enable = true;
-  languages.python.poetry.install.enable = true;
-}
-```
-
 ## Specific package version
 
 ```nix

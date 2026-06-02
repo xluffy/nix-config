@@ -677,7 +677,7 @@ Every script starts with a header block:
 
 ### Function or Implementation Comments
 
-Less comments, code is documentation, no need explain again. I prefer not to use comments before lines of code. In general, no comments is better.
+**Never** use comments inside or above functions, methods, or any line of code. Code must be self-documenting — clear function names, well-scoped locals, and single-responsibility functions remove the need for explanatory comments. No block comments above `main()`, helper functions, or any function definition. No inline comments explaining what a line does.
 
 ### TODO Comments
 

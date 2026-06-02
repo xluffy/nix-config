@@ -5,7 +5,7 @@
 # Examples:
 #   cached-op.sh "op://private/deepseek-api-key/credential"
 
-set -euo pipefail
+set -uo pipefail
 
 OP_PATH="${1:?Usage: cached-op.sh <op-path>}"
 
@@ -13,20 +13,27 @@ CACHE_DIR="${HOME}/.cache/pi-op"
 mkdir -p "${CACHE_DIR}"
 FILE_PATH="${CACHE_DIR}/deepseek.key"
 
-DATE=$(date +"%Y-%m-%d")
+printf -v DATE '%(%Y-%m-%d)T' -1
 CACHE_KEY=$(echo -n "${DATE}" | shasum -a 256 | cut -d' ' -f1)
 CACHE_FILE="${CACHE_DIR}/${CACHE_KEY}"
 
 _log() {
-  printf "\x1B[2;32m"
-  echo "[LOG]" "[$(date +'%Y-%m-%d %H:%M:%S')]:" "$*"
-  printf "\x1B[0m"
+  printf '\x1B[2;32m[LOG] [%(%Y-%m-%d %H:%M:%S)T]: %s\x1B[0m\n' -1 "$*"
 }
 
 _die() {
-  printf "\x1B[2;31m"
-  echo "[ERROR]" "[$(date +'%Y-%m-%d %H:%M:%S')]:" "$*" >&2
+  printf '\x1B[2;31m[ERROR] [%(%Y-%m-%d %H:%M:%S)T]: %s\x1B[0m\n' -1 "$*" >&2
   exit 1
+}
+
+_cleanup_old_cache() {
+  local file
+  for file in "${CACHE_DIR}"/*; do
+    [[ "${file}" == "${CACHE_FILE}" ]] && continue
+    [[ "${file}" == "${FILE_PATH}" ]] && continue
+    [[ -f "${file}" ]] || continue
+    rm -f "${file}"
+  done
 }
 
 _load_cache_file() {
@@ -41,15 +48,15 @@ main() {
 
   if [[ -f ${FILE_PATH} ]]; then
     value=$(cat "${FILE_PATH}")
-    echo "${value}" >"${CACHE_FILE}"
-    _load_cache_file
   elif value=$(op read "${OP_PATH}" 2>/dev/null); then
-    echo "${value}" >"${CACHE_FILE}"
-    _load_cache_file
+    :
   else
-    echo "Error: Plaintext file '${FILE_PATH}' not found and no cached value available" >&2
-    exit 1
+    _die "Plaintext file '${FILE_PATH}' not found and no cached value available"
   fi
+
+  printf '%s' "${value}" >"${CACHE_FILE}"
+  _cleanup_old_cache
+  _load_cache_file
 }
 
 main "$@"

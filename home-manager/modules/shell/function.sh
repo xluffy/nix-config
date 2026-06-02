@@ -85,6 +85,14 @@ bz() {
   fi
 }
 
+pi() {
+  if [[ $PWD == $HOME/code/work* ]]; then
+    [[ -f "$HOME/code/work/.envrc.local" ]] && source "$HOME/code/work/.envrc.local"
+    command pi --provider anthropic --model "claude-opus-4-6" "$@"
+  fi
+  command pi "$@"
+}
+
 f() {
   commit_msg=$(git diff --cached | llm -m 4o-mini "$(cat ~/.config/nix-config/commit-prompt.txt)")
   printf "Commit message:\n %s \n" "${commit_msg}"

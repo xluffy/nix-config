@@ -25,9 +25,14 @@ gc:
 
 check:
   just check-eval
+  just test
 
 check-eval:
   bash bin/check-eval.sh
+
+# Run bats tests for scripts in home-manager/config/pi/
+test:
+  bats tests/
 
 fix:
   alejandra .

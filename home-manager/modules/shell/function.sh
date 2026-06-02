@@ -93,13 +93,13 @@ pi() {
     printf "║      WORK MODE — Claude Opus        ║\n"
     printf "╚══════════════════════════════════════╝\n"
     printf "\033[0m\n"
-    command pi --no-themes --theme "$HOME/.pi/agent/themes/work.json" --provider anthropic --model "claude-opus-4-6" "$@"
+    command pi --provider anthropic --model "claude-opus-4-6" "$@"
   else
     printf "\033[1;32m"
     printf "╔══════════════════════════════════════╗\n"
     printf "║    PERSONAL MODE — DeepSeek V4      ║\n"
     printf "╚══════════════════════════════════════╝\n"
     printf "\033[0m\n"
-    command pi --no-themes --theme "$HOME/.pi/agent/themes/personal.json" "$@"
+    command pi "$@"
   fi
 }

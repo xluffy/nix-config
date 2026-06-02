@@ -31,7 +31,7 @@ Use the native macOS Keychain to store the secret securely with zero plaintext f
    ```
 2. **Update your `models.json`**:
    ```json
-   "apiKey": "!security find-generic-password -s 'deepseek-api-key' -w"
+ "apiKey": "!security find-generic-password -s 'deepseek-api-key' -w"
    ```
    *(Note: The first time `pi` runs, macOS will ask you to approve terminal/application access to the Keychain item, which is a one-time prompt.)*
 
@@ -103,3 +103,37 @@ If you prefer to load keys via your environment (e.g., using `direnv` and `.envr
    ```bash
    export DEEPSEEK_API_KEY="your-deepseek-api-key"
    ```
+
+---
+
+## Work Setup (macOS only)
+
+### One-time setup
+
+Create `~/code/work/.envrc.local` with your company proxy info:
+
+```bash
+cat > ~/code/work/.envrc.local << 'EOF'
+export SKM_BASE_URL=https://lite.llm.skymavis.services
+export SKM_ANTHROPIC_KEY=sk-ant-<your-key>
+EOF
+chmod 600 ~/code/work/.envrc.local
+```
+
+Then apply the nix config:
+
+```bash
+just switch
+```
+
+### Usage
+
+```bash
+# Personal — DeepSeek
+cd ~/code/me
+pi "hello"
+
+# Work — Opus via company proxy (auto-detected)
+cd ~/code/work/some-repo
+pi "review this PR"
+```

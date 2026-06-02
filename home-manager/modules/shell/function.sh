@@ -85,28 +85,6 @@ bz() {
   fi
 }
 
-pi() {
-  local provider=""
-  local model=""
-
-  case "$PWD" in
-  "$HOME/code/me"*)
-    provider="deepseek"
-    model="deepseek-chat"
-    ;;
-  "$HOME/code/work"*)
-    provider="anthropic"
-    model="claude-sonnet-4-20250514"
-    ;;
-  esac
-
-  if [[ -n "$provider" ]]; then
-    command pi --provider "$provider" --model "$model" "$@"
-  else
-    command pi "$@"
-  fi
-}
-
 f() {
   commit_msg=$(git diff --cached | llm -m 4o-mini "$(cat ~/.config/nix-config/commit-prompt.txt)")
   printf "Commit message:\n %s \n" "${commit_msg}"

@@ -96,7 +96,18 @@ git() {
 pi() {
   if [[ $PWD == $HOME/code/work* ]]; then
     [[ -f "$HOME/code/work/.envrc.local" ]] && source "$HOME/code/work/.envrc.local"
+    printf "\033[1;35m"
+    printf "╔══════════════════════════════════════╗\n"
+    printf "║      WORK MODE — Claude Opus        ║\n"
+    printf "╚══════════════════════════════════════╝\n"
+    printf "\033[0m\n"
     command pi --provider anthropic --model "claude-opus-4-6" "$@"
+  else
+    printf "\033[1;32m"
+    printf "╔══════════════════════════════════════╗\n"
+    printf "║    PERSONAL MODE — DeepSeek V4      ║\n"
+    printf "╚══════════════════════════════════════╝\n"
+    printf "\033[0m\n"
+    command pi "$@"
   fi
-  command pi "$@"
 }

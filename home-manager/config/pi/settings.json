@@ -6,6 +6,7 @@
     "deepseek-*",
     "claude-*"
   ],
+  "quietStartup": true,
   "theme": "dark",
   "enableInstallTelemetry": false,
   "compaction": {

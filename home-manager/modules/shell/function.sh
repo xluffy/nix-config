@@ -85,6 +85,14 @@ bz() {
   fi
 }
 
+git() {
+  if [[ $1 == checkout || $1 == co ]] && [[ $2 == master || $2 == main ]]; then
+    command git "$@" && command git pull -pf
+  else
+    command git "$@"
+  fi
+}
+
 pi() {
   if [[ $PWD == $HOME/code/work* ]]; then
     [[ -f "$HOME/code/work/.envrc.local" ]] && source "$HOME/code/work/.envrc.local"

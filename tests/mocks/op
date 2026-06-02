@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+# Mock 1Password CLI for testing cached-op.sh
+#
+# When OP_FAIL=1, exit non-zero. Otherwise echo a fixed secret.
+
+set -uo pipefail
+
+if [[ "${OP_FAIL:-0}" -eq 1 ]]; then
+  echo "mock-op: op read failed (OP_FAIL=1)" >&2
+  exit 1
+fi
+
+echo -n "mock-op-secret"

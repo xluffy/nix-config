@@ -8,6 +8,7 @@
     [
       agenix-cli
       _1password-cli
+      bats
       age
       bashInteractive
       coreutils

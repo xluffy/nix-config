@@ -131,6 +131,43 @@ clear_cache() {
   [[ "${output}" =~ "Usage" ]]
 }
 
+@test "cleanup — old cache files removed, plaintext fallback preserved" {
+  clear_cache
+  mkdir -p "${CACHE_DIR}"
+
+  # Seed two old cache files from different previous days
+  local day1 day2 old_key1 old_key2
+  day1="$(date -v-1d +%Y-%m-%d 2>/dev/null || date -d 'yesterday' +%Y-%m-%d)"
+  day2="$(date -v-3d +%Y-%m-%d 2>/dev/null || date -d '3 days ago' +%Y-%m-%d)"
+  old_key1="$(echo -n "${day1}" | shasum -a 256 | cut -d' ' -f1)"
+  old_key2="$(echo -n "${day2}" | shasum -a 256 | cut -d' ' -f1)"
+  printf '%s' "stale-secret-1" >"${CACHE_DIR}/${old_key1}"
+  printf '%s' "stale-secret-2" >"${CACHE_DIR}/${old_key2}"
+
+  # Plaintext fallback should be preserved after cleanup
+  printf '%s' "persistent-secret" >"${CACHE_DIR}/deepseek.key"
+
+  local file_count_before
+  file_count_before="$(find "${CACHE_DIR}" -type f | wc -l | tr -d ' ')"
+  (( file_count_before == 3 ))
+
+  run bash "${SCRIPT}" "op://private/test-key/credential"
+
+  [[ "${status}" -eq 0 ]]
+  [[ "${output}" == "persistent-secret" ]]
+
+  # Only today's cache file + deepseek.key should remain
+  local today cache_key
+  printf -v today '%(%Y-%m-%d)T' -1
+  cache_key="$(echo -n "${today}" | shasum -a 256 | cut -d' ' -f1)"
+  [[ -f "${CACHE_DIR}/${cache_key}" ]]
+  [[ -f "${CACHE_DIR}/deepseek.key" ]]
+
+  local file_count_after
+  file_count_after="$(find "${CACHE_DIR}" -type f | wc -l | tr -d ' ')"
+  (( file_count_after == 2 ))
+}
+
 @test "plaintext file with leading/trailing whitespace" {
   clear_cache
   mkdir -p "${CACHE_DIR}"

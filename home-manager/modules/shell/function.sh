@@ -92,16 +92,3 @@ pi() {
   fi
   command pi "$@"
 }
-
-f() {
-  commit_msg=$(git diff --cached | llm -m 4o-mini "$(cat ~/.config/nix-config/commit-prompt.txt)")
-  printf "Commit message:\n %s \n" "${commit_msg}"
-  read -pr "Do you want to commit with this message? [y/N]: " confirm
-
-  if [[ ${confirm} =~ ^[Yy]$ ]]; then
-    git commit -m "${commit_msg}"
-  else
-    git reset HEAD .
-    echo "Commit aborted."
-  fi
-}

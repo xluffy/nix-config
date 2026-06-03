@@ -9,54 +9,70 @@ To avoid storing your DeepSeek API key in plaintext within your public Nix confi
 If an `apiKey` value in `models.json` is prefixed with an exclamation mark (`!`), `pi` will execute that command at runtime to dynamically retrieve your key. This keeps the configuration clean and secure.
 
 ### Option A: Local Key File (Simplest)
+
 Store your key in a plain-text file on your local machine that is not tracked by Git or managed by Nix.
 
 1. **Create the local key file** in your home directory:
+
    ```bash
    mkdir -p ~/.pi/agent
    echo "your-deepseek-api-key" > ~/.pi/agent/deepseek.key
    chmod 600 ~/.pi/agent/deepseek.key
    ```
+
 2. **Update your `models.json`** to read the key:
+
    ```json
    "apiKey": "!cat ~/.pi/agent/deepseek.key"
    ```
 
 ### Option B: macOS Keychain (Native & Secure)
+
 Use the native macOS Keychain to store the secret securely with zero plaintext files on disk.
 
 1. **Save the key to the macOS Keychain**:
+
    ```bash
    security add-generic-password -a "$USER" -s "deepseek-api-key" -w "your-deepseek-api-key"
    ```
+
 2. **Update your `models.json`**:
+
    ```json
- "apiKey": "!security find-generic-password -s 'deepseek-api-key' -w"
+   "apiKey": "!security find-generic-password -s 'deepseek-api-key' -w"
    ```
+
    *(Note: The first time `pi` runs, macOS will ask you to approve terminal/application access to the Keychain item, which is a one-time prompt.)*
 
 ### Option C: 1Password CLI (`op`) with TTL Caching
+
 If you use 1Password to manage secrets, use the `cached-op.sh` wrapper to avoid hitting 1Password on every single API call:
 
 1. **Update your `models.json`**:
+
    ```json
    "apiKey": "!~/.pi/agent/cached-op.sh 'op://private/deepseek-api-key/credential' 4"
    ```
    This caches the key for 4 hours (configurable). Subsequent calls within the TTL use the cache.
 
 ### Option D: Plaintext File (Ubuntu Server, No 1Password CLI)
+
 For headless Ubuntu servers or environments where the 1Password CLI is not available, use a local plaintext file with the `--file` flag:
 
 1. **Create a plaintext key file**:
+
    ```bash
    mkdir -p ~/.cache/pi-op
    echo "your-deepseek-api-key" > ~/.cache/pi-op/deepseek.key
    chmod 600 ~/.cache/pi-op/deepseek.key
    ```
+
 2. **Update your `models.json`**:
+
    ```json
    "apiKey": "!~/.pi/agent/cached-op.sh --file ~/.cache/pi-op/deepseek.key 4"
    ```
+
    The script reads the key from the file and caches it in memory for the TTL duration, just like the 1Password mode.
 
 ---

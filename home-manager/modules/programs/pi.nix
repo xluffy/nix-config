@@ -19,5 +19,6 @@ _: {
     ".pi/agent/prompts/review.md".source = ../../config/pi/prompts/review.md;
     ".pi/agent/prompts/git-ci.md".source = ../../config/pi/prompts/git-ci.md;
     ".pi/agent/prompts/spec-workflow.md".source = ../../config/pi/prompts/spec-workflow.md;
+    ".pi/agent/prompts/spec-quick.md".source = ../../config/pi/prompts/spec-quick.md;
   };
 }

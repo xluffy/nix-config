@@ -1,9 +1,50 @@
 {
   "providers": {
+    "mimo": {
+      "baseUrl": "https://api.xiaomimimo.com/v1",
+      "api": "openai-completions",
+      "apiKey": "!~/.pi/agent/cached-op.sh 'op://Private/china-ai-api-key/xiaomi-api-key'",
+      "models": [
+        {
+          "id": "mimo-v2.5-pro",
+          "name": "MiMo-V2.5-Pro",
+          "contextWindow": 1000000,
+          "maxTokens": 128000,
+          "input": [
+            "text"
+          ],
+          "reasoning": true,
+          "thinkingLevelMap": {
+            "minimal": null,
+            "low": null,
+            "medium": null,
+            "high": "high",
+            "xhigh": "max"
+          },
+          "cost": {
+            "input": 0.435,
+            "output": 0.87,
+            "cacheRead": 0.0036,
+            "cacheWrite": 0
+          },
+          "compat": {
+            "requiresReasoningContentOnAssistantMessages": true,
+            "thinkingFormat": "deepseek",
+            "reasoningEffortMap": {
+              "minimal": "high",
+              "low": "high",
+              "medium": "high",
+              "high": "high",
+              "xhigh": "max"
+            }
+          }
+        }
+      ]
+    },
     "deepseek": {
       "baseUrl": "https://api.deepseek.com",
       "api": "openai-completions",
-      "apiKey": "!~/.pi/agent/cached-op.sh 'op://private/deepseek-api-key/credential'",
+      "apiKey": "!~/.pi/agent/cached-op.sh 'op://private/china-ai-api-key/deepseek-api-key'",
       "models": [
         {
           "id": "deepseek-v4-pro",

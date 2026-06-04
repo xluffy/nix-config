@@ -4,6 +4,7 @@
   "defaultThinkingLevel": "high",
   "enabledModels": [
     "deepseek-*",
+    "mimo-*",
     "claude-*"
   ],
   "quietStartup": true,

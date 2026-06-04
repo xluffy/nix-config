@@ -161,9 +161,10 @@ Format:
 
 ## Phase 1: [Name]
 
+- **Objective**: A clear, testable outcome this phase must achieve. Must be verifiable — if you can't write a test for it, it's not specific enough.
 - **Goal**: What this phase delivers
 - **Depends on**: Nothing / Phase 0 research
-- **Verification**: How to confirm this phase is done correctly
+- **Verification**: How to confirm this phase is done correctly (tests, assertions, manual checks). Every verification step must trace back to the objective above.
 - **Steps**:
   1. Step one with rationale
   2. Step two with rationale
@@ -184,7 +185,7 @@ For each phase, in order:
 
 1. **Announce**: State which phase you're starting and what it depends on.
 2. **Implement**: Write the code, tests, configuration — everything the phase requires.
-3. **Verify**: Run the verification steps. Show me the evidence (test output, CLI output, etc.).
+3. **Verify**: Run the verification steps against the phase's **Objective**. Every verification must confirm the objective is met. Show me the evidence (test output, CLI output, etc.). If any verification fails or the objective is not fully achieved, iterate on the implementation before moving to review.
 4. **Pair Review**: Present the completed phase for my review. Ask:
    - Does this match your expectations?
    - Any edge cases I missed?

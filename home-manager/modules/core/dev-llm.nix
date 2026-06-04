@@ -7,5 +7,6 @@
     llama-cpp
     llm-agents.claude-code
     llm-agents.pi
+    pkgs.gitingest
   ];
 }

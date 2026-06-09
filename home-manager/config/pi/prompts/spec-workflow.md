@@ -185,13 +185,47 @@ For each phase, in order:
 
 1. **Announce**: State which phase you're starting and what it depends on.
 2. **Implement**: Write the code, tests, configuration — everything the phase requires.
-3. **Verify**: Run the verification steps against the phase's **Objective**. Every verification must confirm the objective is met. Show me the evidence (test output, CLI output, etc.). If any verification fails or the objective is not fully achieved, iterate on the implementation before moving to review.
-4. **Pair Review**: Present the completed phase for my review. Ask:
+3. **Requirements Checkpoint** 🔴: Before verifying, pause and re-read the spec (`spec-<title>.md`) and implementation plan (`impl-<title>.md`) for this phase. Cross-check every line of code you wrote against:
+   - **FRs (Functional Requirements)** — is each FR satisfied by this phase's code?
+   - **NFRs (Non-Functional Requirements)** — are performance, security, observability constraints met?
+   - **Phase objective** — does the code achieve exactly what this phase's objective states, nothing more, nothing less?
+   - **Edge cases** — are all edge cases from the spec handled in this phase's code?
+   - **Repo conventions** — did you match existing patterns, or did you introduce a new style?
+   
+   **If anything doesn't match, fix it NOW before verifying.** Do not proceed with a broken traceability chain from spec → impl → code.
+4. **Verify**: Run the verification steps against the phase's **Objective**. Every verification must confirm the objective is met. Show me the evidence (test output, CLI output, etc.). If any verification fails or the objective is not fully achieved, iterate on the implementation before moving to review.
+5. **Pair Review**: Present the completed phase for my review. Ask:
    - Does this match your expectations?
    - Any edge cases I missed?
    - Any adjustments needed before Phase N+1?
-5. **Iterate**: If I request changes, update the implementation AND update `spec-<title>.md` / `impl-<title>.md` if the changes affect the spec or plan. Keep all documents in sync.
-6. **Lock**: Only proceed to the next phase after I confirm this phase is done.
+6. **Git Checkpoint** 🔴 (MANDATORY — this is your rollback safety net):
+   - After I confirm the pair review, invoke the **git-ci** prompt template to:
+     1. Stage all changes (`git add`)
+     2. Generate a commit message and branch name (e.g., `feat/<scope>/<what>`, `fix/<scope>/<what>`)
+     3. Create a new branch, commit, and push to remote
+     4. Merge back to the working branch (e.g., `main`)
+   - **Why this matters**: Every phase gets its own commit checkpoint. If Phase 3 introduces a regression, you can `git revert` to exactly the Phase 2 checkpoint without losing Phase 2's work. This also enables `git bisect` to pinpoint exactly which phase broke something.
+   - **Do not skip this step.** If I say "looks good, next phase", your response must be: "Let me checkpoint this phase with a commit first."
+7. **Iterate**: If I request changes, update the implementation AND update `spec-<title>.md` / `impl-<title>.md` if the changes affect the spec or plan. Keep all documents in sync.
+8. **Lock**: Only proceed to the next phase after I confirm this phase is done and the git checkpoint is committed.
+
+---
+
+## Complex Implementations: Independent Review
+
+For phases that are inherently risky (touching auth, payments, data migrations, concurrency, shared infrastructure) or span 5+ files with non-trivial logic, you MUST suggest an independent review after step 5 (Pair Review) and before step 6 (Git Checkpoint):
+
+> **Remind me**: "Phase N is complex enough to warrant an independent review. I recommend spawning a fresh pi-agent using the `review` prompt template to review the staged changes before we commit. The reviewer agent MUST use a **different model** than the one that wrote the code (e.g., if I used `deepseek-v4-pro` to code, use `mimo-v2.5-pro` or `gpt-5.1` to review). Different models have different blind spots — a second pair of eyes from a different model family catches issues the coding model missed."
+
+If I decline, proceed with the Git Checkpoint. If I accept, pause until the review agent returns its findings, address any issues, then proceed with the Git Checkpoint.
+
+This is especially critical for:
+- Auth/authorization logic
+- Payment/billing code
+- Database migrations that touch production data
+- Concurrency/race condition fixes
+- Infrastructure-as-code changes
+- Any code that, if wrong, would cause data loss or a security incident
 
 ---
 
@@ -199,7 +233,7 @@ For each phase, in order:
 
 - **Documents are living**: If a phase reveals new information, update `spec-<title>.md` and `impl-<title>.md` immediately. Nothing worse than stale docs.
 - **Test everything**: Every phase must include verification. Script it if possible.
-- **Commit discipline**: After each approved phase, suggest a meaningful git commit message.
+- **Commit checkpoint after every phase**: Never skip the Git Checkpoint step. Every completed phase gets its own branch → commit → merge cycle for clean `git bisect` and `git revert`.
 - **Ask, don't assume**: If something is ambiguous mid-implementation, pause and ask.
 - **Senior-level quality**: Error handling, logging, edge cases, and clean code are non-negotiable.
 - **DevOps mindset**: Consider deployment, CI/CD, monitoring, and operability from the start.

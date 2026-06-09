@@ -127,11 +127,36 @@ Present the task plan to me for a quick sanity check. I will confirm or ask for 
 Once the plan is confirmed:
 
 1. **Implement**: Write the code, tests, configuration — everything the task requires.
-2. **Verify**: Run the verification steps. Show me the evidence (test output, CLI output, etc.).
-3. **Review**: Present the completed work. Ask:
+2. **Requirements Checkpoint** 🔴: Before moving to verification, pause and re-read the task plan (`task-<title>.md`). Cross-check every line of code you just wrote against:
+   - **Scope boundary** — did you touch anything out of scope?
+   - **Approach** — did you follow the agreed plan, or did you drift?
+   - **Edge cases** — are all listed edge cases handled explicitly?
+   - **Existing patterns** — did you match the repo's conventions, or did you invent new ones?
+   
+   **If anything doesn't match, fix it NOW before verifying.** Do not proceed with broken alignment.
+3. **Verify**: Run the verification steps. Show me the evidence (test output, CLI output, etc.).
+4. **Review**: Present the completed work. Ask:
    - Does this match your expectations?
    - Any edge cases I missed?
-4. **Iterate**: If I request changes, update the implementation AND update `task-<title>.md` if the changes affect the plan. Keep the doc in sync.
+5. **Git Checkpoint** 🔴 (MANDATORY — this is your rollback safety net):
+   - After I confirm the review, invoke the **git-ci** prompt template to:
+     1. Stage all changes (`git add`)
+     2. Generate a commit message and branch name
+     3. Create a new branch, commit, and push to remote
+     4. Merge back to the working branch (e.g., `main`)
+   - **Why this matters**: Every completed task must have its own commit checkpoint. If something breaks later, you can `git revert` to exactly this point instead of untangling a massive diff.
+   - **Do not skip this step.** If I say "looks good, next", your response must be: "Let me checkpoint this with a commit first."
+6. **Iterate**: If I request changes, update the implementation AND update `task-<title>.md` if the changes affect the plan. Keep the doc in sync.
+
+---
+
+## Complex Tasks: Independent Review
+
+For tasks that are inherently risky (touching auth, payments, data migrations, concurrency, shared infrastructure) or span 3+ files with non-trivial logic, you MUST suggest an independent review after Step 4 and before the Git Checkpoint:
+
+> **Remind me**: "This task is complex enough to warrant an independent review. I recommend spawning a fresh pi-agent using the `review` prompt template to review the staged changes before we commit. The reviewer agent should use a **different model** than the one that wrote the code (e.g., if I used `deepseek-v4-pro` to code, use `mimo-v2.5-pro` or `gpt-5.1` to review). Different models catch different blind spots."
+
+If I decline, proceed with the Git Checkpoint. If I accept, pause until the review agent returns its findings, address any issues, then proceed with the Git Checkpoint.
 
 ---
 
@@ -140,7 +165,7 @@ Once the plan is confirmed:
 - **Think first, code second**: Don't jump to implementation before I've confirmed the plan.
 - **Single responsibility**: This task touches only what it needs to. No scope creep.
 - **Test everything**: Every task must include verification. Script it if possible.
-- **Commit discipline**: After completing the task, suggest a meaningful git commit message.
+- **Commit checkpoint after every task**: Never skip the Git Checkpoint step. Every completed task gets its own branch → commit → merge cycle for clean `git bisect` and `git revert`.
 - **Senior-level quality**: Error handling, logging, edge cases, and clean code are non-negotiable.
 - **Document is living**: If implementation reveals new information, update `task-<title>.md` immediately.
 - **Update AGENTS.md**: After completing, suggest additions/updates to `AGENTS.md` if new patterns, modules, or architecture decisions were introduced.

@@ -34,7 +34,7 @@
       username,
       homeDirectory ? null,
       hasGUI ? true,
-      extraModules ? [ ],
+      extraModules ? [],
     }: let
       pkgs = import nixpkgs {
         inherit system;
@@ -62,17 +62,19 @@
     in
       home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
-        modules = [
-          ./home-manager/home.nix
-          nix-index-database.homeModules.nix-index
-          agenix.homeManagerModules.default
-          {
-            home = {
-              inherit username;
-              homeDirectory = resolvedHomeDir;
-            };
-          }
-        ] ++ extraModules;
+        modules =
+          [
+            ./home-manager/home.nix
+            nix-index-database.homeModules.nix-index
+            agenix.homeManagerModules.default
+            {
+              home = {
+                inherit username;
+                homeDirectory = resolvedHomeDir;
+              };
+            }
+          ]
+          ++ extraModules;
         extraSpecialArgs = {
           pkgs-unstable = pkgsUnstable;
           llm-agents = llm-agents.packages.${system};
@@ -105,7 +107,7 @@
           {
             custom.shell.promptColor = {
               primary = "33"; # Yellow
-              host = "31";    # Red
+              host = "31"; # Red
               user = "38;5;214"; # Orange username
             };
             custom.ssh.identityFile = "~/.ssh/id_ed25519";

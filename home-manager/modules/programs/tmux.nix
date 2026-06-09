@@ -1,5 +1,8 @@
 {pkgs, ...}: let
-  prefixKey = if pkgs.stdenv.isDarwin then "C-a" else "C-b";
+  prefixKey =
+    if pkgs.stdenv.isDarwin
+    then "C-a"
+    else "C-b";
 in {
   programs.tmux = {
     enable = true;

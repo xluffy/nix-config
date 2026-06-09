@@ -1,4 +1,8 @@
-{pkgs, config, ...}: {
+{
+  pkgs,
+  config,
+  ...
+}: {
   programs = {
     git = {
       enable = true;
@@ -64,13 +68,19 @@
           defaultBranch = "main";
         };
 
-        gpg = {
-          format = "ssh";
-        } // (if pkgs.stdenv.isDarwin then {
-          ssh = {
-            program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign";
-          };
-        } else {});
+        gpg =
+          {
+            format = "ssh";
+          }
+          // (
+            if pkgs.stdenv.isDarwin
+            then {
+              ssh = {
+                program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign";
+              };
+            }
+            else {}
+          );
 
         push = {
           default = "current";

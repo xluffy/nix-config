@@ -12,7 +12,17 @@ bootstrap:
 
 # Set HM_FLAKE_ATTR to your flake output name (user@hostname). Use .envrc.local (gitignored) or shell rc so each machine can differ without editing this file.
 switch:
+  #!/usr/bin/env bash
+  set -euo pipefail
+  profile="$HOME/.local/state/nix/profiles/home-manager"
+  old_gen=$(readlink -f "$profile" 2>/dev/null || true)
   home-manager switch --flake ".#${HM_FLAKE_ATTR}"
+  new_gen=$(readlink -f "$profile")
+  if [ -n "$old_gen" ] && [ "$old_gen" != "$new_gen" ]; then
+    echo ""
+    echo "📦 Package changes:"
+    nvd diff "$old_gen" "$new_gen"
+  fi
 
 list:
   home-manager packages

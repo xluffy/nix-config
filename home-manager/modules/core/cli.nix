@@ -32,6 +32,7 @@
       mtr
       ncdu
       neovim
+      nvd
       nmap
       pkgs-unstable.gh
       pkgs-unstable.glab

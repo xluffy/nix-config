@@ -23,7 +23,7 @@
     pkgs-unstable.git-xet
     pkgs-unstable.go
     pkgs-unstable.node-gyp
-    pkgs-unstable.nodejs_20
+    pkgs-unstable.nodejs_24
     prometheus.cli
     python310
     regal

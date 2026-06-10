@@ -58,9 +58,8 @@ in {
           vim = "nvim";
         };
 
-        # empty mean unlimit
-        historySize = -1;
-        historyFileSize = -1;
+        historySize = 9999999999;
+        historyFileSize = 9999999999;
         historyFile = "${config.home.homeDirectory}/.bash_history";
 
         historyControl = [

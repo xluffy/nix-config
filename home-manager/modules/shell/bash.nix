@@ -59,19 +59,26 @@ in {
         };
 
         # empty mean unlimit
-        historySize = 999999999;
-        historyFileSize = 999999999;
+        historySize = -1;
+        historyFileSize = -1;
         historyFile = "${config.home.homeDirectory}/.bash_history";
 
         historyControl = [
           "ignoredups"
+          "ignorespace"
         ];
 
-        shellOptions = ["histappend"];
+        shellOptions = [
+          "histappend"
+          "histverify"
+          "cmdhist"
+        ];
 
         sessionVariables = {
           BASH_SILENCE_DEPRECATION_WARNING = 1;
           GO111MODULE = "on";
+          HISTSIZE = -1;
+          HISTFILESIZE = -1;
           HISTTIMEFORMAT = "[%F %T] ";
           USE_GKE_GCLOUD_AUTH_PLUGIN = 1;
           CLOUDSDK_PYTHON_SITEPACKAGES = 1;
@@ -83,7 +90,7 @@ in {
             source ${config.home.homeDirectory}/.config/nix-config/function.sh
             source <(helm completion bash)
             source <(kubectl completion bash)
-            PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
+            PROMPT_COMMAND="history -a; history -n; $PROMPT_COMMAND"
           ''
           + lib.optionalString pkgs.stdenv.isLinux ''
             # Start and reuse ssh-agent on Linux/Ubuntu

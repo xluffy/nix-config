@@ -40,7 +40,6 @@ check:
 check-eval:
   bash bin/check-eval.sh
 
-# Run bats tests for scripts in home-manager/config/pi/
 test:
   bats tests/
 
@@ -49,6 +48,5 @@ fix:
   deadnix --edit .
   statix fix .
 
-# fix for: error: attribute 'git-xet' missing
 update:
   nix flake update nixpkgs-unstable

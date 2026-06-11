@@ -7,7 +7,7 @@ _: {
       auto_sync = false;
       search_mode = "fuzzy";
       filter_mode = "global";
-      enter_accept = true;
+      enter_accept = false;
       style = "compact";
       inline_height = 20;
       update_check = false;

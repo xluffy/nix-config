@@ -58,27 +58,11 @@ in {
           vim = "nvim";
         };
 
-        historySize = 9999999999;
-        historyFileSize = 9999999999;
-        historyFile = "${config.home.homeDirectory}/.bash_history";
-
-        historyControl = [
-          "ignoredups"
-          "ignorespace"
-        ];
-
-        shellOptions = [
-          "histappend"
-          "histverify"
-          "cmdhist"
-        ];
+        # History is managed by atuin — no bash-native history config needed
 
         sessionVariables = {
           BASH_SILENCE_DEPRECATION_WARNING = 1;
           GO111MODULE = "on";
-          HISTSIZE = -1;
-          HISTFILESIZE = -1;
-          HISTTIMEFORMAT = "[%F %T] ";
           USE_GKE_GCLOUD_AUTH_PLUGIN = 1;
           CLOUDSDK_PYTHON_SITEPACKAGES = 1;
           EDITOR = "nvim";
@@ -89,7 +73,6 @@ in {
             source ${config.home.homeDirectory}/.config/nix-config/function.sh
             source <(helm completion bash)
             source <(kubectl completion bash)
-            PROMPT_COMMAND="history -a; history -n; $PROMPT_COMMAND"
           ''
           + lib.optionalString pkgs.stdenv.isLinux ''
             # Start and reuse ssh-agent on Linux/Ubuntu
@@ -119,11 +102,7 @@ in {
           PS1='\[\e[0;${cfg.primary}m\]:: \[\e[0;37m\]You are \[$(tput bold)\]\[\033[${cfg.user}m\]\u\[$(tput sgr0)\]\[$(tput sgr0)\]\[\033[38;5;15m\] \[$(tput sgr0)\]-at- \[\e[0;${cfg.host}m\]\h\[\e[0;37m\] [\[\e[0;${cfg.primary}m\]\w\[\e[0;39m\]]\n\[\e[0;${cfg.primary}m\]\$\[\e[m\] '
 
           shuf -n 1 ${config.home.homeDirectory}/.config/nix-config/quote.txt | cowsay
-          if [[ $- == *i* ]]; then
 
-            bind '"\e[A": history-search-backward'
-            bind '"\e[B": history-search-forward'
-          fi
 
           if [[ -z BASH_COMPLETION_VERSINFO ]]; then
             . "${pkgs.bash-completion}/etc/profile.d/bash_completion.sh"

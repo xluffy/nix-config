@@ -186,3 +186,70 @@ To fix this, permanently change your default login shell to the Nix-installed Ba
    ```
 3. Open a new terminal tab/window and verify with `echo $BASH_VERSION`.
 
+**`stty: 'standard input': unable to perform all requested operations` after Ctrl+R → Enter?**
+This is a known issue with `enter_accept = true` on macOS (especially inside tmux). The error is harmless — your command still runs correctly — but the noise is annoying.
+
+### Root Cause
+
+When `enter_accept = true`, atuin uses its own `__atuin_accept_line` function to execute the selected command instead of pasting it into readline. This function juggles terminal settings to ensure the command runs in the right terminal mode:
+
+```bash
+# __atuin_accept_line (simplified flow):
+__atuin_stty_backup=$(stty -g)    # 1. Save current terminal state
+stty "$ATUIN_STTY"                # 2. Restore to shell-init state
+eval -- "$__atuin_command"         # 3. Run your command (e.g., vim)
+stty "$__atuin_stty_backup"        # 4. Restore pre-command state ← ERROR HERE
+```
+
+The failure at step 4 occurs because after a fullscreen TUI program (vim, less, tmux popup) exits, the BSD terminal driver on macOS is in a state where some flags in the saved `stty -g` string cannot be cleanly reapplied. The nested PTY layers (tmux → bash → atuin TUI → your command) exacerbate this.
+
+### Fix A: Disable `enter_accept` (Recommended, Current Config)
+
+Set `enter_accept = false` in `programs/atuin.nix`:
+
+```nix
+settings = {
+  enter_accept = false;  # Paste into readline, avoid __atuin_accept_line entirely
+};
+```
+
+With this setting:
+- Atuin pastes the selected command into your prompt (like normal Ctrl-R)
+- You press Enter manually — bash handles execution normally
+- `__atuin_accept_line` never runs, no stty juggling, no error
+- UX difference: you see the command appear on the prompt line before it runs, instead of executing immediately
+
+### Fix B: stty Wrapper (If You Want `enter_accept = true`)
+
+If you prefer instant execution on Enter, keep `enter_accept = true` and add a `stty` wrapper to `modules/shell/function.sh` that filters the benign error:
+
+```bash
+# Wrap stty to suppress benign "unable to perform all requested operations"
+# noise from atuin's terminal juggling after fullscreen commands (e.g., vim).
+stty() {
+  local _tmp _ret
+  _tmp=$(command stty "$@" 2>&1)
+  _ret=$?
+  if [[ $_ret -ne 0 ]]; then
+    if [[ $_tmp != *"unable to perform all requested operations"* ]]; then
+      printf '%s\n' "$_tmp" >&2
+    fi
+  elif [[ -n $_tmp ]]; then
+    printf '%s\n' "$_tmp"
+  fi
+  return $_ret
+}
+```
+
+How it works:
+- `stty -g` (read): stdout passes through normally → `ATUIN_STTY=$(stty -g)` still works
+- `stty "$SETTINGS"` (write, success): silent (no output)
+- `stty "$SETTINGS"` (write, known noise): error suppressed
+- `stty "$SETTINGS"` (write, real error): stderr still passes through
+- Exit codes preserved for all cases
+
+To switch back to `enter_accept = true`:
+1. Add the wrapper above to `modules/shell/function.sh`
+2. Set `enter_accept = true` in `modules/programs/atuin.nix`
+3. Run `just switch`
+

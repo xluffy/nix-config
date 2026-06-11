@@ -172,3 +172,17 @@ Make sure you imported history: `atuin import bash`. Check the DB: `atuin stats`
 
 **SCP'd DB doesn't show new entries?**
 Atuin caches the DB in memory. `exec bash` to reload, or just start typing — `Ctrl-R` reopens the TUI with fresh data.
+
+**Tab to edit does not work (empties the command line)?**
+This occurs on macOS if you are using the system default `/bin/bash` which is **version 3.2.57** (released in 2006). Atuin's command injection relies on `READLINE_LINE` and `READLINE_POINT` variables, which are only supported in **Bash 4.0+**. 
+To fix this, permanently change your default login shell to the Nix-installed Bash 5.2+:
+1. Whitelist the Nix Bash binary path:
+   ```bash
+   echo "$HOME/.nix-profile/bin/bash" | sudo tee -a /etc/shells
+   ```
+2. Change your default login shell:
+   ```bash
+   chsh -s "$HOME/.nix-profile/bin/bash"
+   ```
+3. Open a new terminal tab/window and verify with `echo $BASH_VERSION`.
+

@@ -37,4 +37,15 @@ Then, on a new line after the commit message, suggest a git branch name followin
 
 Branch: <suggested-branch-name>
 
-Finally, ask the user to review the changes. If they approve, create a new branch, commit the changes, and push them to the repository.
+Finally, ask the user to review the changes. If they approve, follow this workflow:
+
+1. Create a new branch from the current branch (do NOT checkout master/main).
+2. Commit the changes to the new branch.
+3. Push the branch to the remote repository.
+4. Create a Pull Request (GitHub) or Merge Request (GitLab) for the branch.
+5. The user will review the PR/MR on GitHub/GitLab and merge it manually.
+
+Important rules:
+- NEVER checkout `master` (or `main`) and merge locally.
+- Respect protected branches (e.g., `master`, `main`). Do not push directly to them.
+- All changes must go through a feature/fix branch and a PR/MR.

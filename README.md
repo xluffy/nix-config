@@ -1,105 +1,56 @@
-# Setup with Nix on macOS
+# nix-config
 
 [![built with nix](https://builtwithnix.org/badge.svg)](https://builtwithnix.org)
 
-To install Nix on macOS as a multi-user installtion, run this command:
+Home Manager configuration for macOS (aarch64-darwin) and Ubuntu/NixOS (x86_64-linux) machines.
+
+## Quick Start
 
 ```bash
-sh <(curl -L https://nixos.org/nix/install) --daemon --yes
+# First-time setup
+just bootstrap
+
+# Apply config (reads $HM_FLAKE_ATTR from .envrc.local)
+just switch
 ```
 
-If you want to configure the OS via Nix, you can install Nix Darwin. For me, I just want to use Nix for managing package and user environment config in home directory
-When using `nix`, we still need some tools before using home-manager, so take a look at `shell.nix` — it's a bootstrap script to set up those tools.
-👆 This adds tools to your shell environment.
-
-- `nix`: gives you the nix CLI.
-- `home-manager`: useful if you want to run `home-manager` commands.
-- `git`: version control.
-
-They'll be available whenever you run `nix develop` or `nix-shell`.
-
-- You can run `nix develop` (flake)
-- Or `nix-shell` (legacy)
-
-## OpenSSL
-
-```bash
-> openssl version -a
-```
-
-## Specific package version
-
-```nix
-  inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
-    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
-    # Some particular revision for installing fd
-    nixpkgs-fd.url = "github:nixos/nixpkgs/bf972dc380f36a3bf83db052380e55f0eaa7dcb6";
-
-    home-manager = {
-      url = "github:nix-community/home-manager/release-24.11";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-  };
+## Structure
 
 ```
-
-```nix
-  outputs = { nixpkgs, nixpkgs-unstable, home-manager, nixpkgs-fd, ... }:
-  {
-    #...
-  };
+.
+├── flake.nix              # Entry point: inputs, homeConfigurations, devShells
+├── justfile               # Task runner: switch, check, fix, update, gc
+├── home-manager/
+│   ├── home.nix           # Main HM config
+│   ├── modules/           # core/, programs/, shell/
+│   └── config/            # Raw configs (.npmrc, iterm2.json, pi/)
+├── secrets/               # agenix-encrypted secrets
+├── docs/                  # Detailed docs per topic
+└── bin/                   # bootstrap.sh, check-eval.sh
 ```
 
-## NixOS vs home-manager
+See [AGENTS.md](AGENTS.md) for the full architecture.
 
-```nix
-# configuration.nix
-{config, pkgs, ...}: {
-  environment.systemPackages = with pkgs; [
-    rsync
-  ];
+## Common Commands
 
-  services.nginx = {
-    enable = true;
-  };
-}
-```
+| Command | Description |
+|---|---|
+| `just switch` | Apply Home Manager config |
+| `just check` | Validate evaluation + run tests |
+| `just fix` | Format (alejandra) + lint (deadnix, statix) |
+| `just update` | Update `nixpkgs-unstable` flake input |
+| `just gc` | Garbage collect profiles older than 2 days |
 
-```nix
-# home.nix
-{config, pkgs, ...}: {
-  home.file.foo.text = "bar";
+## Docs
 
-  programs.fish = {
-    enable = true;
-  };
-}
-```
-
-##  How to locate nix packages with specific files
-
-[nix-index](https://github.com/nix-community/nix-index) is a tool to quickly locate the package providing a certain file in nixpkgs. But you need to generate a database locally and run this command to search
-
-```bash
-# create locally database
-> nix run github:nix-community/nix-index#nix-index
-
-# query
-> nix run github:nix-community/nix-index#nix-locate -- bin/ip
-```
-
-In another side, [nix-index-database](https://github.com/nix-community/nix-index-database) provides pre-generated databases if you don't want to generate a database locally.
-
-```bash
-> nix run github:nix-community/nix-index-database bin/ip
-```
-
-## Ref
-
-- https://mynixos.com/home-manager/options/programs.bash
-- https://github.com/Misterio77/nix-starter-configs/blob/main/README.md
-- https://home-manager-options.extranix.com/?query=git.&release=release-24.11
-- https://unmovedcentre.com/posts/secrets-management/#inputting-nix-secrets-to-nix-config
-- https://home-manager-options.extranix.com/
-- https://mplanchard.com/posts/installing-a-specific-version-of-a-package-with-nix.html
+| Doc | Topic |
+|---|---|
+| [AGENTS.md](AGENTS.md) | Full architecture, directory layout, conventions |
+| [docs/macOS.md](docs/macOS.md) | macOS-specific setup |
+| [docs/ubuntu.md](docs/ubuntu.md) | Ubuntu/NixOS setup |
+| [docs/atuin.md](docs/atuin.md) | Atuin shell history (setup, sync, troubleshooting) |
+| [docs/dev-env.md](docs/dev-env.md) | Development environment details |
+| [docs/pi-deepseek.md](docs/pi-deepseek.md) | Pi coding agent with DeepSeek |
+| [docs/edge.md](docs/edge.md) | Nixpkgs edge/unstable usage |
+| [docs/bookmarks.md](docs/bookmarks.md) | Browser bookmarks |
+| [docs/NixOS.md](docs/NixOS.md) | NixOS-specific notes |

@@ -4,6 +4,7 @@
   ...
 }: {
   home.packages = with pkgs; [
+    caddy
     gcc
     gnumake
     golangci-lint

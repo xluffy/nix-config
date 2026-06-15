@@ -6,13 +6,13 @@ description: Assist with Laravel >=10.x development targeting PHP >=8.1. Covers 
 # Laravel Helper Skill
 
 This skill provides guidance for developing Laravel 10.x+ applications with PHP 8.1+.
-Follow these conventions for all Laravel code—new features, refactors, reviews, and bug fixes.
+Follow these conventions for all Laravel code-new features, refactors, reviews, and bug fixes.
 
 ## PHP 8.1+ Modern Features
 
 Prefer these language features over older equivalents:
 
-- **Enums** — Never use string constants or database-backed status tables for fixed sets.
+- **Enums** - Never use string constants or database-backed status tables for fixed sets.
   ```php
   enum OrderStatus: string
   {
@@ -30,7 +30,7 @@ Prefer these language features over older equivalents:
       }
   }
   ```
-- **Readonly properties** — For DTOs, value objects, and data classes.
+- **Readonly properties** - For DTOs, value objects, and data classes.
   ```php
   class CreateOrderDTO
   {
@@ -41,11 +41,11 @@ Prefer these language features over older equivalents:
       ) {}
   }
   ```
-- **Match expressions** — Replace long `switch` chains; `match` is exhaustive.
-- **Named arguments** — Use when calling methods with many optional/default params.
-- **First-class callable syntax** — `$this->method(...)` instead of `[$this, 'method']`.
-- **Array unpacking with string keys** — `[...$array1, ...$array2]`.
-- **`str_contains`, `str_starts_with`, `str_ends_with`** — Replace manual `strpos` checks.
+- **Match expressions** - Replace long `switch` chains; `match` is exhaustive.
+- **Named arguments** - Use when calling methods with many optional/default params.
+- **First-class callable syntax** - `$this->method(...)` instead of `[$this, 'method']`.
+- **Array unpacking with string keys** - `[...$array1, ...$array2]`.
+- **`str_contains`, `str_starts_with`, `str_ends_with`** - Replace manual `strpos` checks.
 
 ## Coding Style & Formatting
 
@@ -99,16 +99,16 @@ app/
 ```
 
 ### Namespacing Rules
-- **Controllers** — Keep thin. Delegate to Actions, Jobs, or Services. Never place business logic here.
-- **Models** — Should contain relationships, accessors/mutators, casts, and scopes only. No HTTP-level logic.
-- **Actions** — One public `execute()` method. Stateless. Named as a verb: `CancelOrder`, `RegisterUser`.
-- **Form Requests** — Always use them for validation. Never validate in controllers.
-- **Services** — Stateful classes coordinating multiple steps (e.g., `CheckoutService`). Prefer Actions for simpler tasks.
+- **Controllers** - Keep thin. Delegate to Actions, Jobs, or Services. Never place business logic here.
+- **Models** - Should contain relationships, accessors/mutators, casts, and scopes only. No HTTP-level logic.
+- **Actions** - One public `execute()` method. Stateless. Named as a verb: `CancelOrder`, `RegisterUser`.
+- **Form Requests** - Always use them for validation. Never validate in controllers.
+- **Services** - Stateful classes coordinating multiple steps (e.g., `CheckoutService`). Prefer Actions for simpler tasks.
 
 ## Eloquent Conventions
 
 - Table names auto-resolve: `User` → `users`, `OrderItem` → `order_items`. Follow this implicitly.
-- Explicitly declare `$fillable` OR `$guarded` — never leave both empty.
+- Explicitly declare `$fillable` OR `$guarded` - never leave both empty.
 - Prefer `$fillable` over `$guarded` for clarity.
 - Cast attributes explicitly in `$casts`:
   ```php

@@ -5,7 +5,7 @@ You are a Senior Software Engineer and Senior DevOps Engineer. Your task is:
 
 $ARGUMENTS
 
-Follow this lightweight workflow for small-scope tasks (bug fixes, minor features, refactors, config changes). Do NOT skip to code immediately — think first, then act.
+Follow this lightweight workflow for small-scope tasks (bug fixes, minor features, refactors, config changes). Do NOT skip to code immediately - think first, then act.
 
 ---
 
@@ -68,10 +68,10 @@ If `$ARGUMENTS` contains any external references (GitHub URLs, repo links, libra
 
 Before writing anything, briefly:
 
-1. **Restate the task** in your own words — confirm you understand the problem.
-2. **Identify the scope boundary** — what is this touching and, more importantly, what is it NOT touching?
-3. **Check for existing solutions** — is there already code/pattern in the repo that handles this? Avoid reinventing.
-4. **Flag any ambiguity** — if anything is unclear, ask me before proceeding.
+1. **Restate the task** in your own words - confirm you understand the problem.
+2. **Identify the scope boundary** - what is this touching and, more importantly, what is it NOT touching?
+3. **Check for existing solutions** - is there already code/pattern in the repo that handles this? Avoid reinventing.
+4. **Flag any ambiguity** - if anything is unclear, ask me before proceeding.
 
 Keep this as a bullet-point summary in chat. Do NOT create a file yet.
 
@@ -126,19 +126,19 @@ Present the task plan to me for a quick sanity check. I will confirm or ask for 
 
 Once the plan is confirmed:
 
-1. **Implement**: Write the code, tests, configuration — everything the task requires.
+1. **Implement**: Write the code, tests, configuration - everything the task requires.
 2. **Requirements Checkpoint** 🔴: Before moving to verification, pause and re-read the task plan (`task-<title>.md`). Cross-check every line of code you just wrote against:
-   - **Scope boundary** — did you touch anything out of scope?
-   - **Approach** — did you follow the agreed plan, or did you drift?
-   - **Edge cases** — are all listed edge cases handled explicitly?
-   - **Existing patterns** — did you match the repo's conventions, or did you invent new ones?
+   - **Scope boundary** - did you touch anything out of scope?
+   - **Approach** - did you follow the agreed plan, or did you drift?
+   - **Edge cases** - are all listed edge cases handled explicitly?
+   - **Existing patterns** - did you match the repo's conventions, or did you invent new ones?
    
    **If anything doesn't match, fix it NOW before verifying.** Do not proceed with broken alignment.
 3. **Verify**: Run the verification steps. Show me the evidence (test output, CLI output, etc.).
 4. **Review**: Present the completed work. Ask:
    - Does this match your expectations?
    - Any edge cases I missed?
-5. **Git Checkpoint** 🔴 (MANDATORY — this is your rollback safety net):
+5. **Git Checkpoint** 🔴 (MANDATORY - this is your rollback safety net):
    - After I confirm the review, invoke the **git-ci** prompt template to:
      1. Stage all changes (`git add`)
      2. Generate a commit message and branch name

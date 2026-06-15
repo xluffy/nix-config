@@ -15,6 +15,7 @@ _: {
       recursive = true;
     };
     ".pi/agent/extensions/company-provider.ts".source = ../../config/pi/extensions/company-provider.ts;
+    ".pi/agent/APPEND_SYSTEM.md".source = ../../config/pi/APPEND_SYSTEM.md;
     ".pi/agent/README.md".source = ../../config/pi/README.md;
     ".pi/agent/prompts/review.md".source = ../../config/pi/prompts/review.md;
     ".pi/agent/prompts/git-ci.md".source = ../../config/pi/prompts/git-ci.md;

@@ -161,7 +161,7 @@ Format:
 
 ## Phase 1: [Name]
 
-- **Objective**: A clear, testable outcome this phase must achieve. Must be verifiable — if you can't write a test for it, it's not specific enough.
+- **Objective**: A clear, testable outcome this phase must achieve. Must be verifiable - if you can't write a test for it, it's not specific enough.
 - **Goal**: What this phase delivers
 - **Depends on**: Nothing / Phase 0 research
 - **Verification**: How to confirm this phase is done correctly (tests, assertions, manual checks). Every verification step must trace back to the objective above.
@@ -184,13 +184,13 @@ Present the implementation plan for review. Do NOT proceed until I approve it.
 For each phase, in order:
 
 1. **Announce**: State which phase you're starting and what it depends on.
-2. **Implement**: Write the code, tests, configuration — everything the phase requires.
+2. **Implement**: Write the code, tests, configuration - everything the phase requires.
 3. **Requirements Checkpoint** 🔴: Before verifying, pause and re-read the spec (`spec-<title>.md`) and implementation plan (`impl-<title>.md`) for this phase. Cross-check every line of code you wrote against:
-   - **FRs (Functional Requirements)** — is each FR satisfied by this phase's code?
-   - **NFRs (Non-Functional Requirements)** — are performance, security, observability constraints met?
-   - **Phase objective** — does the code achieve exactly what this phase's objective states, nothing more, nothing less?
-   - **Edge cases** — are all edge cases from the spec handled in this phase's code?
-   - **Repo conventions** — did you match existing patterns, or did you introduce a new style?
+   - **FRs (Functional Requirements)** - is each FR satisfied by this phase's code?
+   - **NFRs (Non-Functional Requirements)** - are performance, security, observability constraints met?
+   - **Phase objective** - does the code achieve exactly what this phase's objective states, nothing more, nothing less?
+   - **Edge cases** - are all edge cases from the spec handled in this phase's code?
+   - **Repo conventions** - did you match existing patterns, or did you introduce a new style?
    
    **If anything doesn't match, fix it NOW before verifying.** Do not proceed with a broken traceability chain from spec → impl → code.
 4. **Verify**: Run the verification steps against the phase's **Objective**. Every verification must confirm the objective is met. Show me the evidence (test output, CLI output, etc.). If any verification fails or the objective is not fully achieved, iterate on the implementation before moving to review.
@@ -198,7 +198,7 @@ For each phase, in order:
    - Does this match your expectations?
    - Any edge cases I missed?
    - Any adjustments needed before Phase N+1?
-6. **Git Checkpoint** 🔴 (MANDATORY — this is your rollback safety net):
+6. **Git Checkpoint** 🔴 (MANDATORY - this is your rollback safety net):
    - After I confirm the pair review, invoke the **git-ci** prompt template to:
      1. Stage all changes (`git add`)
      2. Generate a commit message and branch name (e.g., `feat/<scope>/<what>`, `fix/<scope>/<what>`)
@@ -215,7 +215,7 @@ For each phase, in order:
 
 For phases that are inherently risky (touching auth, payments, data migrations, concurrency, shared infrastructure) or span 5+ files with non-trivial logic, you MUST suggest an independent review after step 5 (Pair Review) and before step 6 (Git Checkpoint):
 
-> **Remind me**: "Phase N is complex enough to warrant an independent review. I recommend spawning a fresh pi-agent using the `review` prompt template to review the staged changes before we commit. The reviewer agent MUST use a **different model** than the one that wrote the code (e.g., if I used `deepseek-v4-pro` to code, use `mimo-v2.5-pro` or `gpt-5.1` to review). Different models have different blind spots — a second pair of eyes from a different model family catches issues the coding model missed."
+> **Remind me**: "Phase N is complex enough to warrant an independent review. I recommend spawning a fresh pi-agent using the `review` prompt template to review the staged changes before we commit. The reviewer agent MUST use a **different model** than the one that wrote the code (e.g., if I used `deepseek-v4-pro` to code, use `mimo-v2.5-pro` or `gpt-5.1` to review). Different models have different blind spots - a second pair of eyes from a different model family catches issues the coding model missed."
 
 If I decline, proceed with the Git Checkpoint. If I accept, pause until the review agent returns its findings, address any issues, then proceed with the Git Checkpoint.
 

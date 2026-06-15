@@ -16,7 +16,7 @@ Shell is the right tool for:
 
 ## Which Shell
 
-Target **bash** (not `sh`, not `zsh`). Bash gives us `[[ ]]`, arrays, `readarray`, `local -n`, and `%(...)T` in `printf`. Scripts run on Debian/Ubuntu (bash at `/bin/bash`) and RHEL/CentOS — always invoke via `env` for portability.
+Target **bash** (not `sh`, not `zsh`). Bash gives us `[[ ]]`, arrays, `readarray`, `local -n`, and `%(...)T` in `printf`. Scripts run on Debian/Ubuntu (bash at `/bin/bash`) and RHEL/CentOS - always invoke via `env` for portability.
 
 ## Script Structure
 
@@ -24,7 +24,7 @@ Every script follows this skeleton:
 
 ```bash
 #!/usr/bin/env bash
-# script_name.sh — One-line description of what this script does.
+# script_name.sh - One-line description of what this script does.
 #
 # Usage:  ./script_name.sh [options]
 #
@@ -59,8 +59,8 @@ Always `#!/usr/bin/env bash`. Hardcoding `/bin/bash` breaks on systems where bas
 set -uo pipefail
 ```
 
-- `-u` — reject undefined variables (catches typos early)
-- `-o pipefail` — a pipeline fails if *any* command in it fails
+- `-u` - reject undefined variables (catches typos early)
+- `-o pipefail` - a pipeline fails if *any* command in it fails
 
 **Do not use `set -e`** (errexit). It has surprising edge cases: it does not trigger inside `(( ))` evaluating to 0, inside `let`, or when a failing command is the condition of `if`/`while`/`||`/`&&`. It also turns off inside subshells. Explicit error checks are predictable; `set -e` is not.
 
@@ -161,14 +161,14 @@ Lowercase with underscores: `backup_database.sh`, `rotate_logs.sh`. No hyphens.
 process_file "${input_file}"
 cp "${src}" "${dst}"
 
-# Wrong — word splitting, globbing
+# Wrong - word splitting, globbing
 process_file ${input_file}
 ```
 
 Array expansions always use the quoted form:
 
 ```bash
-"${array[@]}"    # each element as a separate word — this is 99% of cases
+"${array[@]}"    # each element as a separate word - this is 99% of cases
 "${array[*]}"    # all elements as a single string (rarely what you want)
 ```
 
@@ -182,7 +182,7 @@ Array expansions always use the quoted form:
 However, the right-hand side of `==` / `!=` in `[[ ]]` **is** a pattern when unquoted:
 
 ```bash
-[[ ${filename} == *.log ]]  # pattern match — "ends with .log"
+[[ ${filename} == *.log ]]  # pattern match - "ends with .log"
 [[ ${filename} == "*.log" ]] # literal string "*.log"
 ```
 
@@ -224,27 +224,27 @@ fi
 ### Equality: `==` Over `=`
 
 ```bash
-[[ "${name}" == "admin" ]]   # preferred — clearly a comparison, not an assignment
+[[ "${name}" == "admin" ]]   # preferred - clearly a comparison, not an assignment
 [[ "${name}" = "admin" ]]    # works but avoid
 ```
 
 ### Empty / Non-Empty Tests
 
-Be explicit — use `-z` (zero-length) and `-n` (non-zero-length):
+Be explicit - use `-z` (zero-length) and `-n` (non-zero-length):
 
 ```bash
-# Preferred — intent is obvious
+# Preferred - intent is obvious
 if [[ -z "${value}" ]]; then … fi
 if [[ -n "${value}" ]]; then … fi
 
-# Avoid — implicit, easy to misread
+# Avoid - implicit, easy to misread
 if [[ "${value}" ]]; then … fi
 if [[ ! "${value}" ]]; then … fi
 ```
 
 ### Numeric Comparisons
 
-**Never** use `<` `>` inside `[[ ]]` — they perform **lexicographic** comparison (so `"22" < "3"` is true!).
+**Never** use `<` `>` inside `[[ ]]` - they perform **lexicographic** comparison (so `"22" < "3"` is true!).
 
 Use `(( ))` for arithmetic tests, or `-lt` `-gt` `-le` `-ge` `-eq` `-ne` inside `[[ ]]`:
 
@@ -253,7 +253,7 @@ Use `(( ))` for arithmetic tests, or `-lt` `-gt` `-le` `-ge` `-eq` `-ne` inside 
 if (( count > 3 )); then … fi
 if [[ "${count}" -gt 3 ]]; then … fi
 
-# Wrong — lexicographic, not numeric
+# Wrong - lexicographic, not numeric
 if [[ "${count}" > 3 ]]; then … fi
 ```
 
@@ -298,14 +298,14 @@ Every variable inside a function **must** be declared `local`. This prevents pol
 **Critical rule**: separate `local` declaration from `$(…)` assignment. `local` swallows the command's exit code:
 
 ```bash
-# Correct — exit code of my_func is preserved
+# Correct - exit code of my_func is preserved
 my_function() {
   local result
   result="$(my_func)" || return
   …
 }
 
-# Wrong — $? is always 0 (the exit code of `local`, not `my_func`)
+# Wrong - $? is always 0 (the exit code of `local`, not `my_func`)
 my_function() {
   local result="$(my_func)"
   (( $? == 0 )) || return   # this check is useless!
@@ -345,12 +345,12 @@ cd "${work_dir}" || die "Cannot enter: ${work_dir}"
 ### Checking Command Exit Status
 
 ```bash
-# Preferred — check directly in if/||
+# Preferred - check directly in if/||
 if ! mv "${files[@]}" "${dest}/"; then
   die "Cannot move files to ${dest}"
 fi
 
-# Also acceptable — explicit $? check
+# Also acceptable - explicit $? check
 mv "${files[@]}" "${dest}/"
 if (( $? != 0 )); then
   die "Cannot move files to ${dest}"
@@ -377,7 +377,7 @@ fi
 With `set -o pipefail`, a pipeline fails if any component fails:
 
 ```bash
-# If grep fails, the pipeline fails — good
+# If grep fails, the pipeline fails - good
 grep "ERROR" /var/log/app.log | wc -l
 ```
 
@@ -390,16 +390,16 @@ Use `(( … ))` for arithmetic evaluation and `$(( … ))` for expansion:
 (( i += 3 ))
 if (( a < b )); then … fi
 
-# Expansion (with $) — inside strings or assignments
+# Expansion (with $) - inside strings or assignments
 echo "$(( 2 + 2 )) is 4"
 total="$(( price * quantity ))"
 ```
 
 ### Never Use
 
-- `let` — subject to word splitting, non-obvious
-- `$[ … ]` — deprecated, non-portable
-- `expr` — external process, slow, quoting headaches
+- `let` - subject to word splitting, non-obvious
+- `$[ … ]` - deprecated, non-portable
+- `expr` - external process, slow, quoting headaches
 
 ```bash
 # Wrong
@@ -417,13 +417,13 @@ With `set -e` enabled (which we avoid), `(( 0 ))` evaluates to 1 and **causes th
 Use arrays for lists of arguments, file paths, or any collection of strings. Never concatenate arguments into a single string:
 
 ```bash
-# Correct — array
+# Correct - array
 declare -a rsync_flags
 rsync_flags=(--archive --compress --delete)
 rsync_flags+=(--exclude='*.tmp')
 rsync "${rsync_flags[@]}" "${src}/" "${dst}/"
 
-# Wrong — string masquerading as list
+# Wrong - string masquerading as list
 rsync_flags="--archive --compress --delete"
 rsync_flags+=" --exclude='*.tmp'"   # quoting nightmare
 rsync ${rsync_flags} "${src}/" "${dst}/"  # word splitting, globbing bugs
@@ -440,7 +440,7 @@ ${#arr[@]}    # array length
 ### Command Substitution Does Not Return Arrays
 
 ```bash
-# Wrong — word splitting, globbing on output
+# Wrong - word splitting, globbing on output
 declare -a files=($(ls /tmp))
 
 # Correct
@@ -454,7 +454,7 @@ readarray -t files < <(find /tmp -type f)
 Pipes create subshells. Variables modified inside a pipe are **lost** when the pipe ends:
 
 ```bash
-# Wrong — last_line is always 'NULL'
+# Wrong - last_line is always 'NULL'
 last_line='NULL'
 your_command | while read -r line; do
   last_line="${line}"
@@ -464,7 +464,7 @@ echo "${last_line}"   # prints 'NULL'
 
 ### Solutions
 
-**Process substitution** — redirect into `while` without piping:
+**Process substitution** - redirect into `while` without piping:
 
 ```bash
 last_line='NULL'
@@ -474,7 +474,7 @@ done < <(your_command)
 echo "${last_line}"   # correct
 ```
 
-**readarray** — read entire output into an array, then iterate:
+**readarray** - read entire output into an array, then iterate:
 
 ```bash
 readarray -t lines < <(your_command)
@@ -486,7 +486,7 @@ done
 ### `for var in $(cmd)` Splits on Whitespace
 
 ```bash
-# Wrong — splits on any whitespace, globs filenames
+# Wrong - splits on any whitespace, globs filenames
 for file in $(find . -name '*.txt'); do … done
 
 # Correct
@@ -497,7 +497,7 @@ done < <(find . -name '*.txt')
 
 ## Command Substitution
 
-Use `$(…)` — never backticks. Backticks don't nest cleanly and are hard to read:
+Use `$(…)` - never backticks. Backticks don't nest cleanly and are hard to read:
 
 ```bash
 # Correct
@@ -518,16 +518,16 @@ output="$(risky_command)" || die "risky_command failed"
 ### Don't Capture Stderr Into Substitution
 
 ```bash
-# stderr goes to caller's stderr, stdout captured — good
+# stderr goes to caller's stderr, stdout captured - good
 result="$(cmd)"
 
-# stderr mixed into result — usually wrong
+# stderr mixed into result - usually wrong
 result="$(cmd 2>&1)"
 ```
 
 ## Builtins Over External Commands
 
-Prefer bash builtins — they are faster and avoid spawning processes:
+Prefer bash builtins - they are faster and avoid spawning processes:
 
 | Instead of                          | Use bash builtin                    |
 |-------------------------------------|-------------------------------------|
@@ -540,13 +540,13 @@ Prefer bash builtins — they are faster and avoid spawning processes:
 | `$(date +%s)`                       | `printf '%(%s)T' -1`               |
 
 ```bash
-# Correct — all builtin, zero subshells
+# Correct - all builtin, zero subshells
 path="/var/log/app.log"
 name="${path##*/}"                    # "app.log"
 dir="${path%/*}"                      # "/var/log"
 timestamp="$(printf '%(%Y%m%d-%H%M%S)T' -1)"
 
-# Wrong — 3 extra processes
+# Wrong - 3 extra processes
 name=$(basename "${path}")
 dir=$(dirname "${path}")
 timestamp=$(date +%Y%m%d-%H%M%S)
@@ -571,12 +571,12 @@ _die() {
 
 Key points:
 - `_log` writes to stdout; `_die` writes to stderr with `>&2`
-- Use `printf`, not `echo` — `echo` varies across shells with `-n`, `-e`, backslashes
-- `%()T` with `-1` is bash builtin `printf` time formatting — avoids a `date` subshell
+- Use `printf`, not `echo` - `echo` varies across shells with `-n`, `-e`, backslashes
+- `%()T` with `-1` is bash builtin `printf` time formatting - avoids a `date` subshell
 
 ### stdout vs stderr
 
-- **stdout** (fd 1): data output — what your script produces
+- **stdout** (fd 1): data output - what your script produces
 - **stderr** (fd 2): diagnostics, errors, progress messages
 
 Keep stdout clean for piping and command substitution:
@@ -598,10 +598,10 @@ generate_report 2> errors.log  # diagnostics go to error log
 Filenames can start with `-`, which commands interpret as flags:
 
 ```bash
-# Dangerous — if any file starts with '-', it becomes an rm flag
+# Dangerous - if any file starts with '-', it becomes an rm flag
 rm -v *
 
-# Safe — './-f' is a filename, not a flag
+# Safe - './-f' is a filename, not a flag
 rm -v ./*
 ```
 
@@ -633,7 +633,7 @@ done
 
 ### Forwarding Arguments
 
-Always quote `"$@"` — each argument stays intact:
+Always quote `"$@"` - each argument stays intact:
 
 ```bash
 wrapper() {
@@ -667,7 +667,7 @@ Every script starts with a header block:
 
 ```bash
 #!/usr/bin/env bash
-# script_name.sh — One-line description.
+# script_name.sh - One-line description.
 #
 # Usage:  ./script_name.sh <arg1> [arg2]
 #
@@ -677,7 +677,7 @@ Every script starts with a header block:
 
 ### Function or Implementation Comments
 
-**Never** use comments inside or above functions, methods, or any line of code. Code must be self-documenting — clear function names, well-scoped locals, and single-responsibility functions remove the need for explanatory comments. No block comments above `main()`, helper functions, or any function definition. No inline comments explaining what a line does.
+**Never** use comments inside or above functions, methods, or any line of code. Code must be self-documenting - clear function names, well-scoped locals, and single-responsibility functions remove the need for explanatory comments. No block comments above `main()`, helper functions, or any function definition. No inline comments explaining what a line does.
 
 ### TODO Comments
 

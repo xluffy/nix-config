@@ -2,7 +2,7 @@ _: {
   programs.direnv = {
     enable = true;
     nix-direnv.enable = true;
-    config = ''
+    stdlib = ''
       layout_uv() {
         if [[ -d ".venv" ]]; then
           VIRTUAL_ENV="$(pwd)/.venv"

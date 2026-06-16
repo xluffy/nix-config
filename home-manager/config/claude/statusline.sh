@@ -1,106 +1,119 @@
 #!/usr/bin/env bash
-set -uo pipefail
+# Claude Code status line script
+# Format: [Model] 📁 project │ 🌿 branch ██████░░ 28% │ $0.83 │ ⏱ 12m 34s ↻89%
 
-STATUS_JSON="$(cat)"
-readonly STATUS_JSON
+input=$(cat)
 
-parse_json() {
-  jq -r '
-    [
-      (.model.display_name // "Claude"),
-      (.workspace.project_dir // .cwd // ""),
-      (.context_window.used_percentage // "" | tostring),
-      (.context_window.total_input_tokens // 0 | tostring),
-      (.context_window.total_output_tokens // 0 | tostring),
-      (.context_window.current_usage.cache_creation_input_tokens // 0 | tostring),
-      (.context_window.current_usage.cache_read_input_tokens // 0 | tostring),
-      (.transcript_path // ""),
-      (.rate_limits.five_hour.used_percentage // "" | tostring)
-    ] | @tsv
-  ' <<<"${STATUS_JSON}"
-}
+# ── Model ────────────────────────────────────────────────────────────────────
+model=$(echo "$input" | jq -r '.model.display_name // "Claude"')
 
-build_progress_bar() {
-  local used_pct_str="$1" used_int filled empty
-  [[ -z "${used_pct_str}" ]] && return
-  used_int="$(printf '%.0f' "${used_pct_str}")"
-  filled=$((used_int * 12 / 100))
-  empty=$((12 - filled))
-  printf '%s%s %d%%' \
-    "$(printf '%*s' "${filled}" '' | tr ' ' '█')" \
-    "$(printf '%*s' "${empty}" '' | tr ' ' '░')" \
-    "${used_int}"
-}
+# ── Project directory (basename of project_dir, fallback to cwd) ─────────────
+project_dir=$(echo "$input" | jq -r '.workspace.project_dir // .cwd // ""')
+project=$(basename "$project_dir")
 
-calculate_cost() {
-  awk -v ti="$1" -v to="$2" -v cw="$3" -v cr="$4" \
-    'BEGIN { printf "%.2f", (ti*15 + to*75 + cw*18.75 + cr*1.50) / 1000000 }'
-}
+# ── Git branch ───────────────────────────────────────────────────────────────
+branch=""
+if [ -n "$project_dir" ] && [ -d "$project_dir/.git" ]; then
+  branch=$(git -C "$project_dir" --git-dir="$project_dir/.git" symbolic-ref --short HEAD 2>/dev/null \
+           || git -C "$project_dir" --git-dir="$project_dir/.git" rev-parse --short HEAD 2>/dev/null)
+fi
 
-parse_iso8601_to_epoch() {
-  local ts="$1" epoch
-  if date --version &>/dev/null 2>&1; then
-    epoch="$(date -d "${ts}" +%s 2>/dev/null)"
+# ── Context progress bar ──────────────────────────────────────────────────────
+used_pct=$(echo "$input" | jq -r '.context_window.used_percentage // empty')
+bar=""
+if [ -n "$used_pct" ]; then
+  # Round to integer
+  used_int=$(printf '%.0f' "$used_pct")
+  # Build a 12-block bar (each block = ~8.33%)
+  total_blocks=12
+  filled=$(( used_int * total_blocks / 100 ))
+  empty=$(( total_blocks - filled ))
+  bar=""
+  for ((i=0; i<filled; i++)); do bar="${bar}█"; done
+  for ((i=0; i<empty; i++));  do bar="${bar}░"; done
+  bar="${bar} ${used_int}%"
+fi
+
+# ── Estimated cost (from cumulative token counts) ────────────────────────────
+# Pricing approximation for claude-opus-4 class models (per 1M tokens):
+#   input: $15, output: $75, cache_write: $18.75, cache_read: $1.50
+total_input=$(echo "$input"  | jq -r '.context_window.total_input_tokens  // 0')
+total_output=$(echo "$input" | jq -r '.context_window.total_output_tokens // 0')
+cache_write=$(echo "$input"  | jq -r '.context_window.current_usage.cache_creation_input_tokens // 0')
+cache_read=$(echo "$input"   | jq -r '.context_window.current_usage.cache_read_input_tokens     // 0')
+
+cost=$(awk -v ti="$total_input" -v to="$total_output" -v cw="$cache_write" -v cr="$cache_read" \
+  'BEGIN { printf "%.2f", (ti*15 + to*75 + cw*18.75 + cr*1.50) / 1000000 }')
+
+# ── Session elapsed time (from transcript file mtime vs now) ─────────────────
+elapsed=""
+transcript=$(echo "$input" | jq -r '.transcript_path // empty')
+if [ -n "$transcript" ] && [ -f "$transcript" ]; then
+  # Get the oldest (creation) time by checking the directory listing of jsonl entries
+  # Approximate: use the mtime of the transcript; subtract from now
+  # More accurate: first line timestamp
+  first_ts=$(head -1 "$transcript" 2>/dev/null | jq -r '.timestamp // empty' 2>/dev/null)
+  if [ -n "$first_ts" ]; then
+    now_s=$(date +%s)
+    # GNU date or BSD date
+    if date --version &>/dev/null 2>&1; then
+      start_s=$(date -d "$first_ts" +%s 2>/dev/null)
+    else
+      start_s=$(date -jf "%Y-%m-%dT%H:%M:%S" "${first_ts%%.*}" +%s 2>/dev/null \
+               || date -jf "%Y-%m-%dT%H:%M:%SZ" "${first_ts}" +%s 2>/dev/null)
+    fi
+    if [ -n "$start_s" ] && [ "$start_s" -gt 0 ] 2>/dev/null; then
+      diff=$(( now_s - start_s ))
+      mins=$(( diff / 60 ))
+      secs=$(( diff % 60 ))
+      elapsed=$(printf "%dm %02ds" "$mins" "$secs")
+    fi
+  fi
+fi
+
+# ── Rate limit (5-hour window) ───────────────────────────────────────────────
+five_pct=$(echo "$input" | jq -r '.rate_limits.five_hour.used_percentage // empty')
+rate=""
+if [ -n "$five_pct" ]; then
+  rate=$(printf '%.0f' "$five_pct")
+fi
+
+# ── Assemble output ──────────────────────────────────────────────────────────
+parts=()
+parts+=("[${model}]")
+
+if [ -n "$project" ]; then
+  parts+=("📁 ${project}")
+fi
+
+if [ -n "$branch" ]; then
+  parts+=("🌿 ${branch}")
+fi
+
+if [ -n "$bar" ]; then
+  parts+=("${bar}")
+fi
+
+if [ -n "$cost" ] && [ "$cost" != "0.00" ]; then
+  parts+=("\$${cost}")
+fi
+
+if [ -n "$elapsed" ]; then
+  parts+=("⏱ ${elapsed}")
+fi
+
+if [ -n "$rate" ]; then
+  parts+=("↻${rate}%")
+fi
+
+# Join with │ separator
+result=""
+for part in "${parts[@]}"; do
+  if [ -z "$result" ]; then
+    result="$part"
   else
-    epoch="$(date -jf "%Y-%m-%dT%H:%M:%S" "${ts%%.*}" +%s 2>/dev/null)"
-    [[ -z "${epoch}" ]] && epoch="$(date -jf "%Y-%m-%dT%H:%M:%SZ" "${ts}" +%s 2>/dev/null)"
+    result="${result} │ ${part}"
   fi
-  printf '%s' "${epoch:-0}"
-}
+done
 
-get_elapsed() {
-  local transcript_path="$1" first_ts start_s now_s diff mins secs
-  [[ -z "${transcript_path}" || ! -f "${transcript_path}" ]] && return
-  first_ts="$(head -1 "${transcript_path}" 2>/dev/null | jq -r '.timestamp // empty' 2>/dev/null)"
-  [[ -z "${first_ts}" ]] && return
-  now_s="$(date +%s)"
-  start_s="$(parse_iso8601_to_epoch "${first_ts}")"
-  [[ "${start_s}" -le 0 ]] && return
-  diff=$((now_s - start_s))
-  mins=$((diff / 60))
-  secs=$((diff % 60))
-  printf '%dm %02ds' "${mins}" "${secs}"
-}
-
-get_branch() {
-  local project_dir="$1" branch
-  [[ -n "${project_dir}" && -d "${project_dir}/.git" ]] || return
-  branch="$(git -C "${project_dir}" --git-dir="${project_dir}/.git" symbolic-ref --short HEAD 2>/dev/null)"
-  [[ -n "${branch}" ]] || branch="$(git -C "${project_dir}" --git-dir="${project_dir}/.git" rev-parse --short HEAD 2>/dev/null)"
-  printf '%s' "${branch}"
-}
-
-join_parts() {
-  local IFS=' │ '
-  printf '%s' "$*"
-}
-
-main() {
-  local model_name project_dir used_pct_str total_input total_output cache_write cache_read transcript_path rate_str
-  IFS=$'\t' read -r model_name project_dir used_pct_str total_input total_output cache_write cache_read transcript_path rate_str <<<"$(parse_json)"
-
-  local model project branch bar cost elapsed rate parts
-  model="[${model_name}]"
-  project="$(basename "${project_dir}")"
-  branch="$(get_branch "${project_dir}")"
-  bar="$(build_progress_bar "${used_pct_str}")"
-  cost="$(calculate_cost "${total_input}" "${total_output}" "${cache_write}" "${cache_read}")"
-  elapsed="$(get_elapsed "${transcript_path}")"
-
-  parts=("${model}")
-
-  [[ -n "${project}" ]] && parts+=("📁 ${project}")
-  [[ -n "${branch}" ]] && parts+=("🌿 ${branch}")
-  [[ -n "${bar}" ]] && parts+=("${bar}")
-  [[ -n "${cost}" && "${cost}" != "0.00" ]] && parts+=("\$${cost}")
-  [[ -n "${elapsed}" ]] && parts+=("⏱ ${elapsed}")
-
-  if [[ -n "${rate_str}" ]]; then
-    rate="$(printf '%.0f' "${rate_str}")"
-    parts+=("↻${rate}%")
-  fi
-
-  join_parts "${parts[@]}"
-}
-
-main
+echo "$result"

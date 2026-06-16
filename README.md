@@ -14,6 +14,8 @@ just bootstrap
 just switch
 ```
 
+![diff](./docs/diff.png)
+
 ## Structure
 
 ```

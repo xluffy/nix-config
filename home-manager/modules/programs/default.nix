@@ -1,6 +1,7 @@
 {...}: {
   imports = [
     ./common.nix
+    ./direnv.nix
     ./1password.nix
     ./atuin.nix
     ./fzf.nix

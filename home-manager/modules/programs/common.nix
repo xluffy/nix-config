@@ -8,11 +8,6 @@ _: {
       };
     };
 
-    direnv = {
-      enable = true;
-      nix-direnv.enable = true;
-    };
-
     jq = {
       enable = true;
     };

@@ -8,5 +8,6 @@
     ./ssh.nix
     ./tmux.nix
     ./pi.nix
+    ./claude.nix
   ];
 }

@@ -16,7 +16,6 @@
     maple-mono.NF-unhinted
     maple-mono.truetype
     mkcert
-    openssl_1_1
     pkg-config
     pkgs-unstable.ansible-lint
     pkgs-unstable.bun

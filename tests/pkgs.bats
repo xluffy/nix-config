@@ -14,13 +14,13 @@ setup() {
 @test "packages.kage resolves on aarch64-darwin" {
   run nix eval --json "path:${FLAKE}#packages.aarch64-darwin.kage.name"
   [ "$status" -eq 0 ]
-  [ "$output" = '"kage-0.3.3"' ]
+  [ "$output" = '"kage-0.3.4"' ]
 }
 
 @test "packages.kage resolves on x86_64-linux" {
   run nix eval --json "path:${FLAKE}#packages.x86_64-linux.kage.name"
   [ "$status" -eq 0 ]
-  [ "$output" = '"kage-0.3.3"' ]
+  [ "$output" = '"kage-0.3.4"' ]
 }
 
 @test "packages.kage uses go_1_26 from unstable" {
@@ -64,7 +64,7 @@ setup() {
       pkgsWithKage.kage.name
   '
   [ "$status" -eq 0 ]
-  [ "$output" = '"kage-0.3.3"' ]
+  [ "$output" = '"kage-0.3.4"' ]
 }
 
 @test "overlay additionsUnstable passes unstable Go to kage" {
@@ -88,7 +88,7 @@ setup() {
 @test "homeConfigurations evaluate with kage available" {
   run nix eval --json "path:${FLAKE}#homeConfigurations.\"quang.van.nguyen@Nguyens-MacBook-Pro.local\".pkgs.kage.name"
   [ "$status" -eq 0 ]
-  [ "$output" = '"kage-0.3.3"' ]
+  [ "$output" = '"kage-0.3.4"' ]
 }
 
 @test "kage meta is well-formed" {

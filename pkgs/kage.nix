@@ -7,13 +7,13 @@
 (buildGoModule.override {inherit go;})
 rec {
   pname = "kage";
-  version = "0.3.3";
+  version = "0.3.4";
 
   src = fetchFromGitHub {
     owner = "tamnd";
     repo = "kage";
     rev = "v${version}";
-    hash = "sha256-NZc+/EaVyuJxPzEKi4crwOg55KWMc/Km/QywJ5ywKnc=";
+    hash = "sha256-s7bi4JIxLUAaMVdhRoQiYANJLBLg8bWiZMbRbd23POs=";
   };
 
   vendorHash = "sha256-Jr9rR7qX8KLuzumz4jUfvuUftW+GO1gq/Dj/oT5+Uto=";

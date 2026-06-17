@@ -29,6 +29,16 @@
     agenix,
     ...
   }: let
+    # Shared config for nixpkgs imports
+    nixpkgsConfig = {
+      config.allowUnfree = true;
+      config.permittedInsecurePackages = [
+        "openssl-1.1.1w"
+      ];
+    };
+
+    overlays = import ./overlays;
+
     mkHomeConfig = {
       system,
       username,
@@ -36,20 +46,17 @@
       hasGUI ? true,
       extraModules ? [],
     }: let
-      pkgs = import nixpkgs {
-        inherit system;
-        config.allowUnfree = true;
-        config.permittedInsecurePackages = [
-          "openssl-1.1.1w"
-        ];
-      };
-      pkgsUnstable = import nixpkgs-unstable {
-        inherit system;
-        config.allowUnfree = true;
-        config.permittedInsecurePackages = [
-          "openssl-1.1.1w"
-        ];
-      };
+      pkgsUnstable = import nixpkgs-unstable (nixpkgsConfig
+        // {
+          inherit system;
+        });
+      pkgs = import nixpkgs (nixpkgsConfig
+        // {
+          inherit system;
+          overlays = [
+            (overlays.additionsUnstable pkgsUnstable)
+          ];
+        });
       resolvedHomeDir =
         if homeDirectory != null
         then homeDirectory
@@ -82,6 +89,12 @@
           inherit hasGUI;
         };
       };
+
+    # Helper to apply overlays for standalone nixpkgs access
+    forAllSystems = nixpkgs.lib.genAttrs [
+      "aarch64-darwin"
+      "x86_64-linux"
+    ];
   in {
     homeConfigurations = {
       "quang.van.nguyen@Nguyens-MacBook-Pro.local" = mkHomeConfig {
@@ -116,19 +129,24 @@
       };
     };
 
-    devShells = {
-      aarch64-darwin.default = import ./shell.nix {
-        pkgs = import nixpkgs {
-          system = "aarch64-darwin";
-          config.allowUnfree = true;
-        };
-      };
-      x86_64-linux.default = import ./shell.nix {
-        pkgs = import nixpkgs {
-          system = "x86_64-linux";
-          config.allowUnfree = true;
-        };
-      };
-    };
+    # Custom packages; accessible via 'nix build .#kage', 'nix shell .#kage', etc
+    packages = forAllSystems (
+      system:
+        import ./pkgs {
+          pkgs = import nixpkgs (nixpkgsConfig // {inherit system;});
+          pkgsUnstable = import nixpkgs-unstable (nixpkgsConfig // {inherit system;});
+        }
+    );
+
+    # Custom overlays; consumers can import these
+    inherit overlays;
+
+    devShells = forAllSystems (
+      system: let
+        pkgs = import nixpkgs (nixpkgsConfig // {inherit system;});
+      in {
+        default = import ./shell.nix {inherit pkgs;};
+      }
+    );
   };
 }

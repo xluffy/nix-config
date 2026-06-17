@@ -27,6 +27,7 @@
       htop
       inetutils
       just
+      kage
       kcat
       libiconv
       mtr

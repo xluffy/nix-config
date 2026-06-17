@@ -21,5 +21,7 @@ _: {
     ".pi/agent/prompts/git-ci.md".source = ../../config/pi/prompts/git-ci.md;
     ".pi/agent/prompts/spec-workflow.md".source = ../../config/pi/prompts/spec-workflow.md;
     ".pi/agent/prompts/spec-quick.md".source = ../../config/pi/prompts/spec-quick.md;
+    ".pi/agent/prompts/grill-me.md".source = ../../config/pi/prompts/grill-me.md;
+    ".pi/agent/prompts/handoff.md".source = ../../config/pi/prompts/handoff.md;
   };
 }

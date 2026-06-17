@@ -32,9 +32,7 @@
     # Shared config for nixpkgs imports
     nixpkgsConfig = {
       config.allowUnfree = true;
-      config.permittedInsecurePackages = [
-        "openssl-1.1.1w"
-      ];
+      config.permittedInsecurePackages = [];
     };
 
     overlays = import ./overlays;

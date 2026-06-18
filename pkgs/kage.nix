@@ -28,13 +28,6 @@ rec {
 
   env.CGO_ENABLED = "0";
 
-  # kage requires go >= 1.26.4. nixpkgs-unstable has 1.26.3, so we patch down
-  # one patch version. No go mod tidy needed — go.sum format unchanged within 1.26.x.
-  # TODO: remove this postPatch when nixpkgs-unstable ships go >= 1.26.4.
-  postPatch = ''
-    substituteInPlace go.mod --replace-fail "go 1.26.4" "go 1.26.3"
-  '';
-
   meta = with lib; {
     description = "Shadow any website for offline viewing, with the JavaScript stripped out";
     homepage = "https://github.com/tamnd/kage";

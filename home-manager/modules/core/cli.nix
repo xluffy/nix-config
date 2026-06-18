@@ -47,6 +47,7 @@
       unixtools.watch
       wget
       xz
+      yomi
       yq
       zstd
     ]

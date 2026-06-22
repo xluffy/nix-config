@@ -29,6 +29,7 @@
       just
       kage
       kcat
+      kcctl
       libiconv
       mtr
       ncdu

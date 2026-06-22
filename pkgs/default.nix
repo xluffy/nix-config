@@ -23,6 +23,8 @@ in {
     go = go_1_26_4;
   };
 
+  kcctl = pkgs.callPackage ./kcctl.nix {};
+
   yomi = pkgs.callPackage ./yomi.nix {
     go = go_1_26_4;
   };

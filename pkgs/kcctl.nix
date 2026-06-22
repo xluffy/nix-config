@@ -36,7 +36,6 @@ in
 
     buildInputs = lib.optionals stdenvNoCC.hostPlatform.isLinux [
       zlib
-      stdenvNoCC.cc.cc.lib
     ];
 
     sourceRoot = ".";

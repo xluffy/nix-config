@@ -49,6 +49,9 @@
       "Read(~/Library/Application Support/**/solflare*/**)"
     ],
     "allow": [
+      "Bash(git add:*)",
+      "Bash(git checkout:*)",
+      "Bash(git commit:*)",
       "Read(~/code/work/**)"
     ]
   },

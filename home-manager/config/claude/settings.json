@@ -6,6 +6,7 @@
     "DISABLE_ERROR_REPORTING": "1",
     "CLAUDE_CODE_DISABLE_FEEDBACK_SURVEY": "1",
     "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1",
+    "CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS": "1",
     "CLAUDE_CODE_ENABLE_GATEWAY_MODEL_DISCOVERY": "1",
     "CLAUDE_CODE_SUBAGENT_MODEL": "claude-opus-4-7"
   },
@@ -46,6 +47,9 @@
       "Read(~/Library/Application Support/**/exodus*/**)",
       "Read(~/Library/Application Support/**/phantom*/**)",
       "Read(~/Library/Application Support/**/solflare*/**)"
+    ],
+    "allow": [
+      "Read(~/code/work/**)"
     ]
   },
   "statusLine": {

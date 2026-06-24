@@ -21,5 +21,6 @@
   },
   "warnings": {
     "anthropicExtraUsage": true
-  }
+  },
+  "packages": ["@aliou/pi-guardrails"]
 }

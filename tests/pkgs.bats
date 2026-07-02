@@ -99,18 +99,4 @@ setup() {
   [[ "$output" =~ "kage" ]]
 }
 
-# ---------------------------------------------------------------------------
-# Future-proofing: detect when workaround is no longer needed
-# ---------------------------------------------------------------------------
 
-@test "WORKAROUND: nixpkgs-unstable go is still < 1.26.4" {
-  skip "Remove this test once Go >= 1.26.4 lands in nixpkgs-unstable"
-  run nix eval --impure --expr '
-    let
-      flake = builtins.getFlake "'"${FLAKE}"'";
-      goVer = flake.inputs.nixpkgs-unstable.legacyPackages.aarch64-darwin.go_1_26.version;
-    in
-      builtins.compareVersions goVer "1.26.4"
-  '
-  [ "$output" -lt 0 ]
-}

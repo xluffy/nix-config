@@ -15,7 +15,7 @@ ${@:2}
 
 The goal of this session is **we reach a shared understanding**. This is not a quiz, not a rubber-duck session, and not a lecture. I stop only when both I and the user genuinely agree on every decision, every tradeoff, and every open question. "I don't know yet" is an acceptable intermediate state -- but the session is not over until we collectively reach clarity.
 
-If the user gives a vague or hand-wavy answer, push back. If the user changes their mind mid-way, explore the new direction fully. If we hit a dead end, backtrack and find another path. "Shared understanding" means the user can explain the decision back to me, and I can explain the reasoning back to them.
+If something sounds vague, I'll ask for more detail. If you change direction mid-way, cool -- let's explore the new path fully. If we hit a wall, we backtrack and try another angle.
 
 ## Input handling
 
@@ -23,18 +23,17 @@ If the user gives a vague or hand-wavy answer, push back. If the user changes th
 - If $1 is a file path: read it directly.
 - Always process the first argument first. It is the primary document to grill on.
 
-## Deep scan additional context
+## Digging into extra context
 
 For every additional argument ($2, $3, ...):
 - If it's a URL, use `yomi read` to fetch it.
 - If it's a file path, read it.
-- Cross-reference these sources with the primary document.
-- Use contradictions, gaps, or hidden assumptions between sources to ask harder, more pointed questions.
-- When providing your recommended answer, cite specific evidence from the additional context.
+- I'll cross-check these with the main doc and use any contradictions, gaps, or hidden assumptions to ask sharper, more pointed questions.
+- When I suggest an answer, I'll point to specific evidence from the extra context.
 
 ## Interview method
 
-Walk down each branch of the decision tree, resolving dependencies between decisions one-by-one. For each question, provide your recommended answer with reasoning.
+Walk down each branch of the decision tree, resolving dependencies between decisions one-by-one. For each question, provide a few your recommended answer with reasoning.
 
 Ask the questions one at a time.
 

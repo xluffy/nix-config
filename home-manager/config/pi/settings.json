@@ -1,7 +1,7 @@
 {
   "defaultProvider": "deepseek",
-  "defaultModel": "deepseek-chat",
-  "defaultThinkingLevel": "high",
+  "defaultModel": "deepseek-v4-pro",
+  "defaultThinkingLevel": "xhigh",
   "enabledModels": [
     "deepseek-*",
     "mimo-*",
@@ -21,6 +21,5 @@
   },
   "warnings": {
     "anthropicExtraUsage": true
-  },
-  "packages": ["@aliou/pi-guardrails"]
+  }
 }

@@ -59,10 +59,41 @@ just gc       # Garbage collect profiles older than 2 days
 
 Managed via `home-manager/modules/programs/pi.nix` and `home-manager/config/pi/`:
 - `settings.json` — pi settings
-- `models.json` — custom model definitions
+- `models.json` — custom model definitions (deepseek, mimo, claude)
+- `APPEND_SYSTEM.md` — system-level policy appended to every pi session (no em dashes, minimize semicolons)
 - `cached-op.sh` — cached operation helper
 
-Prompt templates live in `.pi/agent/prompts/` (managed by HM as symlinks to nix store).
+### Prompt Templates
+
+Live in `home-manager/config/pi/prompts/` (symlinked to `~/.pi/agent/prompts/` by HM):
+- `spec-workflow.md` — Full spec → plan → phased execution → pair review
+- `spec-quick.md` — Lightweight spec for small changes
+- `review.md` — Code review against specs and best practices
+- `git-ci.md` — Conventional commit messages and PR workflow
+- `grill-me.md` — Stress-test a plan/design/document through relentless Q&A
+- `audit-me.md` — Audit code/documents against defined criteria
+- `handoff.md` — Handoff context between sessions
+
+### Skills
+
+Domain-specific knowledge in `home-manager/config/pi/skills/`:
+- `nix-helper` — Nix, NixOS, Home Manager configurations
+- `nix-config-helper` — This repo's structure, modules, tasks, and secrets
+- `bash-scripting` — Clean, maintainable bash/shell scripts
+- `laravel-helper` — Laravel >=10.x coding conventions and patterns
+- `laravel-best-practices` — Impact-prioritized Laravel rules by topic (Eloquent, caching, queues, security, etc.)
+
+### Extensions
+
+Minimal custom extensions in `home-manager/config/pi/extensions/`:
+- `company-provider.ts` — Custom model provider
+- `minimal-footer.ts` — Minimal TUI footer
+
+### Policy
+
+- All prompt templates and skills must follow `APPEND_SYSTEM.md` (no em dashes in prose, minimize semicolons)
+- Prompts stay under 200 lines. Skills only for recurring, narrow, well-defined problems
+- No third-party extensions — if it's not in this repo, it's not needed
 
 ## Secrets
 

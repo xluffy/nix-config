@@ -72,7 +72,7 @@ Check sibling files, related controllers, models, or tests for established patte
 ### 6. Validation & Forms → `rules/validation.md`
 
 - Form Request classes, not inline validation
-- Array notation `['required', 'email']` for new code; follow existing convention
+- Array notation `['required', 'email']` for new code. Follow existing convention
 - `$request->validated()` only - never `$request->all()`
 - `Rule::when()` for conditional validation
 - `after()` instead of `withValidator()`
@@ -93,10 +93,10 @@ Check sibling files, related controllers, models, or tests for established patte
 
 ### 9. Queue & Job Patterns → `rules/queue-jobs.md`
 
-- `retry_after` must exceed job `timeout`; use exponential backoff `[1, 5, 10]`
-- `ShouldBeUnique` to prevent duplicates; `ShouldBeUniqueUntilProcessing` for early lock release
-- Always implement `failed()`; with `retryUntil()`, set `$tries = 0`
-- `RateLimited` middleware for external API calls; `Bus::batch()` for related jobs
+- `retry_after` must exceed job `timeout`. Use exponential backoff `[1, 5, 10]`
+- `ShouldBeUnique` to prevent duplicates. `ShouldBeUniqueUntilProcessing` for early lock release
+- Always implement `failed()`. With `retryUntil()`, set `$tries = 0`
+- `RateLimited` middleware for external API calls. `Bus::batch()` for related jobs
 - Horizon for complex multi-queue scenarios
 
 ### 10. Routing & Controllers → `rules/routing.md`
@@ -117,7 +117,7 @@ Check sibling files, related controllers, models, or tests for established patte
 
 ### 12. Events, Notifications & Mail → `rules/events-notifications.md`, `rules/mail.md`
 
-- Event discovery over manual registration; `event:cache` in production
+- Event discovery over manual registration. `event:cache` in production
 - `ShouldDispatchAfterCommit` / `afterCommit()` inside transactions
 - Queue notifications and mailables with `ShouldQueue`
 - On-demand notifications for non-user recipients
@@ -145,10 +145,10 @@ Check sibling files, related controllers, models, or tests for established patte
 
 ### 15. Architecture → `rules/architecture.md`
 
-- Single-purpose Action classes; dependency injection over `app()` helper
+- Single-purpose Action classes. Dependency injection over `app()` helper
 - Prefer official Laravel packages and follow conventions, don't override defaults
-- Default to `ORDER BY id DESC` or `created_at DESC`; `mb_*` for UTF-8 safety
-- `defer()` for post-response work; `Context` for request-scoped data; `Concurrency::run()` for parallel execution
+- Default to `ORDER BY id DESC` or `created_at DESC`. `mb_*` for UTF-8 safety
+- `defer()` for post-response work. `Context` for request-scoped data. `Concurrency::run()` for parallel execution
 
 ### 16. Migrations → `rules/migrations.md`
 
@@ -157,7 +157,7 @@ Check sibling files, related controllers, models, or tests for established patte
 - Never modify migrations that have run in production
 - Add indexes in the migration, not as an afterthought
 - Mirror column defaults in model `$attributes`
-- Reversible `down()` by default; forward-fix migrations for intentionally irreversible changes
+- Reversible `down()` by default. Forward-fix migrations for intentionally irreversible changes
 - One concern per migration - never mix DDL and DML
 
 ### 17. Collections → `rules/collections.md`
@@ -170,7 +170,7 @@ Check sibling files, related controllers, models, or tests for established patte
 ### 18. Blade & Views → `rules/blade-views.md`
 
 - `$attributes->merge()` in component templates
-- Blade components over `@include`; `@pushOnce` for per-component scripts
+- Blade components over `@include`. `@pushOnce` for per-component scripts
 - View Composers for shared view data
 - `@aware` for deeply nested component props
 
@@ -179,7 +179,7 @@ Check sibling files, related controllers, models, or tests for established patte
 - Follow Laravel naming conventions for all entities
 - Prefer Laravel helpers (`Str`, `Arr`, `Number`, `Uri`, `Str::of()`, `$request->string()`) over raw PHP functions
 - No JS/CSS in Blade, no HTML in PHP classes
-- Code should be readable; comments only for config files
+- Code should be readable. Comments only for config files
 
 ## How to Apply
 

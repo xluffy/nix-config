@@ -25,7 +25,7 @@
     pkgs-unstable.node-gyp
     pkgs-unstable.nodejs_24
     prometheus.cli
-    python310
+    python313
     regal
     rustc
     rustup

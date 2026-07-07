@@ -8,9 +8,6 @@
       enable = true;
       lfs.enable = true;
 
-      userEmail = "quang@2meo.com";
-      userName = "xluffy";
-
       includes = [
         {
           condition = "gitdir:~/code/me/";
@@ -36,20 +33,41 @@
         }
       ];
 
-      aliases = {
-        a = "add";
-        p = "push";
-        pul = "pull";
-        ci = "commit -S";
-        st = "status -uno";
-        stt = "status";
-        co = "checkout";
-        br = "branch";
-        lol = "log --graph --decorate --pretty=oneline --abbrev-commit";
-        lola = "log --graph --decorate --pretty=oneline --abbrev-commit --all";
-      };
+      ignores = [
+        ".DS_Store"
+        ".env"
+        "__pycache__"
+        ".terraform"
+        "terraform.tfvars"
+        "*.key"
+        "*.pem"
+        "*.crt"
+        ".vault_*"
+      ];
 
-      extraConfig = {
+      settings = {
+        user = {
+          email = "quang@2meo.com";
+          name = "xluffy";
+          signingkey =
+            if pkgs.stdenv.isDarwin
+            then "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAII6gzw6c40c8zowzZ6nR8iRwsYy0qg2sNvro09nFtTzF"
+            else "${config.custom.ssh.identityFile}.pub";
+        };
+
+        alias = {
+          a = "add";
+          p = "push";
+          pul = "pull";
+          ci = "commit -S";
+          st = "status -uno";
+          stt = "status";
+          co = "checkout";
+          br = "branch";
+          lol = "log --graph --decorate --pretty=oneline --abbrev-commit";
+          lola = "log --graph --decorate --pretty=oneline --abbrev-commit --all";
+        };
+
         color = {
           branch = "auto";
           diff = "auto";
@@ -103,34 +121,17 @@
           };
         };
 
-        user = {
-          signingkey =
-            if pkgs.stdenv.isDarwin
-            then "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAII6gzw6c40c8zowzZ6nR8iRwsYy0qg2sNvro09nFtTzF"
-            else "${config.custom.ssh.identityFile}.pub";
-        };
         lfs."customtransfer.xet" = {
           path = "git-xet";
           args = "transfer";
           concurrent = true;
         };
       };
+    };
 
-      diff-so-fancy = {
-        enable = true;
-      };
-
-      ignores = [
-        ".DS_Store"
-        ".env"
-        "__pycache__"
-        ".terraform"
-        "terraform.tfvars"
-        "*.key"
-        "*.pem"
-        "*.crt"
-        ".vault_*"
-      ];
+    diff-so-fancy = {
+      enable = true;
+      enableGitIntegration = true;
     };
   };
 }

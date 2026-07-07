@@ -25,7 +25,8 @@ in {
     # Client side SSH configuratio
     programs.ssh = {
       enable = true;
-      compression = true;
+      enableDefaultConfig = false;
+      settings."*".Compression = true;
     };
 
     home.file.".ssh/config".text = ''

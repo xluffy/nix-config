@@ -3,7 +3,7 @@
     alejandra
     deadnix
     nix-tree
-    nixfmt-rfc-style
+    nixfmt
     statix
   ];
 }

@@ -41,7 +41,7 @@ Prefer these language features over older equivalents:
       ) {}
   }
   ```
-- **Match expressions** - Replace long `switch` chains; `match` is exhaustive.
+- **Match expressions** - Replace long `switch` chains. `match` is exhaustive.
 - **Named arguments** - Use when calling methods with many optional/default params.
 - **First-class callable syntax** - `$this->method(...)` instead of `[$this, 'method']`.
 - **Array unpacking with string keys** - `[...$array1, ...$array2]`.
@@ -53,7 +53,7 @@ Prefer these language features over older equivalents:
   ```bash
   ./vendor/bin/pint
   ```
-- Run Pint before committing; configure IDE format-on-save.
+- Run Pint before committing. Configure IDE format-on-save.
 - For inspections and static analysis, use **Larastan** (level 5+):
   ```bash
   ./vendor/bin/phpstan analyse
@@ -159,7 +159,7 @@ app/
   ```
 - For resource controllers with 4+ standard methods, group related ones.
 - Use **route model binding** with explicit binding in `RouteServiceProvider` for non-id keys.
-- Return API Resources from API routes; return views from web routes.
+- Return API Resources from API routes. Return views from web routes.
 - Handle authorization via Policies + FormRequests (first line of controller/request).
 
 ## Routing
@@ -167,7 +167,7 @@ app/
 - Use `Route::apiResource()` for RESTful APIs.
 - Name all routes with `.name()` or prefixes: `Route::name('admin.')->group(...)`.
 - Group middleware, prefixes, and namespaces explicitly.
-- Use `Route::controller()` sparingly; prefer explicit method referencing.
+- Use `Route::controller()` sparingly. Prefer explicit method referencing.
 - In `routes/api.php`, keep the default `api` prefix and `auth:sanctum` middleware.
 
 ## Validation
@@ -247,9 +247,9 @@ app/
 ## Migration Conventions
 
 - Use `$table->foreignIdFor(User::class)->constrained()` over verbose `$table->foreignId('user_id')`.
-- Add `->cascadeOnDelete()` or `->restrictOnDelete()` explicitly; don't rely on DB defaults.
+- Add `->cascadeOnDelete()` or `->restrictOnDelete()` explicitly. Don't rely on DB defaults.
 - For large tables, use batches in `down()` methods for reversibility.
-- Never import `DB` facade in migrations; use the `$table` builder.
+- Never import `DB` facade in migrations. Use the `$table` builder.
 
 ## Service Provider Conventions
 
@@ -261,7 +261,7 @@ app/
 ## Queue & Jobs
 
 - Jobs should implement `ShouldQueue` and `ShouldBeUnique` where applicable.
-- Use `dispatch()` helper or `Bus::dispatch()`; avoid `dispatchNow()`.
+- Use `dispatch()` helper or `Bus::dispatch()`. Avoid `dispatchNow()`.
 - Set `$timeout`, `$tries`, `backoff()` explicitly.
 - Handle failures gracefully with `failed()` method or `JobFailed` event listener.
 - Prefer dedicated `Job` classes over inline closures in `dispatch(fn () => ...)`.
@@ -301,6 +301,6 @@ app/
 
 - Use `strip_tags()` on user-generated content BEFORE storing (in FormRequest `passedValidation()`).
 - Use Blade `{{ }}` (auto-escaped) for output. Never use `{!! !!}` with user input.
-- Mass-assign via `$fillable` only; never use `request()->all()` to create/update models.
+- Mass-assign via `$fillable` only. Never use `request()->all()` to create/update models.
 - For rate limiting, use `RateLimiter` facade in RouteServiceProvider or middleware.
 - Sign sensitive URLs with `URL::signedRoute()` and `URL::temporarySignedRoute()`.

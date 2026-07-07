@@ -62,7 +62,7 @@ set -uo pipefail
 - `-u` - reject undefined variables (catches typos early)
 - `-o pipefail` - a pipeline fails if *any* command in it fails
 
-**Do not use `set -e`** (errexit). It has surprising edge cases: it does not trigger inside `(( ))` evaluating to 0, inside `let`, or when a failing command is the condition of `if`/`while`/`||`/`&&`. It also turns off inside subshells. Explicit error checks are predictable; `set -e` is not.
+**Do not use `set -e`** (errexit). It has surprising edge cases: it does not trigger inside `(( ))` evaluating to 0, inside `let`, or when a failing command is the condition of `if`/`while`/`||`/`&&`. It also turns off inside subshells. Explicit error checks are predictable. `set -e` is not.
 
 Use `set -x` for interactive debugging only. Do not commit it.
 
@@ -570,7 +570,7 @@ _die() {
 ```
 
 Key points:
-- `_log` writes to stdout; `_die` writes to stderr with `>&2`
+- `_log` writes to stdout. `_die` writes to stderr with `>&2`
 - Use `printf`, not `echo` - `echo` varies across shells with `-n`, `-e`, backslashes
 - `%()T` with `-1` is bash builtin `printf` time formatting - avoids a `date` subshell
 

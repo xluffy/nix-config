@@ -16,10 +16,10 @@ Commit Types
 - `feat`: A new feature for the user, not a new feature for builds.
 - `fix`: A bug fix for the user, not a fix for a build script.
 - `docs`: Changes to the documentation.
-- `style`: Formatting, missing semi-colons, etc.; no production code change.
+- `style`: Formatting, missing semi-colons, etc. No production code change.
 - `refactor`: Refactoring production code, e.g. renaming a variable.
 - `perf`: Code changes that improve performance.
-- `test`: Adding missing tests, refactoring tests; no production code change.
+- `test`: Adding missing tests, refactoring tests. No production code change.
 - `build`: Changes that affect the build system or external dependencies (example scopes: gulp, broccoli, npm).
 - `ci`: Changes to CI configuration files and scripts (example scopes: Travis, Circle, BrowserStack, SauceLabs).
 - `chore`: Other changes that don't modify src or test files.

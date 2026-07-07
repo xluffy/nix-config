@@ -201,7 +201,7 @@ For each phase, in order:
 6. **Git Checkpoint** 🔴 (MANDATORY - this is your rollback safety net):
    - After I confirm the pair review, invoke the **git-ci** prompt template to:
      1. Stage all changes (`git add`)
-     2. Generate a commit message and branch name (e.g., `feat/<scope>/<what>`, `fix/<scope>/<what>`)
+     2. Generate a commit message following git-ci conventions and a branch name (e.g., `feat/<scope>/<what>`, `fix/<scope>/<what>`). Do NOT prefix the commit message with "Phase N" or similar phase labels - describe what was actually implemented.
      3. Create a new branch, commit, and push to remote
      4. Merge back to the working branch (e.g., `main`)
    - **Why this matters**: Every phase gets its own commit checkpoint. If Phase 3 introduces a regression, you can `git revert` to exactly the Phase 2 checkpoint without losing Phase 2's work. This also enables `git bisect` to pinpoint exactly which phase broke something.

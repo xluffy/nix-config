@@ -33,7 +33,7 @@
       libiconv
       mtr
       ncdu
-      neovim
+      pkgs-unstable.neovim
       nvd
       nmap
       pkgs-unstable.gh

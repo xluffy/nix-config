@@ -10,5 +10,6 @@
     ./tmux.nix
     ./pi.nix
     ./claude.nix
+    ./neovim.nix
   ];
 }

@@ -1,5 +1,8 @@
-if true then return end -- WARN: REMOVE THIS LINE TO ACTIVATE THIS FILE
+-- This runs last in the setup process, after all plugins (including AstroCore).
+-- Use this for final-say overrides that plugin defaults may stomp on.
 
--- This will run last in the setup process.
--- This is just pure lua so anything that doesn't
--- fit in the normal config locations above can go here
+-- Soft wrapping for readable prose (overrides AstroCore's default wrap=false)
+vim.opt.wrap = true
+vim.opt.linebreak = true
+vim.opt.breakindent = true
+vim.opt.showbreak = "↪ "

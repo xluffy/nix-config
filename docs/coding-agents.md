@@ -50,7 +50,7 @@ source code to find the relevant implementation. I think that's incredibly cool.
 Another thing - which I believe is Pi's biggest selling point, and something I haven't seen in
 other coding agents - is how it reinterprets my prompts back to me. Even if my prompt is
 short, full of keywords, or contains typos, Pi rewrites it into a clear, structured form and
-shows it to me before acting. That way I can read it and confirm that the agent, the model,
+shows it to me. That way I can read it and confirm that the agent, the model,
 and I all share the same understanding. If Pi got it wrong, I just correct it in the next
 prompt until we're aligned. I don't know the name of this soft skill in real life, but it's
 excellent.

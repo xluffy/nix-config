@@ -56,3 +56,4 @@ See [AGENTS.md](AGENTS.md) for the full architecture.
 | [docs/edge.md](docs/edge.md) | Nixpkgs edge/unstable usage |
 | [docs/bookmarks.md](docs/bookmarks.md) | Browser bookmarks |
 | [docs/NixOS.md](docs/NixOS.md) | NixOS-specific notes |
+| [docs/coding-agents.md](docs/coding-agents.md) | Personal experience with coding agents (Claude Code, Pi, OpenCode, etc.) |

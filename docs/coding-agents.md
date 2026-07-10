@@ -48,11 +48,12 @@ I really love Pi. One feature I especially like is that whenever I want to custo
 source code to find the relevant implementation. I think that's incredibly cool.
 
 Another thing - which I believe is Pi's biggest selling point, and something I haven't seen in
-other coding agents - is how accurately it reinterprets my requests. Even if my prompt is
-short, contains typos, or is poorly written, Pi usually understands exactly what I mean. I
-think this is a very valuable soft skill: before answering, it effectively summarizes and
-validates the user's intent to make sure both the agent and the model understand the request
-correctly. It's excellent.
+other coding agents - is how it reinterprets my prompts back to me. Even if my prompt is
+short, full of keywords, or contains typos, Pi rewrites it into a clear, structured form and
+shows it to me before acting. That way I can read it and confirm that the agent, the model,
+and I all share the same understanding. If Pi got it wrong, I just correct it in the next
+prompt until we're aligned. I don't know the name of this soft skill in real life, but it's
+excellent.
 
 I honestly have nothing to complain about, and Pi remains my primary coding agent. That said, I'm always curious to try new things - which brings me to OpenCode.
 

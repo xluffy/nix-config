@@ -11,6 +11,11 @@ not to try it. My company uses Anthropic models through Google Vertex AI. Person
 don't like it because I think it's a bit bloated. I also don't want to customize it, so I don't
 find its output particularly outstanding.
 
+However, Anthropic currently has some of the best models in the world - Opus 4.8 and, more
+recently, Fable - both of which are widely regarded as state-of-the-art for coding. Since
+we're not currently constrained by token usage or budget, Claude Code paired with Opus still
+delivers excellent overall results.
+
 ## Pi
 
 For personal projects, I use Chinese models such as DeepSeek or Xiaomi's MiMo Pro because they're much

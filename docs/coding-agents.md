@@ -38,8 +38,8 @@ only needed about 30 minutes to read through everything and understand how Pi wo
 very lightweight (unlike Claude, which I find rather bloated), and I really like Pi's prompt
 templates.
 
-I actually know Armin Ronacher (https://github.com/mitsuhiko), who is the second-largest
-contributor to the project alongside Mario Zechner (https://github.com/badlogic). I knew Armin
+I actually know [Armin Ronacher](https://github.com/mitsuhiko), who is the second-largest
+contributor to the project alongside [Mario Zechner](https://github.com/badlogic). I knew Armin
 from his work on Sentry and because he's the creator of the Flask framework. I've also read
 many of his blog posts over the years, so I already had a very positive impression of him.
 
@@ -58,11 +58,7 @@ I honestly have nothing to complain about, and Pi remains my primary coding agen
 
 ## OpenCode
 
-I recently watched this video:
-
-https://www.youtube.com/watch?v=3C2wWsKXY3c
-
-**OpenCode Creator: Why Open-Source AI Models Dominate**
+I recently watched this video: [**OpenCode Creator: Why Open-Source AI Models Dominate**](https://www.youtube.com/watch?v=3C2wWsKXY3c)
 
 Madison (Baseten) interviewed Dax Raad, the co-founder of OpenCode.
 

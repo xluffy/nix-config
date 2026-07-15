@@ -1,5 +1,4 @@
 ---
-name: review
 description: Review staged git changes for bugs, correctness, and best practices
 ---
 

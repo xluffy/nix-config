@@ -1,5 +1,4 @@
 ---
-name: audit-me
 description: "Review and audit a document section-by-section, challenging correctness, necessity, and alternatives. Use when user wants a rigorous document audit or design review."
 ---
 

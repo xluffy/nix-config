@@ -50,6 +50,6 @@ in {
   home.file = {
     ".config/opencode/opencode.json".source = ../../config/opencode/opencode.json;
     ".config/opencode/APPEND_SYSTEM.md".source = ../../config/opencode/APPEND_SYSTEM.md;
-    ".config/opencode/skills".source = ../../config/opencode/skills;
+    ".config/opencode/commands".source = ../../config/opencode/commands;
   };
 }

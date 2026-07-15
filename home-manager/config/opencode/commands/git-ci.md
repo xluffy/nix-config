@@ -1,5 +1,4 @@
 ---
-name: git-ci
 description: Generate a commit message from staged changes
 ---
 

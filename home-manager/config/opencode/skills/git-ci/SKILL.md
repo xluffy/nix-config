@@ -43,7 +43,28 @@ Finally, ask the user to review the changes. If they approve, follow this workfl
 1. Create a new branch from the current branch (do NOT checkout master/main).
 2. Commit the changes to the new branch.
 3. Push the branch to the remote repository.
-4. Create a Pull Request (GitHub) or Merge Request (GitLab) for the branch.
+4. Create a Pull Request (GitHub, gh) or Merge Request (GitLab, glab) for the branch.
+   Use the following PR/MR description template:
+
+   ```
+   ## Summary
+
+   1-3 sentences explaining what this PR does and why
+
+   - Bulleted list of changes made (same as the commit body bullet points)
+   - Group/sort related changes together
+   - Be specific about what was added, modified, or removed
+
+   ## Notes for reviewers
+
+   Any context reviewers need (breaking changes, deployment notes, follow-up tasks).
+
+   ## Files changed
+
+   - `<file-path>`
+   - `<file-path>`
+   ```
+
 5. The user will review the PR/MR on GitHub/GitLab and merge it manually.
 
 Important rules:

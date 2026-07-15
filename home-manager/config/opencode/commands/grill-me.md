@@ -1,5 +1,4 @@
 ---
-name: grill-me
 description: "Interview the user relentlessly until reaching shared understanding, resolving each branch of the decision tree. Use when user wants to stress-test a plan, spec, design, or any document."
 ---
 

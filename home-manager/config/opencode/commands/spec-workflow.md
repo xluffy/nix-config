@@ -1,5 +1,4 @@
 ---
-name: spec-workflow
 description: "Spec-driven development: research → spec → implementation plan → phased execution with pair review"
 ---
 
@@ -196,7 +195,7 @@ For each phase, in order:
 4. **Verify**: Run the verification steps against the phase's Objective. Show evidence.
 5. **Pair Review**: Present the completed phase for review.
 6. **Git Checkpoint** (MANDATORY - rollback safety net):
-   - After confirmation, use the `git-ci` skill (load via `skill({ name: "git-ci" })`) to:
+   - After confirmation, run the `/git-ci` command to:
      1. Stage all changes
      2. Generate a commit message and branch name (do NOT prefix with phase labels)
      3. Create a new branch, commit, and push
@@ -212,7 +211,7 @@ For each phase, in order:
 
 For phases that are inherently risky (auth, payments, data migrations, concurrency, shared infrastructure) or span 5+ files with non-trivial logic, suggest an independent review after Pair Review and before Git Checkpoint:
 
-> "Phase N is complex enough to warrant an independent review. Load the `review` skill via `skill({ name: "review" })` to review the staged changes. The reviewer should use a different model if possible."
+> "Phase N is complex enough to warrant an independent review. Run the `/review` command to review the staged changes. The reviewer should use a different model if possible."
 
 If declined, proceed with Git Checkpoint.
 

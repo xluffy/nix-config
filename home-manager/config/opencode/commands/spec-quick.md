@@ -1,5 +1,4 @@
 ---
-name: spec-quick
 description: "Lightweight spec-driven workflow for small-scope tasks: quick plan → execute → verify"
 ---
 
@@ -132,7 +131,7 @@ Once the plan is confirmed:
 3. **Verify**: Run the verification steps. Show evidence.
 4. **Review**: Present the completed work.
 5. **Git Checkpoint** (MANDATORY - rollback safety net):
-   - After confirmation, use the `git-ci` skill (load via `skill({ name: "git-ci" })`) to:
+   - After confirmation, run the `/git-ci` command to:
      1. Stage all changes
      2. Generate a commit message and branch name
      3. Create a new branch, commit, and push
@@ -146,7 +145,7 @@ Once the plan is confirmed:
 
 For tasks that are inherently risky (auth, payments, data migrations, concurrency, shared infrastructure) or span 3+ files with non-trivial logic, suggest an independent review after Step 4 and before Git Checkpoint:
 
-> "This task is complex enough to warrant an independent review. Load the `review` skill via `skill({ name: "review" })` to review the staged changes."
+> "This task is complex enough to warrant an independent review. Run the `/review` command to review the staged changes."
 
 If declined, proceed with Git Checkpoint.
 

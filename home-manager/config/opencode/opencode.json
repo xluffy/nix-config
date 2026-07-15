@@ -1,0 +1,61 @@
+{
+  "model": "deepseek/deepseek-v4-pro",
+  "small_model": "deepseek/deepseek-v4-flash",
+  "shell": "/bin/bash",
+  "logLevel": "INFO",
+  "autoupdate": false,
+  "formatter": true,
+  "provider": {
+    "deepseek": {
+      "api": "openai-completions",
+      "name": "DeepSeek",
+      "options": {
+        "baseURL": "https://api.deepseek.com",
+        "apiKey": "{env:DEEPSEEK_API_KEY}"
+      }
+    },
+    "skm": {
+      "api": "anthropic",
+      "name": "SKM Anthropic",
+      "options": {
+        "baseURL": "{env:SKM_BASE_URL}",
+        "apiKey": "{env:SKM_ANTHROPIC_KEY}"
+      }
+    }
+  },
+  "compaction": {
+    "auto": true,
+    "prune": false,
+    "tail_turns": 2,
+    "preserve_recent_tokens": 20000,
+    "reserved": 16384
+  },
+  "permission": {
+    "bash": {
+      "*": "ask",
+      "git *": "allow",
+      "npm *": "ask",
+      "rm *": "deny",
+      "grep *": "allow"
+    },
+    "edit": {
+      "*": "deny"
+    },
+    "read": {
+      "*": "allow",
+      "*.env": "deny",
+      "*.env.*": "deny",
+      "*.env.example": "allow"
+    }
+  },
+  "tool_output": {
+    "max_lines": 2000,
+    "max_bytes": 51200
+  },
+  "watcher": {
+    "ignore": ["node_modules/**", "dist/**", ".git/**"]
+  },
+  "instructions": [
+    "{env:HOME}/.config/opencode/APPEND_SYSTEM.md"
+  ]
+}

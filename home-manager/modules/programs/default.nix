@@ -9,6 +9,7 @@
     ./ssh.nix
     ./tmux.nix
     ./pi.nix
+    ./opencode.nix
     ./claude.nix
     ./neovim.nix
   ];

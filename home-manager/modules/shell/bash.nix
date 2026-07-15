@@ -34,9 +34,7 @@ in {
           awk = "goawk";
           bcat = "bat";
           cd = "z";
-          ca = "cursor-agent";
           cc = "claude";
-          cx = "codex";
           gg = "agy";
           df = "df -h | tail -n 8 | sort";
           du = "du -sch";
@@ -102,7 +100,6 @@ in {
           PS1='\[\e[0;${cfg.primary}m\]:: \[\e[0;37m\]You are \[$(tput bold)\]\[\033[${cfg.user}m\]\u\[$(tput sgr0)\]\[$(tput sgr0)\]\[\033[38;5;15m\] \[$(tput sgr0)\]-at- \[\e[0;${cfg.host}m\]\h\[\e[0;37m\] [\[\e[0;${cfg.primary}m\]\w\[\e[0;39m\]]\n\[\e[0;${cfg.primary}m\]\$\[\e[m\] '
 
           shuf -n 1 ${config.home.homeDirectory}/.config/nix-config/quote.txt | cowsay
-
 
           if [[ -z BASH_COMPLETION_VERSINFO ]]; then
             . "${pkgs.bash-completion}/etc/profile.d/bash_completion.sh"

@@ -15,7 +15,7 @@ or budget, Claude Code paired with Opus still delivers excellent overall results
 
 ## Pi
 
-For personal projects, I use Chinese models such as DeepSeek or Xiaomi's MiMo Pro because they're much cheaper
+For personal projects, I use Chinese models such as DeepSeek or Xiaomi's MiMo Pro because they're much fucking cheaper
 than Anthropic. I'm completely satisfied with the output - the quality is excellent. With Pi, I customize the
 model selection based on the folder path, especially when I'm working on company projects.
 

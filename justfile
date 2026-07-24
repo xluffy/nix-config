@@ -50,3 +50,5 @@ fix:
 
 update:
   nix flake update nixpkgs-unstable
+  nix flake update nixpkgs
+  nix flake update llm-agents

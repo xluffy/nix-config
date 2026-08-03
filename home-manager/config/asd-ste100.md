@@ -1,6 +1,6 @@
-# ASD-STE100 Simplified Technical English
+# ASD-STE100 Simplified Technical English - Writing Rules
 
-All markdown output (docs, specs, implementation plans, tasks, README files) must follow ASD-STE100 Simplified Technical English, Issue 8.
+All markdown output (docs, specs, implementation plans, tasks, README files) must follow these rules from ASD-STE100 Simplified Technical English, Issue 8.
 
 ## Rule 1: Approved Words
 

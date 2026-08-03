@@ -14,7 +14,7 @@ Personal pi coding agent setup. Minimal, intentional, software-engineering focus
 
 ```
 pi/
-├── APPEND_SYSTEM.md       # System policy: no em dashes, minimize semicolons
+├── APPEND_SYSTEM.md       # System policy: ASD-STE100 Simplified Technical English + no em dashes, minimize semicolons
 ├── prompts/               # Core: custom prompt templates
 │   ├── spec-workflow.md   # Full spec → plan → implement → review
 │   ├── spec-quick.md      # Lightweight spec for small changes
@@ -42,5 +42,5 @@ pi/
 1. No new skill unless it solves a **recurring, narrow, well-defined** problem.
 2. New prompts must stay under 200 lines. If it's longer, split it or simplify.
 3. No third-party extensions - if it's not in this repo, it's not needed.
-4. All prompt templates and skills must follow `APPEND_SYSTEM.md` (no em dashes in prose, minimize semicolons).
+4. All prompt templates, skills, and markdown output (docs, specs, plans, tasks) must follow `APPEND_SYSTEM.md` (ASD-STE100 Simplified Technical English: short sentences, active voice, approved verb forms, no em dashes, minimize semicolons).
 5. All changes go through `just check` before `just switch`.

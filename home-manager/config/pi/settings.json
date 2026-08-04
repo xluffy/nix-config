@@ -1,6 +1,6 @@
 {
   "defaultProvider": "deepseek",
-  "defaultModel": "deepseek-v4-pro",
+  "defaultModel": "deepseek-v4-flash",
   "defaultThinkingLevel": "xhigh",
   "enabledModels": [
     "deepseek-*",

@@ -91,7 +91,8 @@ Minimal custom extensions in `home-manager/config/pi/extensions/`:
 
 ### Policy
 
-- All prompt templates and skills must follow `APPEND_SYSTEM.md` (no em dashes in prose, minimize semicolons)
+- All markdown output (docs, specs, implementation plans, tasks, README files) must follow ASD-STE100 Simplified Technical English: short sentences (max 20/25 words), active voice, approved verb forms only, no em dashes, minimize semicolons, one topic per sentence, consistent terminology
+- This policy is enforced via `APPEND_SYSTEM.md` (pi, opencode) and `CLAUDE.md` (claudecode)
 - Prompts stay under 200 lines. Skills only for recurring, narrow, well-defined problems
 - No third-party extensions — if it's not in this repo, it's not needed
 

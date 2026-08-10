@@ -1,5 +1,7 @@
 # Coding Agents
 
+All coding agents in this repo share a common writing policy: all markdown output must follow ASD-STE100 Simplified Technical English. This policy is enforced via `APPEND_SYSTEM.md` (pi-agent, opencode) and `CLAUDE.md` (claudecode).
+
 You might be wondering why I have so many coding agents in this repo. I have `claudecode`, `pi-agent`, `opencode`,
 and a few others (`codex`, `cursor`, `antigravity-cli`). The last three are mostly for testing and are used very rarely.
 

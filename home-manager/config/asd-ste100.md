@@ -1,6 +1,6 @@
-# ASD-STE100 Simplified Technical English
+# ASD-STE100 Simplified Technical English - Writing Rules
 
-All markdown output (docs, specs, implementation plans, tasks, README files) must follow ASD-STE100 Simplified Technical English, Issue 8.
+All markdown output (docs, specs, implementation plans, tasks, README files) must follow these rules from ASD-STE100 Simplified Technical English, Issue 8.
 
 ## Rule 1: Approved Words
 
@@ -77,27 +77,3 @@ Break complex information into bullet lists or numbered steps. Do not pack multi
 ## Rule 12: Consistent Terminology
 
 Use the same technical term throughout a document. Do not switch between synonyms for the same concept. If you introduce a term, use only that term.
-
-## Rule 13: YAML Front Matter
-
-Every markdown file must start with YAML front matter. Use three dashes (---) to open and close the block.
-The front matter must contain these properties:
-
-- `title`: A clear, short title for the document (string).
-- `date`: The date when the document is created or updated. Use the ISO 8601 format YYYY-MM-DD (string).
-- `tags`: A YAML list of keywords that describe the document content. Use lowercase and hyphens for multi-word tags.
-
-Example:
-
-```yaml
----
-title: "Example Document Title"
-date: 2025-06-15
-tags:
-  - example
-  - front-matter
-  - demo-purpose
----
-```
-
-Write front matter before the first heading of the document. Make sure the tags are specific and relevant.

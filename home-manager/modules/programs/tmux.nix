@@ -47,11 +47,7 @@ in {
       bind -r K resize-pane -U 5
       bind -r L resize-pane -R 5
 
-      # handle mouse
-      #setw -g mode-mouse on
-      #set -g mouse-select-pane on
-      #set -g mouse-resize-pane on
-      #set -g mouse-select-window on
+      set -g focus-events on
 
       # The main host is macOS, so keeping tmux on Ubuntu is the simplest approach.
       ${pkgs.lib.optionalString pkgs.stdenv.isDarwin ''

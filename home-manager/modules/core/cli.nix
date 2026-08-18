@@ -20,6 +20,7 @@
       fd
       ffmpeg
       ghostscript
+      git-filter-repo
       glow
       gnupg
       gnused

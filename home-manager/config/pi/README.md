@@ -6,9 +6,9 @@ Personal pi coding agent setup. Minimal, intentional, software-engineering focus
 
 - **KISS** - Keep it simple. No bloat, no magic, no fancy abstractions.
 - **Prompts over skills** - Custom prompt templates are the primary interface. Skills are only for narrow, repeatable domain knowledge (nix, bash, laravel).
-- **No internet copy-paste** - Every skill, prompt, and extension here is hand-written for real workflows. Zero cloned "awesome" lists or viral dotfiles.
+- **No internet copy-paste** - Most skills, prompts, and extensions here are hand-written for real workflows. One exception: `pi-usage-widget` is vendored from an upstream MIT project, with license and attribution kept.
 - **Software engineering focus** - Spec-driven development, code review, git workflows. Not a general-purpose chatbot.
-- **Minimal extensions** - Two custom extensions: a model provider and a footer. No bloat.
+- **Minimal extensions** - Three extensions: a model provider, a footer, and a vendored usage dashboard. No bloat.
 
 ## Structure
 
@@ -29,9 +29,10 @@ pi/
 │   ├── bash-scripting/
 │   ├── laravel-helper/
 │   └── laravel-best-practices/
-├── extensions/            # Custom pi extensions
+├── extensions/            # Pi extensions
 │   ├── company-provider.ts
-│   └── minimal-footer.ts
+│   ├── minimal-footer.ts
+│   └── pi-usage-widget/   # Vendored usage dashboard (/usage), MIT
 ├── models.json            # Model definitions (deepseek, mimo, claude)
 ├── settings.json          # Pi agent settings
 └── cached-op.sh           # Cached operation helper
@@ -41,6 +42,6 @@ pi/
 
 1. No new skill unless it solves a **recurring, narrow, well-defined** problem.
 2. New prompts must stay under 200 lines. If it's longer, split it or simplify.
-3. No third-party extensions - if it's not in this repo, it's not needed.
+3. No third-party extensions unless vendored into this repo with license and attribution. If it is not in this repo, it is not needed.
 4. All prompt templates, skills, and markdown output (docs, specs, plans, tasks) must follow `APPEND_SYSTEM.md` (ASD-STE100 Simplified Technical English: short sentences, active voice, approved verb forms, no em dashes, minimize semicolons).
 5. All changes go through `just check` before `just switch`.

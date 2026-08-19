@@ -6,11 +6,11 @@
 }:
 stdenvNoCC.mkDerivation rec {
   pname = "flux-markdown";
-  version = "1.34.464";
+  version = "1.34.475";
 
   src = fetchurl {
     url = "https://github.com/xykong/flux-markdown/releases/download/v${version}/FluxMarkdown.dmg";
-    hash = "sha256-YFyQIhNa9OFW4z2IQqyeaPUHcgK18OBUCQghXTzQH6E=";
+    hash = "sha256-Heqvn6N7VPbNXaPNhoxD+22ahfmWRNhG10bxkQSUbwE=";
   };
 
   nativeBuildInputs = [ undmg ];

@@ -34,7 +34,7 @@ in {
           awk = "goawk";
           bcat = "bat";
           cd = "z";
-          cc = "claude --permission-mode auto";
+          cc = "claude --permission-mode auto --model claude-opus-4-7[1m]";
           gg = "agy";
           df = "df -h | tail -n 8 | sort";
           du = "du -sch";

@@ -8,14 +8,14 @@
     "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1",
     "CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS": "1",
     "CLAUDE_CODE_ENABLE_GATEWAY_MODEL_DISCOVERY": "1",
-    "CLAUDE_CODE_SUBAGENT_MODEL": "claude-opus-4-7",
+    "CLAUDE_CODE_SUBAGENT_MODEL": "claude-opus-4-8",
     "CLAUDE_CODE_DISABLE_WORKFLOWS": "1",
     "CLAUDE_CODE_DISABLE_CRON": "1",
     "CLAUDE_CODE_DISABLE_BUNDLED_SKILLS": "1"
   },
   "enableAllProjectMcpServers": false,
   "alwaysThinkingEnabled": true,
-  "model": "claude-opus-4-8[1m]",
+  "model": "opus[1m]",
   "theme": "dark-daltonized",
   "permissions": {
     "deny": [

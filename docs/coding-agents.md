@@ -1,3 +1,14 @@
+---
+title: "Coding Agents"
+date: 2026-08-24
+tags:
+  - coding-agents
+  - omp
+  - pi-agent
+  - opencode
+  - claudecode
+---
+
 # Coding Agents
 
 All coding agents in this repo share a common writing policy: all markdown output must follow ASD-STE100 Simplified Technical English. This policy is enforced via `APPEND_SYSTEM.md` (pi-agent, opencode) and `CLAUDE.md` (claudecode).
@@ -92,3 +103,61 @@ Sometimes I use `antigravity-cli` for code review with Gemini Pro - that's about
 
 That's my current lineup. Pi for daily work, OpenCode for exploration, and the rest for specific needs. Different
 tools for different jobs.
+
+## OMP (oh-my-pi)
+
+`omp` (oh-my-pi) is a fork of `pi` by can1357. The project lives at `github:can1357/oh-my-pi`. It adds LSP support,
+a real debugger, and Python and Bun evaluation workers.
+
+omp is a subscription agent. The subscription provides the model catalog and the auth. No API keys, secret
+scripts, custom providers, skills, or extensions are configured.
+
+The setup is minimal: install the package, set basic settings, sync the pi prompt templates.
+
+### Install
+
+Add the `omp` input to `flake.nix`:
+
+```nix
+omp.url = "github:can1357/oh-my-pi";
+```
+
+Add `omp.homeManagerModules.default` to the module list in `mkHomeConfig`. The module provides `programs.omp`
+with `enable`, `package`, and `settings`. The module writes `settings` to `~/.omp/agent/config.yml` as a
+writable regular file.
+
+The first build compiles the Rust core. The build takes a long time. The `nix-community` cachix in the omp
+flake covers dependencies, not the omp package itself.
+
+### Basic config
+
+Create `home-manager/modules/programs/omp.nix`. Import it from `home-manager/home.nix`:
+
+```nix
+programs.omp = {
+  enable = true;
+  settings = {
+    startup.quiet = true;
+    theme.dark = "titanium";
+    defaultThinkingLevel = "xhigh";
+  };
+};
+```
+
+Verify every key with `omp config list --json` after the first switch. Adjust the theme name to an available
+omp theme.
+
+### Prompt sync
+
+Link the 7 pi prompt templates into the omp prompts directory. The templates are the same source files for
+both agents. No duplication:
+
+```nix
+home.file.".omp/agent/prompts/spec-workflow.md".source =
+  ../../config/pi/prompts/spec-workflow.md;
+```
+
+### Auth
+
+Run `/login` with the subscription account once. The session stores the auth. Then run a test session and
+confirm the subscription models appear in the model selector.

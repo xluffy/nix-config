@@ -6,6 +6,8 @@
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     llm-agents.url = "github:numtide/llm-agents.nix";
 
+    omp.url = "github:can1357/oh-my-pi";
+
     home-manager = {
       url = "github:nix-community/home-manager/release-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -24,6 +26,7 @@
     nixpkgs,
     nixpkgs-unstable,
     llm-agents,
+    omp,
     home-manager,
     nix-index-database,
     agenix,
@@ -70,6 +73,7 @@
         modules =
           [
             ./home-manager/home.nix
+            omp.homeManagerModules.default
             nix-index-database.homeModules.nix-index
             agenix.homeManagerModules.default
             {

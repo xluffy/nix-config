@@ -15,7 +15,7 @@ Home Manager configuration for macOS (MacBook Pro, aarch64-darwin) and Ubuntu/Ni
 │   ├── home.nix              # Main HM config: programs, nix-index, llm-agents, pi-agent
 │   ├── modules/
 │   │   ├── core/             # dev.nix, cli.nix, gui.nix, font.nix, nix.nix, dev-php.nix, dev-llm.nix, dev-db.nix, dev-ops.nix, dev-terraform.nix
-│   │   ├── programs/         # git.nix, tmux.nix, fzf.nix, ssh.nix, 1password.nix, common.nix, pi.nix
+│   │   ├── programs/         # git.nix, tmux.nix, fzf.nix, ssh.nix, 1password.nix, common.nix, pi.nix, omp.nix
 │   │   └── shell/            # bash.nix, function.sh, inputrc, prompt configs
 │   └── config/               # Raw configs: .npmrc, iterm2.json, kube_config.age, pi/
 ├── hosts/                    # Host-specific notes (README.md)
@@ -35,6 +35,7 @@ Home Manager configuration for macOS (MacBook Pro, aarch64-darwin) and Ubuntu/Ni
 - `agenix` — secret encryption/decryption
 - `nix-index-database` — command-not-found lookup
 - `llm-agents` (numtide/llm-agents.nix) — LLM agent packages
+- `omp` (can1357/oh-my-pi) — omp coding agent (subscription)
 
 ## Hosts
 
@@ -95,6 +96,14 @@ Minimal custom extensions in `home-manager/config/pi/extensions/`:
 - This policy is enforced via `APPEND_SYSTEM.md` (pi, opencode) and `CLAUDE.md` (claudecode)
 - Prompts stay under 200 lines. Skills only for recurring, narrow, well-defined problems
 - No third-party extensions — if it's not in this repo, it's not needed
+
+## OMP Configuration
+
+Managed via `home-manager/modules/programs/omp.nix` and the `omp` flake input:
+- `programs.omp.settings` — written to `~/.omp/agent/config.yml` (startup.quiet, theme.dark, defaultThinkingLevel)
+- Prompt templates — synced from `config/pi/prompts/` to `~/.omp/agent/prompts/`
+- Auth — subscription login via `/login` inside a session
+- Models, skills, extensions, and API keys are not configured: the subscription provides them
 
 ## Secrets
 

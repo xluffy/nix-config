@@ -13,7 +13,7 @@ stdenvNoCC.mkDerivation rec {
     hash = "sha256-Heqvn6N7VPbNXaPNhoxD+22ahfmWRNhG10bxkQSUbwE=";
   };
 
-  nativeBuildInputs = [ undmg ];
+  nativeBuildInputs = [undmg];
 
   sourceRoot = ".";
 
@@ -28,6 +28,6 @@ stdenvNoCC.mkDerivation rec {
     license = licenses.unfree;
     mainProgram = "FluxMarkdown";
     platforms = platforms.darwin;
-    maintainers = with maintainers; [ ];
+    maintainers = with maintainers; [];
   };
 }

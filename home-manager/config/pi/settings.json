@@ -3,9 +3,15 @@
   "defaultModel": "deepseek-v4-pro",
   "defaultThinkingLevel": "xhigh",
   "enabledModels": [
-    "deepseek-*",
-    "mimo-*",
-    "claude-*"
+    "deepseek-v4-flash",
+    "deepseek-v4-pro",
+    "claude-sonnet-4-6",
+    "claude-opus-4-6",
+    "claude-opus-4-7",
+    "claude-opus-4-8",
+    "gpt-5.6-terra",
+    "gpt-5.6-sol",
+    "gpt-5.6-luna"
   ],
   "quietStartup": true,
   "theme": "dark",

@@ -87,7 +87,7 @@
         # ------------------------------------------------------------------
         # Workbench
         # ------------------------------------------------------------------
-        "workbench.colorTheme" = "Catppuccin Latte";
+        "workbench.colorTheme" = "Dracula";
         "workbench.iconTheme" = "vscode-icons";
         "workbench.startupEditor" = "none";
         "workbench.editor.enablePreview" = false;
@@ -268,12 +268,12 @@
         "vim.timeout" = 300;
         "vim.statusBarColorControl" = true;
         "vim.statusBarColors" = {
-          normal = "#1e66f5";
-          insert = "#40a02b";
-          visual = "#8839ef";
-          visualline = "#8839ef";
-          visualblock = "#8839ef";
-          replace = "#d20f39";
+          normal = "#6272a4";
+          insert = "#50fa7b";
+          visual = "#bd93f9";
+          visualline = "#bd93f9";
+          visualblock = "#bd93f9";
+          replace = "#ff5555";
         };
         "vim.cursorStylePerMode" = {
           normal = "block";

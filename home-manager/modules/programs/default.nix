@@ -13,5 +13,6 @@
     ./opencode.nix
     ./claude.nix
     ./neovim.nix
+    ./vscode.nix
   ];
 }

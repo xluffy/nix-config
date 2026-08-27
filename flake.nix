@@ -16,6 +16,8 @@
     nix-index-database.url = "github:nix-community/nix-index-database";
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
 
+    nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
+
     agenix = {
       url = "github:ryantm/agenix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -29,6 +31,7 @@
     omp,
     home-manager,
     nix-index-database,
+    nix-vscode-extensions,
     agenix,
     ...
   }: let
@@ -88,6 +91,7 @@
           pkgs-unstable = pkgsUnstable;
           llm-agents = llm-agents.packages.${system};
           agenix-cli = agenix.packages.${system}.default;
+          vscode-marketplace = nix-vscode-extensions.extensions.${system}.vscode-marketplace;
           inherit hasGUI;
         };
       };

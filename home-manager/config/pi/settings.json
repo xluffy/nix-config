@@ -1,4 +1,7 @@
 {
+  "packages": [
+    "https://github.com/gotgenes/pi-anthropic-auth@v2.0.6"
+  ],
   "defaultProvider": "deepseek",
   "defaultModel": "deepseek-v4-pro",
   "defaultThinkingLevel": "xhigh",

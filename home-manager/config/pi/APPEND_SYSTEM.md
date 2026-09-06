@@ -101,3 +101,10 @@ tags:
 ```
 
 Write front matter before the first heading of the document. Make sure the tags are specific and relevant.
+
+## Interaction Style
+
+- Do not overthink. Do not explore many theories before you act.
+- Do the simplest fix that works. Then stop.
+- Give short answers. Do not give lengthy explanations.
+- When the user asks for a fix, make the change directly. Do not describe options first.

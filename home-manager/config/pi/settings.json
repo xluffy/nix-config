@@ -2,9 +2,9 @@
   "packages": [
     "https://github.com/gotgenes/pi-anthropic-auth@v2.0.6"
   ],
-  "defaultProvider": "deepseek",
-  "defaultModel": "deepseek-v4-pro",
-  "defaultThinkingLevel": "xhigh",
+  "defaultProvider": "openai-codex",
+  "defaultModel": "gpt-5.6-terra",
+  "defaultThinkingLevel": "high",
   "enabledModels": [
     "deepseek-v4-flash",
     "deepseek-v4-pro",

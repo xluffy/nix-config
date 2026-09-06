@@ -29,5 +29,6 @@ _: {
     ".pi/agent/prompts/spec-quick.md".source = ../../config/pi/prompts/spec-quick.md;
     ".pi/agent/prompts/grill-me.md".source = ../../config/pi/prompts/grill-me.md;
     ".pi/agent/prompts/handoff.md".source = ../../config/pi/prompts/handoff.md;
+    ".pi/agent/prompts/show-me.md".source = ../../config/pi/prompts/show-me.md;
   };
 }

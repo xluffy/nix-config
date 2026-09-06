@@ -115,6 +115,19 @@
           }
         }
       ]
+    },
+    "openai-codex": {
+      "modelOverrides": {
+        "gpt-5.6-luna": {
+          "name": "GPT-5.6 Luna \u00b7 mini tier (fast/cheap) \u00b7 $0.20/$1.20 per 1M"
+        },
+        "gpt-5.6-terra": {
+          "name": "GPT-5.6 Terra \u00b7 standard tier (balanced) \u00b7 $2/$12 per 1M"
+        },
+        "gpt-5.6-sol": {
+          "name": "GPT-5.6 Sol \u00b7 premium tier (strongest) \u00b7 $5/$30 per 1M"
+        }
+      }
     }
   }
 }

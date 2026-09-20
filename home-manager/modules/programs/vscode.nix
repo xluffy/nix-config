@@ -87,7 +87,7 @@
         # ------------------------------------------------------------------
         # Workbench
         # ------------------------------------------------------------------
-        "workbench.colorTheme" = "Dracula";
+        "workbench.colorTheme" = "Light Modern";
         "workbench.iconTheme" = "vscode-icons";
         "workbench.startupEditor" = "none";
         "workbench.editor.enablePreview" = false;

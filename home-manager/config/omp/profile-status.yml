@@ -1,0 +1,30 @@
+statusLine:
+  preset: custom
+  leftSegments:
+    - pi
+    - status
+    - vim
+    - model
+    - mode
+    - collab
+    - path
+    - git
+    - pr
+    - context_pct
+    - cost
+  rightSegments:
+    - session_name
+  separator: powerline-thin
+  showHookStatus: false
+  segmentOptions:
+    model:
+      showThinkingLevel: true
+    path:
+      abbreviate: true
+      maxLength: 40
+      stripWorkPrefix: true
+    git:
+      showBranch: true
+      showStaged: true
+      showUnstaged: true
+      showUntracked: true

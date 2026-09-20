@@ -9,6 +9,8 @@ _: {
   };
 
   home.file = {
+    ".omp/profile-indicator.ts".source = ../../config/omp/profile-indicator.ts;
+    ".omp/profile-status.yml".source = ../../config/omp/profile-status.yml;
     ".omp/agent/prompts/spec-workflow.md".source = ../../config/pi/prompts/spec-workflow.md;
     ".omp/agent/prompts/spec-quick.md".source = ../../config/pi/prompts/spec-quick.md;
     ".omp/agent/prompts/review.md".source = ../../config/pi/prompts/review.md;

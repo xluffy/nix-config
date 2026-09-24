@@ -6,7 +6,7 @@
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     llm-agents.url = "github:numtide/llm-agents.nix";
 
-    omp.url = "github:can1357/oh-my-pi/v18.2.11";
+    omp.url = "github:can1357/oh-my-pi/v18.3.0";
 
     home-manager = {
       url = "github:nix-community/home-manager/release-26.05";

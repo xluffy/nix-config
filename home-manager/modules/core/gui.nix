@@ -11,6 +11,7 @@
     ]
     ++ (pkgs.lib.optionals pkgs.stdenv.isDarwin [
       pkgs-unstable.betterdisplay
+      commander-one
       pkgs-unstable.karabiner-elements
       flux-markdown
     ]));

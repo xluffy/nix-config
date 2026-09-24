@@ -1,4 +1,4 @@
-# Custom packages: kage, kcctl, yomi, flux-markdown
+# Custom packages: commander-one, flux-markdown, kage, kcctl, yomi
 # Built via 'nix build .#<name>' or accessed as pkgs.<name> in home-manager
 # via the overlay in ../overlays
 {
@@ -14,6 +14,8 @@
   yomi = pkgs.callPackage ./yomi.nix {
     go = pkgsUnstable.go_1_26;
   };
+
+  commander-one = pkgs.callPackage ./commander-one.nix {};
 
   flux-markdown = pkgs.callPackage ./flux-markdown.nix {};
 }

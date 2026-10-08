@@ -58,12 +58,6 @@ Finally, ask the user to review the changes. If they approve, follow this workfl
 
    Any context reviewers need (breaking changes, deployment notes, follow-up tasks).
 
-   ## Files changed
-
-   - `<file-path>`
-   - `<file-path>`
-   ```
-
 5. The user will review the PR/MR on GitHub/GitLab and merge it manually.
 
 Important rules:

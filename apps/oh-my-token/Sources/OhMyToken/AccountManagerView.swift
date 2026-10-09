@@ -30,7 +30,7 @@ struct AccountManagerView: View {
             .padding(20)
         }
         .frame(minWidth: 460, minHeight: 440)
-        .background(MenuMaterial())
+        .background(Color(nsColor: .windowBackgroundColor))
         .sheet(item: $loginProfile) { profile in
             AccountWebsiteView(profile: profile, store: store)
         }

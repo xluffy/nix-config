@@ -162,6 +162,17 @@ Read this file to understand the app and to build your own version.
 - Finding 3: Manual refresh runs at once.
 - Finding 4: The Nix package builds a release binary. `just app-run` keeps the fast debug build.
 
+### Native, theme-aware popup
+
+- The native menu bar window controls the popup corners and shadow.
+- Opaque surfaces stay consistent above white and dark windows.
+- The popup follows the macOS light or dark appearance.
+- The app removed the custom blur view and its window-background changes.
+- Each account shows its email below the account name.
+- Larger usage text and more space improve readability.
+- The Accounts window uses an opaque system background.
+- Usage requests, refresh intervals, and account sessions are unchanged.
+
 ## Notes for your own build
 
 - Change the account list in `Sources/OhMyToken/Account.swift`.

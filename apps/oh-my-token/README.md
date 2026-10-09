@@ -17,6 +17,7 @@ Keep usage monitoring separate from the coding agent that sends requests.
 - Show Claude session, weekly, and model-specific usage.
 - Show ChatGPT Work and Codex dashboard allowances, including 5-hour and weekly windows.
 - Show usage bars, reset countdowns, and the last update time.
+- Follow the macOS light or dark appearance with an opaque popup background.
 - Refresh connected accounts automatically or with the Refresh button.
 - Keep each account's cookies and session separate.
 - Sign in through the Accounts window or import a website session.

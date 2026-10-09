@@ -1,26 +1,6 @@
 import AppKit
 import SwiftUI
 
-struct MenuMaterial: NSViewRepresentable {
-    func makeNSView(context: Context) -> NSVisualEffectView {
-        let view = BackdropView()
-        view.material = .popover
-        view.blendingMode = .behindWindow
-        view.state = .active
-        return view
-    }
-
-    func updateNSView(_ nsView: NSVisualEffectView, context: Context) {}
-
-    private final class BackdropView: NSVisualEffectView {
-        override func viewDidMoveToWindow() {
-            super.viewDidMoveToWindow()
-            window?.isOpaque = false
-            window?.backgroundColor = .clear
-        }
-    }
-}
-
 struct HoverSurface: ViewModifier {
     var cornerRadius: CGFloat = 8
     var restingOpacity: Double = 0
@@ -35,7 +15,10 @@ struct HoverSurface: ViewModifier {
         let border = isPressed ? 0.22 : highlighted ? 0.16 : restingOpacity > 0 ? 0.10 : 0
         let shape = RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)
         content
-            .background(shape.fill(Color.primary.opacity(fill)))
+            .background {
+                shape.fill(Color(nsColor: .controlBackgroundColor))
+                    .overlay(shape.fill(Color.primary.opacity(fill)))
+            }
             .overlay(shape.strokeBorder(Color.primary.opacity(border), lineWidth: 0.5))
             .animation(reduceMotion ? nil : .easeOut(duration: 0.12), value: highlighted)
             .onHover { isHovered = $0 }
@@ -47,7 +30,7 @@ struct MenuActionStyle: ButtonStyle {
 
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
-            .font(.caption)
+            .font(.system(size: 12))
             .padding(.horizontal, 9)
             .padding(.vertical, 7)
             .frame(maxWidth: .infinity)

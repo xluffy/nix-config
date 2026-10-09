@@ -5,11 +5,16 @@
 # additionsUnstable — same, but passes pkgs-unstable so packages that need a
 #                      newer Go (e.g. kage) get it without resorting to workarounds.
 {
-  additions = final: _prev: import ../pkgs {pkgs = final;};
+  additions = final: prev:
+    import ../pkgs {
+      pkgs = final;
+      isDarwin = prev.stdenv.hostPlatform.isDarwin;
+    };
 
-  additionsUnstable = pkgsUnstable: final: _prev:
+  additionsUnstable = pkgsUnstable: final: prev:
     import ../pkgs {
       pkgs = final;
       inherit pkgsUnstable;
+      isDarwin = prev.stdenv.hostPlatform.isDarwin;
     };
 }

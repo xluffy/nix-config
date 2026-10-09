@@ -24,6 +24,28 @@ switch:
     nvd diff "$old_gen" "$new_gen"
   fi
 
+# Build and run the oh-my-token app from source. Uses the SwiftPM build cache,
+# so a rebuild after a small change takes a few seconds instead of about 45s.
+app-run:
+  #!/usr/bin/env bash
+  set -euo pipefail
+  root="$(git rev-parse --show-toplevel)"
+  dir="$root/apps/oh-my-token"
+  nix develop "$root#swift" --command bash -c '
+    set -euo pipefail
+    cd "'"$dir"'"
+    swift build -c debug --product oh-my-token --disable-sandbox --disable-automatic-resolution
+  '
+  bin="$dir/.build/$(uname -m)-apple-macosx/debug/oh-my-token"
+  app="$dir/.build/oh-my-token.app"
+  rm -rf "$app"
+  mkdir -p "$app/Contents/MacOS" "$app/Contents/Resources"
+  cp "$dir/Info.plist" "$app/Contents/Info.plist"
+  cp "$dir/AppIcon.icns" "$app/Contents/Resources/AppIcon.icns"
+  cp "$bin" "$app/Contents/MacOS/oh-my-token"
+  pkill -f "oh-my-token.app/Contents/MacOS/oh-my-token" 2>/dev/null || true
+  open "$app"
+
 list:
   home-manager packages
 

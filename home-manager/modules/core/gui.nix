@@ -14,5 +14,6 @@
       commander-one
       pkgs-unstable.karabiner-elements
       flux-markdown
+      oh-my-token
     ]));
 }

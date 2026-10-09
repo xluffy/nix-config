@@ -3,3 +3,5 @@ result
 .envrc.local
 .antigravitycli/
 tmp/
+/apps/oh-my-token/.build/
+/apps/oh-my-token/.swiftpm/

@@ -54,6 +54,7 @@ just check    # Validate eval
 just fix      # alejandra format + deadnix + statix
 just update   # Update nixpkgs-unstable flake input
 just gc       # Garbage collect profiles older than 2 days
+just app-run  # Build and run oh-my-token from source (fast incremental SwiftPM build)
 ```
 
 ## Pi-Agent Configuration

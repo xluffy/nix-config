@@ -150,9 +150,13 @@
     devShells = forAllSystems (
       system: let
         pkgs = import nixpkgs (nixpkgsConfig // {inherit system;});
-      in {
-        default = import ./shell.nix {inherit pkgs;};
-      }
+      in
+        {
+          default = import ./shell.nix {inherit pkgs;};
+        }
+        // nixpkgs.lib.optionalAttrs pkgs.stdenv.hostPlatform.isDarwin {
+          swift = import ./apps/oh-my-token/shell.nix {inherit pkgs;};
+        }
     );
   };
 }

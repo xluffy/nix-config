@@ -2,13 +2,15 @@ import type { ExtensionAPI, ExtensionContext } from "@oh-my-pi/pi-coding-agent";
 
 export default function (pi: ExtensionAPI) {
   let timer: NodeJS.Timeout | undefined;
-  let currentProvider: string | undefined;
+  let currentStatus: string | undefined;
 
   const updateStatus = (_event: unknown, ctx: ExtensionContext) => {
     const profile = process.env.OMP_PROFILE ?? "default";
     const color = profile === "work" ? "warning" : "success";
     const provider = ctx.model?.provider;
-    currentProvider = provider;
+    const model = ctx.model;
+    const thinkingLevel = pi.getThinkingLevel();
+    currentStatus = `${provider}/${model?.id}/${thinkingLevel}`;
     const auth = ctx.modelRegistry.authStorage;
     let account: string | undefined;
 
@@ -22,7 +24,8 @@ export default function (pi: ExtensionAPI) {
       }
     }
 
-    const label = ctx.ui.theme.bold(ctx.ui.theme.fg(color, `● profile:${profile}${account ? ` · ${account}` : ""}`));
+    const modelLabel = model ? ` · ${model.name}${thinkingLevel ? ` (${thinkingLevel})` : ""}` : "";
+    const label = ctx.ui.theme.bold(ctx.ui.theme.fg(color, `● profile:${profile}${account ? ` · ${account}` : ""}${modelLabel}`));
     ctx.ui.setStatus("account-profile", label);
     ctx.ui.setTitle(`OMP ${profile}`);
   };
@@ -32,7 +35,8 @@ export default function (pi: ExtensionAPI) {
     clearInterval(timer);
     if (ctx.mode === "tui" && ctx.agent.kind === "main") {
       timer = setInterval(() => {
-        if (ctx.model?.provider !== currentProvider) updateStatus(undefined, ctx);
+        const status = `${ctx.model?.provider}/${ctx.model?.id}/${pi.getThinkingLevel()}`;
+        if (status !== currentStatus) updateStatus(undefined, ctx);
       }, 500);
     }
   };

@@ -6,11 +6,11 @@
 }:
 stdenvNoCC.mkDerivation rec {
   pname = "flux-markdown";
-  version = "1.34.475";
+  version = "1.34.485-xluffy.1";
 
   src = fetchurl {
-    url = "https://github.com/xykong/flux-markdown/releases/download/v${version}/FluxMarkdown.dmg";
-    hash = "sha256-Heqvn6N7VPbNXaPNhoxD+22ahfmWRNhG10bxkQSUbwE=";
+    url = "https://github.com/xluffy-fork/flux-markdown/releases/download/v${version}/FluxMarkdown.dmg";
+    hash = "sha256-ioLv9NA68wCFguqYwkoeTOdKISZt3iGXLvNa6kKx2OU=";
   };
 
   nativeBuildInputs = [undmg];
@@ -23,11 +23,11 @@ stdenvNoCC.mkDerivation rec {
   '';
 
   meta = with lib; {
-    description = "A modern Markdown editor for macOS";
-    homepage = "https://github.com/xykong/flux-markdown";
-    license = licenses.unfree;
+    description = "Unofficial personal FluxMarkdown fork with Markdown QuickLook previews";
+    homepage = "https://github.com/xluffy-fork/flux-markdown";
+    license = licenses.gpl3Only;
     mainProgram = "FluxMarkdown";
-    platforms = platforms.darwin;
+    platforms = ["aarch64-darwin"];
     maintainers = with maintainers; [];
   };
 }

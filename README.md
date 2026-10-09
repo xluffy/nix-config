@@ -45,6 +45,26 @@ See [AGENTS.md](AGENTS.md) for the full architecture.
 | `just update` | Update `nixpkgs-unstable` flake input |
 | `just gc` | Garbage collect profiles older than 2 days |
 
+## FluxMarkdown maintenance fork
+
+Source stays in [xluffy-fork/flux-markdown](https://github.com/xluffy-fork/flux-markdown), not in `apps/`.
+This unofficial fork credits [xykong](https://github.com/xykong/flux-markdown) and all upstream contributors.
+The original GPL-3.0 license and copyright notices remain unchanged.
+
+`pkgs/flux-markdown.nix` installs a pinned ARM64 DMG from the fork.
+Home Manager manages updates. The app has no in-app updater.
+These builds use ad-hoc signatures, without Developer ID signing or notarization.
+
+To ship a change:
+
+1. Change and test the separate fork. Keep upstream credit and license notices.
+2. Run `make release patch` in the fork. GitHub Actions tests and publishes the tagged artifacts.
+3. Prefetch the new DMG with `nix store prefetch-file --json`, using its release download URL.
+4. Update `version` and `src.hash` in `pkgs/flux-markdown.nix`.
+5. Run `just check`, then `just switch`.
+
+See the [fork release guide](https://github.com/xluffy-fork/flux-markdown/blob/master/docs/release/RELEASE_PROCESS.md) for build requirements and source archives.
+
 ## Docs
 
 | Doc | Topic |

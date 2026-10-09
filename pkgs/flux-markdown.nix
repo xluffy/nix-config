@@ -6,11 +6,11 @@
 }:
 stdenvNoCC.mkDerivation rec {
   pname = "flux-markdown";
-  version = "1.34.502-xluffy.1";
+  version = "1.34.507-xluffy.1";
 
   src = fetchurl {
     url = "https://github.com/xluffy-fork/flux-markdown/releases/download/v${version}/FluxMarkdown.dmg";
-    hash = "sha256-mvYhkJdUp1xSY3nIVe+i+msgzCekOTaajoe7cIY3biM=";
+    hash = "sha256-2eTMsBObFGhApjDnnM0R4lhN0CWgNbb3KTcP2vogeuE=";
   };
 
   nativeBuildInputs = [undmg];

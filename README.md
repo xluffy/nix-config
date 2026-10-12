@@ -47,7 +47,7 @@ See [AGENTS.md](AGENTS.md) for the full architecture.
 
 ## FluxMarkdown maintenance fork
 
-Source stays in [xluffy-fork/flux-markdown](https://github.com/xluffy-fork/flux-markdown), not in `apps/`.
+Source stays in [xluffy/flux-markdown](https://github.com/xluffy/flux-markdown), not in `apps/`.
 This unofficial fork credits [xykong](https://github.com/xykong/flux-markdown) and all upstream contributors.
 The original GPL-3.0 license and copyright notices remain unchanged.
 
@@ -63,7 +63,7 @@ To ship a change:
 4. Update `version` and `src.hash` in `pkgs/flux-markdown.nix`.
 5. Run `just check`, then `just switch`.
 
-See the [fork release guide](https://github.com/xluffy-fork/flux-markdown/blob/master/docs/release/RELEASE_PROCESS.md) for build requirements and source archives.
+See the [fork release guide](https://github.com/xluffy/flux-markdown/blob/master/docs/release/RELEASE_PROCESS.md) for build requirements and source archives.
 
 ## Docs
 

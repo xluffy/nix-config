@@ -6,11 +6,11 @@
 }:
 stdenvNoCC.mkDerivation rec {
   pname = "flux-markdown";
-  version = "1.34.507-xluffy.1";
+  version = "1.34.510-xluffy.1";
 
   src = fetchurl {
-    url = "https://github.com/xluffy-fork/flux-markdown/releases/download/v${version}/FluxMarkdown.dmg";
-    hash = "sha256-2eTMsBObFGhApjDnnM0R4lhN0CWgNbb3KTcP2vogeuE=";
+    url = "https://github.com/xluffy/flux-markdown/releases/download/v${version}/FluxMarkdown.dmg";
+    hash = "sha256-4JZ2m87YZNxN+db3CFx6J1GNBgs6C+R422Ar3mLigdk=";
   };
 
   nativeBuildInputs = [undmg];
@@ -24,7 +24,7 @@ stdenvNoCC.mkDerivation rec {
 
   meta = with lib; {
     description = "Unofficial personal FluxMarkdown fork with Markdown QuickLook previews";
-    homepage = "https://github.com/xluffy-fork/flux-markdown";
+    homepage = "https://github.com/xluffy/flux-markdown";
     license = licenses.gpl3Only;
     mainProgram = "FluxMarkdown";
     platforms = ["aarch64-darwin"];

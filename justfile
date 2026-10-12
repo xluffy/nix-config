@@ -36,8 +36,8 @@ fix-quicklook:
   lsr="/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/LaunchServices.framework/Versions/A/Support/lsregister"
   app="$(readlink -f "$HOME/.nix-profile/Applications/FluxMarkdown.app" 2>/dev/null || true)"
   if [ -z "$app" ] || [ ! -d "$app" ]; then
-    echo "FluxMarkdown.app not found in the Nix profile. Run 'just switch' first." >&2
-    exit 1
+    echo "FluxMarkdown.app not found in the Nix profile. Skipping the QuickLook fix." >&2
+    exit 0
   fi
   appex="$app/Contents/PlugIns/MarkdownPreview.appex"
   echo "🔗 Registering QuickLook extension: $app"

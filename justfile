@@ -6,6 +6,7 @@ alias l := list
 alias ls := list
 alias f := fix
 alias c := check
+alias ql := fix-quicklook
 
 bootstrap:
   nix develop
@@ -23,6 +24,37 @@ switch:
     echo "📦 Package changes:"
     nvd diff "$old_gen" "$new_gen"
   fi
+  just fix-quicklook
+
+# Re-register the FluxMarkdown QuickLook extension after a version bump.
+# Nix installs each version in a new store path. macOS keeps the old
+# registration, so Finder loads the old extension. This recipe removes the
+# stale entries and registers the current app.
+fix-quicklook:
+  #!/usr/bin/env bash
+  set -euo pipefail
+  lsr="/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/LaunchServices.framework/Versions/A/Support/lsregister"
+  app="$(readlink -f "$HOME/.nix-profile/Applications/FluxMarkdown.app" 2>/dev/null || true)"
+  if [ -z "$app" ] || [ ! -d "$app" ]; then
+    echo "FluxMarkdown.app not found in the Nix profile. Run 'just switch' first." >&2
+    exit 1
+  fi
+  appex="$app/Contents/PlugIns/MarkdownPreview.appex"
+  echo "🔗 Registering QuickLook extension: $app"
+  for old in /nix/store/*flux-markdown-*/Applications/FluxMarkdown.app; do
+    [ -d "$old" ] || continue
+    [ "$old" = "$app" ] && continue
+    "$lsr" -u "$old" >/dev/null 2>&1 || true
+    pluginkit -r "$old/Contents/PlugIns/MarkdownPreview.appex" >/dev/null 2>&1 || true
+  done
+  "$lsr" -f "$app" >/dev/null 2>&1 || true
+  pluginkit -r "$appex" >/dev/null 2>&1 || true
+  pluginkit -a "$appex" >/dev/null 2>&1 || true
+  qlmanage -r >/dev/null 2>&1 || true
+  qlmanage -r cache >/dev/null 2>&1 || true
+  killall QuickLookUIService >/dev/null 2>&1 || true
+  echo "✅ QuickLook now uses:"
+  pluginkit -m -v -p com.apple.quicklook.preview 2>/dev/null | grep -i markdown || true
 
 # Build and run the oh-my-token app from source. Uses the SwiftPM build cache,
 # so a rebuild after a small change takes a few seconds instead of about 45s.

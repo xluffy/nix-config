@@ -109,10 +109,10 @@ tools for different jobs.
 `omp` (oh-my-pi) is a fork of `pi` by can1357. The project lives at `github:can1357/oh-my-pi`. It adds LSP support,
 a real debugger, and Python and Bun evaluation workers.
 
-omp is a subscription agent. The subscription provides the model catalog and the auth. No API keys, secret
-scripts, custom providers, skills, or extensions are configured.
+OMP uses the subscription for models and authentication. The Home Manager module also links a local profile indicator extension.
 
-The setup is minimal: install the package, set basic settings, sync the pi prompt templates.
+The extension shows the selected model's subscription email. It shows `API token` when an API key overrides the subscription.
+It refreshes the account label after a model switch, even when the session is idle.
 
 ### Install
 
@@ -161,3 +161,5 @@ home.file.".omp/agent/prompts/spec-workflow.md".source =
 
 Run `/login` with the subscription account once. The session stores the auth. Then run a test session and
 confirm the subscription models appear in the model selector.
+
+The `work` and `personal` profiles store credentials separately. Log in to each profile to show its own email.

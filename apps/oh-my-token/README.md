@@ -19,8 +19,9 @@ Keep usage monitoring separate from the coding agent that sends requests.
 - Show usage bars, reset countdowns, and the last update time.
 - Follow the macOS light or dark appearance with an opaque popup background.
 - Refresh connected accounts automatically or with the Refresh button.
+- Use WebKit to sign in to provider websites and read usage with each account's website session.
 - Keep each account's cookies and session separate.
-- Sign in through the Accounts window or import a website session.
+- Import a website session instead of signing in through the Accounts window.
 - Select a Claude workspace when an account has more than one.
 
 ## Read-only usage

@@ -96,6 +96,7 @@ check-eval:
 
 test:
   bats tests/
+  bun test tests/omp-commands.test.ts
 
 fix:
   alejandra .

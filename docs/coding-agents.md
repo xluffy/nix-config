@@ -147,15 +147,63 @@ programs.omp = {
 Verify every key with `omp config list --json` after the first switch. Adjust the theme name to an available
 omp theme.
 
+### Minimal command menu
+
+OMP 18.10.3 has no built-in command allowlist. Feature flags do not remove commands from the menu.
+The [built-in registry](https://github.com/can1357/oh-my-pi/blob/81e1d8927a3c16cfaff2e9456baa8c060e1e0e9b/packages/coding-agent/src/slash-commands/builtin-registry.ts#L42-L78) registers disabled features too.
+
+The local `minimal-commands.ts` extension uses an allowlist. Every unlisted slash command stays hidden and blocked.
+New built-ins, extension commands, and `/skill:<name>` commands remain disabled until added.
+
+| Group | Enabled commands |
+|---|---|
+| Core | `/login`, `/logout`, `/model`, `/switch`, `/effort`, `/settings`, `/setup`, `/hotkeys`, `/quit`, `/exit`, `/restart` |
+| Sessions | `/new`, `/clear`, `/resume`, `/session`, `/pin`, `/handoff`, `/export` |
+| Agents | `/todo`, `/jobs` |
+| Diagnostics | `/usage`, `/stats` |
+| Local templates | `/audit-me`, `/git-ci`, `/grill-me`, `/spec-quick`, `/spec-workflow` |
+
+The allowlist also accepts the aliases `/models`, `/providers`, and `/q`.
+`/handoff` uses OMP's session-handoff command. Built-in `/review` stays disabled.
+The pi template files stay unchanged.
+
+Edit `enabledCommands` in `home-manager/config/omp/minimal-commands.ts` to change the allowlist.
+Use `builtin` for OMP commands and `prompt` for local templates.
+For another local template, also add its name to `promptNames` in `home-manager/modules/programs/omp.nix`.
+Feature flags can still disable the underlying feature.
+
+Completion matches enabled command-name prefixes. Disabled names cannot complete into unrelated enabled commands.
+The [input hook](https://github.com/can1357/oh-my-pi/blob/81e1d8927a3c16cfaff2e9456baa8c060e1e0e9b/docs/extensions.md#L511-L541) blocks Enter and Ctrl+Enter submissions before built-in execution.
+Normal absolute file paths remain prompt text.
+
+Home Manager generates `~/.omp/minimal.yml`. The shell wrapper loads this overlay for both named profiles.
+The overlay loads both local extensions.
+Bare slash commands stay disabled, so plain command names cannot bypass the input hook.
+Feature flags disable plan, goal, security, computer use, ratchet, prewalk, extended context, and automatic collaboration.
+
+Typo detection stays enabled on macOS. Word autocomplete uses `auto`, the cross-platform N-gram engine.
+Tab accepts a word suggestion with a space. Right Arrow accepts it without a space.
+Automatic spelling correction stays disabled by default.
+
+Scope: the main-session TUI menu and submitted slash commands.
+This does not restrict model tools, keyboard shortcuts, standalone CLI commands, settings pages, or programmatic entry points.
+`--no-extensions` bypasses filtering.
+To remove commands from the binary and every entry point, patch the upstream registry and rebuild OMP.
+
+Run `just check`, then `just switch`.
+Open a new shell, or source `~/.config/nix-config/function.sh`. Start a new OMP session.
+Restart OMP after allowlist changes. `/reload-plugins` is intentionally disabled.
+
 ### Prompt sync
 
-Link the 7 pi prompt templates into the omp prompts directory. The templates are the same source files for
-both agents. No duplication:
+Home Manager links the five selected pi templates into all three OMP prompt directories:
 
-```nix
-home.file.".omp/agent/prompts/spec-workflow.md".source =
-  ../../config/pi/prompts/spec-workflow.md;
-```
+- `~/.omp/agent/prompts/`
+- `~/.omp/profiles/personal/agent/prompts/`
+- `~/.omp/profiles/work/agent/prompts/`
+
+Every link uses the same pi source file. Template content is not copied.
+The unused OMP links for local `review` and `handoff` templates are removed because OMP commands shadow those names.
 
 ### Auth
 

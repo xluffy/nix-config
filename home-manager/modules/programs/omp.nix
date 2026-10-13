@@ -1,22 +1,63 @@
-_: {
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: let
+  promptNames = [
+    "audit-me"
+    "git-ci"
+    "grill-me"
+    "spec-quick"
+    "spec-workflow"
+  ];
+  promptFiles =
+    lib.concatMap (
+      agentDir: map (name: "${agentDir}/prompts/${name}.md") promptNames
+    ) [
+      ".omp/agent"
+      ".omp/profiles/personal/agent"
+      ".omp/profiles/work/agent"
+    ];
+  minimalSettings = {
+    input.bareSlashCommands = false;
+    security.enabled = false;
+    plan.enabled = false;
+    goal.enabled = false;
+    computer.enabled = false;
+    ratchet.enabled = false;
+    prewalk.enabled = false;
+    extendedContext = false;
+    collab.autoStart = "off";
+    spelling = {
+      typoDetection = true;
+      autocomplete = "auto";
+    };
+    extensions = [
+      "${config.home.homeDirectory}/.omp/minimal-commands.ts"
+      "${config.home.homeDirectory}/.omp/profile-indicator.ts"
+    ];
+  };
+in {
   programs.omp = {
     enable = true;
-    settings = {
-      startup.quiet = true;
-      theme.dark = "titanium";
-      defaultThinkingLevel = "xhigh";
-    };
+    settings =
+      minimalSettings
+      // {
+        startup.quiet = true;
+        theme.dark = "titanium";
+        defaultThinkingLevel = "xhigh";
+      };
   };
 
-  home.file = {
-    ".omp/profile-indicator.ts".source = ../../config/omp/profile-indicator.ts;
-    ".omp/profile-status.yml".source = ../../config/omp/profile-status.yml;
-    ".omp/agent/prompts/spec-workflow.md".source = ../../config/pi/prompts/spec-workflow.md;
-    ".omp/agent/prompts/spec-quick.md".source = ../../config/pi/prompts/spec-quick.md;
-    ".omp/agent/prompts/review.md".source = ../../config/pi/prompts/review.md;
-    ".omp/agent/prompts/git-ci.md".source = ../../config/pi/prompts/git-ci.md;
-    ".omp/agent/prompts/grill-me.md".source = ../../config/pi/prompts/grill-me.md;
-    ".omp/agent/prompts/audit-me.md".source = ../../config/pi/prompts/audit-me.md;
-    ".omp/agent/prompts/handoff.md".source = ../../config/pi/prompts/handoff.md;
-  };
+  home.file =
+    lib.genAttrs promptFiles (file: {
+      source = ../../config/pi/prompts + "/${builtins.baseNameOf file}";
+    })
+    // {
+      ".omp/minimal-commands.ts".source = ../../config/omp/minimal-commands.ts;
+      ".omp/minimal.yml".source = (pkgs.formats.yaml {}).generate "omp-minimal.yml" minimalSettings;
+      ".omp/profile-indicator.ts".source = ../../config/omp/profile-indicator.ts;
+      ".omp/profile-status.yml".source = ../../config/omp/profile-status.yml;
+    };
 }

@@ -115,10 +115,10 @@ pi() {
 omp() {
   case "$PWD" in
     "$HOME"/code/work|"$HOME"/code/work/*)
-      command omp --profile work --config "$HOME/.omp/profile-status.yml" --extension "$HOME/.omp/profile-indicator.ts" "$@"
+      command omp --profile work --config "$HOME/.omp/minimal.yml" --config "$HOME/.omp/profile-status.yml" "$@"
       ;;
     *)
-      command omp --profile personal --config "$HOME/.omp/profile-status.yml" --extension "$HOME/.omp/profile-indicator.ts" "$@"
+      command omp --profile personal --config "$HOME/.omp/minimal.yml" --config "$HOME/.omp/profile-status.yml" "$@"
       ;;
   esac
 }

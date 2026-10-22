@@ -1,5 +1,6 @@
 {...}: {
   imports = [
+    ./ca.nix
     ./cli.nix
     ./dev.nix
     ./dev-db.nix

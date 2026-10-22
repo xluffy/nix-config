@@ -25,7 +25,19 @@
     pkgs-unstable.node-gyp
     pkgs-unstable.nodejs_24
     prometheus.cli
-    python313
+    # pip 26.2.2 distrusts the compromised eMudhra CAs. Drop the override when
+    # nixpkgs ships pip >= 26.2.2.
+    (python313.withPackages (ps: [
+      (ps.pip.overridePythonAttrs rec {
+        version = "26.2.2";
+        src = fetchFromGitHub {
+          owner = "pypa";
+          repo = "pip";
+          tag = version;
+          hash = "sha256-iH5O1kneYzoHpzbfgrJc/8gVr57CNX3/xpwel4ueNqE=";
+        };
+      })
+    ]))
     regal
     rustc
     rustup

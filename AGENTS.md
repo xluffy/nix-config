@@ -14,7 +14,7 @@ Home Manager configuration for macOS (MacBook Pro, aarch64-darwin) and Ubuntu/Ni
 ├── home-manager/
 │   ├── home.nix              # Main HM config: programs, nix-index, llm-agents, pi-agent
 │   ├── modules/
-│   │   ├── core/             # dev.nix, cli.nix, gui.nix, font.nix, nix.nix, dev-php.nix, dev-llm.nix, dev-db.nix, dev-ops.nix, dev-terraform.nix
+│   │   ├── core/             # ca.nix, dev.nix, cli.nix, gui.nix, font.nix, nix.nix, dev-php.nix, dev-llm.nix, dev-db.nix, dev-ops.nix, dev-terraform.nix
 │   │   ├── programs/         # git.nix, tmux.nix, fzf.nix, ssh.nix, 1password.nix, common.nix, pi.nix, omp.nix
 │   │   └── shell/            # bash.nix, function.sh, inputrc, prompt configs
 │   └── config/               # Raw configs: .npmrc, iterm2.json, kube_config.age, pi/

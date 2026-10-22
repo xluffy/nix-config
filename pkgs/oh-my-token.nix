@@ -111,5 +111,5 @@ in
       runHook postInstall
     '';
 
-    meta = binary.meta;
+    inherit (binary) meta;
   }

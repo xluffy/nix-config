@@ -3,7 +3,7 @@
   pkgs-unstable,
   ...
 }: let
-  myPhp = pkgs.php84.withExtensions ({
+  myPhp = pkgs.php85.withExtensions ({
     all,
     enabled,
   }:
@@ -14,7 +14,7 @@
 in {
   home.packages = [
     myPhp
-    pkgs.php84Packages.composer
+    pkgs.php85Packages.composer
     pkgs.phpactor
     pkgs-unstable.frankenphp
   ];

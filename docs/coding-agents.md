@@ -13,6 +13,9 @@ tags:
 
 All coding agents in this repo share a common writing policy: all markdown output must follow ASD-STE100 Simplified Technical English. This policy is enforced via `APPEND_SYSTEM.md` (pi-agent, opencode) and `CLAUDE.md` (claudecode).
 
+The same files also contain a diagram rule. Write each diagram as Mermaid code in an HTML comment. Put an image link after the comment.
+Run `mermaid-drawio <document>.md` to render the PNG files with the draw.io web theme. The package is in `pkgs/mermaid-drawio/`. Its `CHANGELOG.md` records the history.
+
 You might be wondering why I have so many coding agents in this repo. I have `claudecode`, `pi-agent`, `opencode`,
 and a few others (`codex`, `cursor`, `antigravity-cli`). The last three are mostly for testing and are used very rarely.
 
@@ -204,6 +207,14 @@ Home Manager links the five selected pi templates into all three OMP prompt dire
 
 Every link uses the same pi source file. Template content is not copied.
 The unused OMP links for local `review` and `handoff` templates are removed because OMP commands shadow those names.
+
+### System prompt
+
+`home-manager/config/omp/APPEND_SYSTEM.md` is the OMP system prompt addition. It started as a copy of the pi file. Edit it separately from the pi file.
+Home Manager links it to `APPEND_SYSTEM.md` in the same three agent directories as the prompt templates.
+
+The OMP file adds a diagram rule. Write each diagram as Mermaid code in an HTML comment. Put an image link after the comment.
+Run `mermaid-drawio <document>.md` to render the PNG files with the draw.io web theme. The package is in `pkgs/mermaid-drawio/`. Its `CHANGELOG.md` records the history.
 
 ### Auth
 

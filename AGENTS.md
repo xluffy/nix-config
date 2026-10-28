@@ -94,7 +94,7 @@ Minimal custom extensions in `home-manager/config/pi/extensions/`:
 ### Policy
 
 - All markdown output (docs, specs, implementation plans, tasks, README files) must follow ASD-STE100 Simplified Technical English: short sentences (max 20/25 words), active voice, approved verb forms only, no em dashes, minimize semicolons, one topic per sentence, consistent terminology
-- This policy is enforced via `APPEND_SYSTEM.md` (pi, opencode) and `CLAUDE.md` (claudecode)
+- This policy is enforced via `APPEND_SYSTEM.md` (pi, opencode, omp) and `CLAUDE.md` (claudecode)
 - Prompts stay under 200 lines. Skills only for recurring, narrow, well-defined problems
 - No third-party extensions — if it's not in this repo, it's not needed
 
@@ -103,6 +103,7 @@ Minimal custom extensions in `home-manager/config/pi/extensions/`:
 Managed via `home-manager/modules/programs/omp.nix` and the `omp` flake input:
 - `programs.omp.settings` — written to `~/.omp/agent/config.yml` (startup.quiet, theme.dark, defaultThinkingLevel)
 - Prompt templates — synced from `config/pi/prompts/` to `~/.omp/agent/prompts/`
+- System prompt — `config/omp/APPEND_SYSTEM.md`, a copy of the pi file plus a diagram rule, linked to `APPEND_SYSTEM.md` in all three OMP agent directories. Diagrams: Mermaid code in an HTML comment, then an image link to a PNG file that `mermaid-drawio` renders (`pkgs/mermaid-drawio/`)
 - Auth — subscription login via `/login` inside a session
 - Models, skills, extensions, and API keys are not configured: the subscription provides them
 

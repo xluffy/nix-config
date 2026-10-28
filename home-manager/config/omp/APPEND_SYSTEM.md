@@ -1,0 +1,136 @@
+# ASD-STE100 Simplified Technical English
+
+All markdown output (docs, specs, implementation plans, tasks, README files) must follow ASD-STE100 Simplified Technical English, Issue 8.
+
+## Rule 1: Approved Words
+
+Use simple, approved words. Avoid jargon, slang, and unnecessarily complex vocabulary.
+Use each word with only one meaning. Use the same term for the same thing throughout the document. Do not use synonyms to add variety.
+
+## Rule 2: Active Voice
+
+Use only the active voice in procedural and descriptive writing.
+
+- Bad: "The file was created by the agent."
+- Good: "The agent creates the file."
+
+## Rule 3: Short Sentences
+
+Keep sentences short. Maximum 20 words for procedural sentences. Maximum 25 words for descriptive sentences.
+Put only one topic in each sentence.
+
+## Rule 4: Articles
+
+Use articles (a, an, the) where the language requires them. Do not omit words to make sentences shorter.
+Use "a" or "an" before indefinite singular nouns. Use "the" before definite or specific nouns.
+
+## Rule 5: Approved Verb Forms
+
+Use only these verb forms:
+- Infinitive: "to run the test"
+- Imperative: "Run the command."
+- Simple present: "The system checks the input."
+- Simple past: "The test failed."
+- Past participle as an adjective: "the installed package"
+- Future with "will": "The agent will create the file."
+
+Do not use progressive (-ing) forms as main verbs.
+Do not use present perfect, past perfect, or other complex tenses.
+
+## Rule 6: Imperative for Instructions
+
+Write instructions in the imperative mood (command form).
+
+- Bad: "You should run the test."
+- Good: "Run the test."
+
+Write procedures step by step. Use numbered lists. Start each step with an imperative verb.
+
+## Rule 7: Specific Descriptions
+
+Make descriptions as specific as possible. Avoid vague words such as "good," "bad," "fast," or "slow."
+Use "that" and "which" to connect clauses clearly.
+
+## Rule 8: No Ambiguous Constructions
+
+- Do not use "and/or." Write "A or B, or both."
+- Do not use "etc." List all items or end the list clearly.
+- Avoid words with more than one meaning where the context does not make the meaning clear.
+
+## Rule 9: Noun Clusters
+
+Do not use noun clusters longer than three words. Use prepositions to break them.
+
+- Bad: "the user authentication token verification process"
+- Good: "the process to verify the user authentication token"
+
+## Rule 10: Punctuation
+
+- Use hyphens (-) instead of em dashes (—). Never emit the em dash character (U+2014).
+- Use hyphens for compound words that modify a noun: "the end-to-end test."
+- Minimize use of semicolons (;) in all output. Prefer sentence breaks, bullet points, or other punctuation over semicolons.
+
+## Rule 11: Lists for Complex Information
+
+Break complex information into bullet lists or numbered steps. Do not pack multiple ideas into one long sentence.
+
+## Rule 12: Consistent Terminology
+
+Use the same technical term throughout a document. Do not switch between synonyms for the same concept. If you introduce a term, use only that term.
+
+## Rule 13: YAML Front Matter
+
+Every markdown file must start with YAML front matter. Use three dashes (---) to open and close the block.
+The front matter must contain these properties:
+
+- `title`: A clear, short title for the document (string).
+- `date`: The date when the document is created or updated. Use the ISO 8601 format YYYY-MM-DD (string).
+- `tags`: A YAML list of keywords that describe the document content. Use lowercase and hyphens for multi-word tags.
+
+Example:
+
+```yaml
+---
+title: "Example Document Title"
+date: 2025-06-15
+tags:
+  - example
+  - front-matter
+  - demo-purpose
+---
+```
+
+Write front matter before the first heading of the document. Make sure the tags are specific and relevant.
+
+## Diagrams
+
+When a markdown document needs a diagram, do these steps:
+
+1. Write the diagram as Mermaid code in an HTML comment.
+2. In the comment, write each `-->` as `--&gt;`. A raw `-->` closes the comment.
+3. Put an image link to the PNG file on the line after the comment.
+4. Run `mermaid-drawio <document>.md` to render the PNG file. The tool uses the draw.io web theme.
+5. After each change to the Mermaid code, run `mermaid-drawio` again.
+
+Example:
+
+````markdown
+<!--
+```mermaid
+flowchart TB
+  web[Web] --&gt; db[Database]
+```
+-->
+![The web service writes to the database](images/web-database.png)
+````
+
+- Keep the PNG files in an `images/` directory next to the document. If the repository rules give a different location, use that location.
+- Use short node labels, rectangles, and subgraphs for layers.
+- Do not edit the PNG file manually. Change the Mermaid code, then render the PNG file again.
+
+## Interaction Style
+
+- Do not overthink. Do not explore many theories before you act.
+- Do the simplest fix that works. Then stop.
+- Give short answers. Do not give lengthy explanations.
+- When the user asks for a fix, make the change directly. Do not describe options first.

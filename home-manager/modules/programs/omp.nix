@@ -4,6 +4,11 @@
   pkgs,
   ...
 }: let
+  agentDirs = [
+    ".omp/agent"
+    ".omp/profiles/personal/agent"
+    ".omp/profiles/work/agent"
+  ];
   promptNames = [
     "audit-me"
     "git-ci"
@@ -14,11 +19,10 @@
   promptFiles =
     lib.concatMap (
       agentDir: map (name: "${agentDir}/prompts/${name}.md") promptNames
-    ) [
-      ".omp/agent"
-      ".omp/profiles/personal/agent"
-      ".omp/profiles/work/agent"
-    ];
+    )
+    agentDirs;
+  # OMP appends APPEND_SYSTEM.md from the agent directory to its system prompt.
+  appendSystemFiles = map (agentDir: "${agentDir}/APPEND_SYSTEM.md") agentDirs;
   minimalSettings = {
     input.bareSlashCommands = false;
     security.enabled = false;
@@ -53,6 +57,9 @@ in {
   home.file =
     lib.genAttrs promptFiles (file: {
       source = ../../config/pi/prompts + "/${builtins.baseNameOf file}";
+    })
+    // lib.genAttrs appendSystemFiles (_: {
+      source = ../../config/omp/APPEND_SYSTEM.md;
     })
     // {
       ".omp/minimal-commands.ts".source = ../../config/omp/minimal-commands.ts;

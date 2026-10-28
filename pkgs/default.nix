@@ -13,6 +13,10 @@
 
   kcctl = pkgs.callPackage ./kcctl.nix {};
 
+  mermaid-drawio = pkgs.callPackage ./mermaid-drawio {
+    inherit (pkgsUnstable) drawio;
+  };
+
   yomi = pkgs.callPackage ./yomi.nix {
     go = pkgsUnstable.go_1_26;
   };

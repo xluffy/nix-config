@@ -104,6 +104,7 @@ Managed via `home-manager/modules/programs/omp.nix` and the `omp` flake input:
 - `programs.omp.settings` — written to `~/.omp/agent/config.yml` (startup.quiet, theme.dark, defaultThinkingLevel)
 - Prompt templates — synced from `config/pi/prompts/` to `~/.omp/agent/prompts/`
 - System prompt — `config/omp/APPEND_SYSTEM.md`, a copy of the pi file plus a diagram rule, linked to `APPEND_SYSTEM.md` in all three OMP agent directories. Diagrams: Mermaid code in an HTML comment, then an image link to a PNG file that `mermaid-drawio` renders (`pkgs/mermaid-drawio/`)
+- Code search: `astGrep.enabled` turns on the built-in `ast_grep` tool. `config/omp/repo-map.ts` adds the `repo_map` tool, which runs `repo-map` (`pkgs/repo-map/`, a wrapper around `aider.repomap`)
 - Auth — subscription login via `/login` inside a session
 - Models, skills, extensions, and API keys are not configured: the subscription provides them
 

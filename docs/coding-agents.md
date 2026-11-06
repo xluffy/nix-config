@@ -1,6 +1,6 @@
 ---
 title: "Coding Agents"
-date: 2026-08-24
+date: 2026-11-06
 tags:
   - coding-agents
   - omp
@@ -180,7 +180,7 @@ The [input hook](https://github.com/can1357/oh-my-pi/blob/81e1d8927a3c16cfaff2e9
 Normal absolute file paths remain prompt text.
 
 Home Manager generates `~/.omp/minimal.yml`. The shell wrapper loads this overlay for both named profiles.
-The overlay loads both local extensions.
+The overlay loads the three local extensions.
 Bare slash commands stay disabled, so plain command names cannot bypass the input hook.
 Feature flags disable plan, goal, security, computer use, ratchet, prewalk, extended context, and automatic collaboration.
 
@@ -196,6 +196,22 @@ To remove commands from the binary and every entry point, patch the upstream reg
 Run `just check`, then `just switch`.
 Open a new shell, or source `~/.config/nix-config/function.sh`. Start a new OMP session.
 Restart OMP after allowlist changes. `/reload-plugins` is intentionally disabled.
+
+### Code search tools
+
+The overlay enables the built-in `ast_grep` tool for structural code search. OMP disables it by default.
+
+The local `repo-map.ts` extension adds the `repo_map` tool. The tool runs the `repo-map` command from `pkgs/repo-map/`.
+The command imports `aider.repomap` from the nixpkgs `aider-chat` package. It does not load an LLM client.
+The command ranks the source files with tree-sitter tags and PageRank. Then it prints the key signatures in the token budget.
+
+- The tool is essential, so the model sees its full schema. The description tells the model to call it first when it explores a codebase.
+- The default budget is 2048 tokens. Use `--focus FILE` and `--ident NAME` to rank related code higher.
+- The command lists files with `git ls-files`. It keeps the tags cache in `~/.cache/repo-map/`, not in the repository.
+- The first run on a repository parses all files. The next runs use the cache and parse only the changed files.
+- Aider has no tags query for Nix. The map shows `.nix` files by name only.
+
+Run `repo-map [DIR] [--tokens N]` in a shell to see the same map.
 
 ### Prompt sync
 

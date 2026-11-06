@@ -33,6 +33,8 @@
     prewalk.enabled = false;
     extendedContext = false;
     collab.autoStart = "off";
+    # Structural code search with the built-in ast-grep engine. OMP ships it disabled.
+    astGrep.enabled = true;
     spelling = {
       typoDetection = true;
       autocomplete = "auto";

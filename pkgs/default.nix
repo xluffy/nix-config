@@ -17,6 +17,8 @@
     inherit (pkgsUnstable) drawio;
   };
 
+  repo-map = pkgs.callPackage ./repo-map {};
+
   yomi = pkgs.callPackage ./yomi.nix {
     go = pkgsUnstable.go_1_26;
   };

@@ -42,6 +42,7 @@
     extensions = [
       "${config.home.homeDirectory}/.omp/minimal-commands.ts"
       "${config.home.homeDirectory}/.omp/profile-indicator.ts"
+      "${config.home.homeDirectory}/.omp/repo-map.ts"
     ];
   };
 in {
@@ -56,6 +57,9 @@ in {
       };
   };
 
+  # The repo_map tool in repo-map.ts runs this command.
+  home.packages = [pkgs.repo-map];
+
   home.file =
     lib.genAttrs promptFiles (file: {
       source = ../../config/pi/prompts + "/${builtins.baseNameOf file}";
@@ -67,6 +71,7 @@ in {
       ".omp/minimal-commands.ts".source = ../../config/omp/minimal-commands.ts;
       ".omp/minimal.yml".source = (pkgs.formats.yaml {}).generate "omp-minimal.yml" minimalSettings;
       ".omp/profile-indicator.ts".source = ../../config/omp/profile-indicator.ts;
+      ".omp/repo-map.ts".source = ../../config/omp/repo-map.ts;
       ".omp/profile-status.yml".source = ../../config/omp/profile-status.yml;
     };
 }

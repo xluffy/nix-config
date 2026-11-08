@@ -12,6 +12,7 @@ import xml.etree.ElementTree as ET
 FONT = "fontFamily=Recursive;fontSize=11;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DRecursive;"
 SHADOW = "shadow=1;shadowColor=#000000;shadowOffsetX=4;shadowOffsetY=4;shadowBlur=0;shadowOpacity=6;"
 NODE = "html=1;whiteSpace=wrap;strokeWidth=2;fillColor=#ffffff;strokeColor=#28253D;fontColor=#28253D;" + SHADOW + FONT
+TABLE = "strokeWidth=2;fillColor=#ECFEFF;strokeColor=#28253D;fontColor=#28253D;fontStyle=1;" + SHADOW + FONT
 CONTAINER = "html=1;whiteSpace=nowrap;strokeWidth=1;verticalAlign=top;fillColor={fill};strokeColor={stroke};fontColor=#000000;" + SHADOW + FONT
 PALETTE = [("#FDF4FF", "#E879F9"), ("#F0FDFA", "#2DD4BF"), ("#FFF7ED", "#FB923C"), ("#ECFEFF", "#22D3EE")]
 EDGE = ("edgeStyle=orthogonalEdgeStyle;rounded=1;curved=0;endArrow=block;endSize=8;jumpStyle=arc;jumpSize=12;"
@@ -52,6 +53,11 @@ for obj in tree.iter("UserObject"):
             start = "startArrow=block;startSize=8;sourcePerimeterSpacing=4;" if "startArrow=block" in old else "startArrow=none;"
             ports = "".join(re.findall(r"(?:exit|entry)[XY]=[^;]+;", old))
             base = SEQ_EDGE if is_sequence else EDGE
+            er = "".join(re.findall(r"(?:start|end)(?:Arrow=ER\w+|Size=\d+);", old))
+            if er:
+                # Keep the crow's foot markers of an entity-relationship line.
+                base = base.replace("endArrow=block;endSize=8;", "") + er + "startFill=0;endFill=0;"
+                start = ""
             new = base + dashed + start + ports + (LABEL if obj.get("label") else "")
             geo = cell.find("mxGeometry")
             if geo is not None and not (KEEP_POINTS or is_sequence):
@@ -63,6 +69,9 @@ for obj in tree.iter("UserObject"):
             fill, stroke = PALETTE[containers % len(PALETTE)]
             containers += 1
             new = CONTAINER.format(fill=fill, stroke=stroke)
+        elif "shape=table;" in old:
+            # An entity table keeps its table layout, so the header shows the table name above the rows.
+            new = re.sub(r"(?:fontSize|fontFamily|strokeWidth|fillColor|strokeColor|fontColor)=[^;]*;", "", old) + TABLE
         elif "endArrow" in old or "line" in old or "dashed=1" in old:
             new = old.replace("light-dark(#333333,#cccccc)", "#28253D").replace("light-dark(#9370DB,#cccccc)", "#28253D")
         else:
@@ -76,6 +85,16 @@ if is_sequence:
         if st.startswith("text;"):
             st = re.sub(r"fontFamily=[^;]*;|fontSize=\d+;|fontColor=[^;]*;|fillColor=[^;]*;", "", st)
             cell.set("style", st + "fillColor=#ffffff;fontColor=#28253D;" + FONT)
+
+else:
+    # The rows and the column cells of an entity table are plain mxCells.
+    for cell in tree.find(".//root").findall("mxCell"):
+        st = cell.get("style") or ""
+        if st.startswith(("shape=tableRow;", "shape=partialRectangle;")):
+            st = re.sub(r"(?:fontSize|fontFamily|fillColor|fontColor)=[^;]*;", "", st)
+            st = st.replace("light-dark(#9370DB,#cccccc)", "#28253D")
+            fill = "fillColor=#ffffff;" if st.startswith("shape=tableRow;") else "fillColor=none;"
+            cell.set("style", st + fill + "fontColor=#28253D;" + FONT)
 
 
 def spread_ports() -> None:
@@ -203,6 +222,22 @@ def spread_ports() -> None:
                         n += 1
         return n
 
+    def write_points(c, path, label_seg):
+        """Store the inner points of path on edge c. Put the label in the middle of segment label_seg."""
+        g = c.find("mxGeometry")
+        for arr in [a for a in g if a.tag == "Array"]:
+            g.remove(arr)
+        arr = ET.SubElement(g, "Array", {"as": "points"})
+        par = c.get("parent")
+        ox, oy = (box(par)[0], box(par)[1]) if par in cells and par != "1" else (0.0, 0.0)
+        for x, y in path[1:-1]:
+            ET.SubElement(arr, "mxPoint", {"x": str(round(x - ox, 1)), "y": str(round(y - oy, 1))})
+        if "labelBackgroundColor" in (c.get("style") or ""):
+            lens = [abs(b[0] - a[0]) + abs(b[1] - a[1]) for a, b in zip(path, path[1:])]
+            total = sum(lens) or 1
+            g.set("x", str(round(2 * (sum(lens[:label_seg]) + lens[label_seg] / 2) / total - 1, 3)))
+
+    routes = []
     for (top, bottom), lst in bands.items():
         left = sorted([p for p in lst if p[0] < p[1]], key=lambda p: p[1])
         right = sorted([p for p in lst if p[0] >= p[1]], key=lambda p: -p[1])
@@ -210,19 +245,119 @@ def spread_ports() -> None:
         lanes = [round(top + step * (i + 1), 1) for i in range(len(lst))]
         order = min((left + right, right + left), key=lambda o: crossings(o, lanes))
         for (nx, ex, c, sy, ty), lane in zip(order, lanes):
-            g = c.find("mxGeometry")
-            for arr in [a for a in g if a.tag == "Array"]:
-                g.remove(arr)
-            arr = ET.SubElement(g, "Array", {"as": "points"})
-            par = c.get("parent")
-            ox, oy = (box(par)[0], box(par)[1]) if par in cells and par != "1" else (0.0, 0.0)
-            ET.SubElement(arr, "mxPoint", {"x": str(round(ex - ox, 1)), "y": str(round(lane - oy, 1))})
-            ET.SubElement(arr, "mxPoint", {"x": str(round(nx - ox, 1)), "y": str(round(lane - oy, 1))})
-            if "labelBackgroundColor" in (c.get("style") or ""):
-                # Put the label in the middle of its own horizontal lane, so labels do not collide.
-                v1, h, v2 = abs(lane - sy), abs(nx - ex), abs(ty - lane)
-                total = v1 + h + v2 or 1
-                g.set("x", str(round(2 * (v1 + h / 2) / total - 1, 3)))
+            routes.append([c, [(ex, sy), (ex, lane), (nx, lane), (nx, ty)], 1])
+
+    # A line that skips a layer can cross a box. Such a line goes down to a free gap,
+    # along the gap to a free column, down the column to the gap above the target, and then to the target.
+    margin = 8
+
+    def is_container(cid):
+        return cid in cells and "verticalAlign=top" in (cells[cid].get("style") or "")
+
+    obstacles = {cid: box(cid) for cid, c in cells.items()
+                 if c.get("vertex") == "1" and not is_container(cid)
+                 and (c.get("parent") == "1" or is_container(c.get("parent")))}
+
+    def hits(path, skip):
+        for (x0, y0), (x1, y1) in zip(path, path[1:]):
+            for cid, (bx, by, bw, bh) in obstacles.items():
+                if (cid not in skip and min(x0, x1) < bx + bw + margin / 2 and max(x0, x1) > bx - margin / 2
+                        and min(y0, y1) < by + bh + margin / 2 and max(y0, y1) > by - margin / 2):
+                    return True
+        return False
+
+    def free(lo, hi, a0, a1, skip, vertical):
+        """Return the free intervals in [a0, a1] for a line that spans [lo, hi] on the other axis."""
+        spans = []
+        for cid, (bx, by, bw, bh) in obstacles.items():
+            p, pl, q, ql = (by, bh, bx, bw) if vertical else (bx, bw, by, bh)
+            if cid not in skip and p - margin < hi and p + pl + margin > lo:
+                spans.append((q - margin, q + ql + margin))
+        out, cur = [], a0
+        for a, z in sorted(spans):
+            if a > cur:
+                out.append((cur, min(a, a1)))
+            cur = max(cur, z)
+            if cur >= a1:
+                break
+        if cur < a1:
+            out.append((cur, a1))
+        return [(a, z) for a, z in out if z > a]
+
+    def taken(used, v, lo, hi):
+        return any(abs(u - v) < LANE / 2 and u0 < hi and u1 > lo for u, u0, u1 in used)
+
+    def segments(path):
+        h, v = [], []
+        for (x0, y0), (x1, y1) in zip(path, path[1:]):
+            if y0 == y1 and x0 != x1:
+                h.append((y0, min(x0, x1), max(x0, x1)))
+            elif x0 == x1 and y0 != y1:
+                v.append((x0, min(y0, y1), max(y0, y1)))
+        return h, v
+
+    def pick(gaps, lo, hi, used, from_top):
+        for a, z in gaps if from_top else reversed(gaps):
+            k = 1
+            while LANE * k < z - a:
+                y = a + LANE * k if from_top else z - LANE * k
+                if not taken(used, y, lo, hi):
+                    return y
+                k += 1
+        return None
+
+    # A line from a box to itself goes around the right side of the box, or the left side when the right side is full.
+    for cid, c in cells.items():
+        st = c.get("style") or ""
+        if c.get("edge") != "1" or "strokeColor=none" in st or c.get("source") != c.get("target") or c.get("source") not in cells:
+            continue
+        s = c.get("source")
+        bx, by, bw, bh = box(s)
+        y0, y1 = by + 0.3 * bh, by + 0.7 * bh
+        for side in (1, 0):
+            x = bx + bw + 2 * LANE if side else bx - 2 * LANE
+            edge_x = bx + bw if side else bx
+            path = [(edge_x, y0), (x, y0), (x, y1), (edge_x, y1)]
+            if not hits(path[1:-1], {s, outer(s)}):
+                break
+        c.set("style", re.sub(r"(?:exit|entry)[XY]=[^;]+;", "", st) + f"exitX={side};exitY=0.3;entryX={side};entryY=0.7;")
+        write_points(c, path, 1)
+        # Other lines keep out of the loop.
+        obstacles[f"loop-{cid}"] = (min(edge_x, x), y0, abs(x - edge_x), y1 - y0)
+
+    used_h, used_v = [], []
+    for r in routes:
+        h, v = segments(r[1])
+        used_h += h
+        used_v += v
+    for r in routes:
+        c, path, _ = r
+        s, t = c.get("source"), c.get("target")
+        skip = {s, t, outer(s), outer(t)}
+        if not hits(path, skip):
+            continue
+        (ex, sy), (nx, ty) = path[0], path[-1]
+        old_h, old_v = segments(path)
+        used_h = [u for u in used_h if u not in old_h]
+        used_v = [u for u in used_v if u not in old_v]
+        g1 = free(ex, ex, sy, ty, skip, False)[0]
+        g2 = free(nx, nx, sy, ty, skip, False)[-1]
+        cols = free(g1[0], g2[1], -1e6, 1e6, skip, True)
+        xs = [a + LANE / 2 * k for a, z in cols for k in range(1, int((z - a) / (LANE / 2)))]
+        for xc in sorted(xs, key=lambda x: abs(x - ex) + abs(x - nx)):
+            l1 = pick(free(min(ex, xc), max(ex, xc), g1[0], g1[1], skip, False), min(ex, xc), max(ex, xc), used_h, True)
+            l2 = pick(free(min(nx, xc), max(nx, xc), g2[0], g2[1], skip, False), min(nx, xc), max(nx, xc), used_h, False)
+            if l1 is None or l2 is None or l2 <= l1 or taken(used_v, xc, l1, l2):
+                continue
+            new = [(ex, sy), (ex, l1), (xc, l1), (xc, l2), (nx, l2), (nx, ty)]
+            if not hits(new, skip):
+                r[1], r[2] = new, 2
+                break
+        h, v = segments(r[1])
+        used_h += h
+        used_v += v
+    for c, path, label_seg in routes:
+        write_points(c, path, label_seg)
 
 
 if not is_sequence:

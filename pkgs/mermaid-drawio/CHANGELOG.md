@@ -1,6 +1,6 @@
 ---
 title: "mermaid-drawio Changelog"
-date: 2026-10-28
+date: 2026-11-08
 tags:
   - mermaid
   - drawio
@@ -11,6 +11,16 @@ tags:
 # mermaid-drawio Changelog
 
 This file records each user requirement and the change that answered it.
+
+## 1.1.0 - 2026-11-08
+
+Requirement: an entity-relationship diagram shows no table name, and some lines go through a table.
+
+- An entity table keeps its draw.io table layout. The header shows the table name above the rows. Before, the script gave the table the style of a plain box, so the rows hid the name.
+- The rows and the column cells of a table use the web colours and the Recursive font.
+- An entity-relationship line keeps its crow's foot markers. Before, the script changed them to block arrows.
+- A line that crosses a box goes down to a free gap, along the gap to a free column, and down the column to the target layer.
+- A line from a box to itself goes around the right side of the box, or the left side when the right side is full. Other lines keep out of the loop.
 
 ## 1.0.0 - 2026-10-28
 

@@ -8,6 +8,7 @@
     gcc
     gnumake
     golangci-lint
+    govulncheck
     hugo
     k6
     libjpeg

@@ -95,7 +95,7 @@ in {
           '';
 
         bashrcExtra = ''
-          export PATH="$HOME/.nix-profile/bin:$HOME/bin:~/.npm-packages/bin:$HOME/.local/bin:$PATH"
+          export PATH="$HOME/.nix-profile/bin:$HOME/bin:$HOME/.npm-packages/bin:$HOME/.local/bin:$PATH"
           export NODE_PATH=~/.npm-packages/lib/node_modules
           PS1='\[\e[0;${cfg.primary}m\]:: \[\e[0;37m\]You are \[$(tput bold)\]\[\033[${cfg.user}m\]\u\[$(tput sgr0)\]\[$(tput sgr0)\]\[\033[38;5;15m\] \[$(tput sgr0)\]-at- \[\e[0;${cfg.host}m\]\h\[\e[0;37m\] [\[\e[0;${cfg.primary}m\]\w\[\e[0;39m\]]\n\[\e[0;${cfg.primary}m\]\$\[\e[m\] '
 

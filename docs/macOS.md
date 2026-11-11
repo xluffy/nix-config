@@ -1,46 +1,187 @@
-# macOS Bootstrapping & Setup Guide (A-to-Z)
+---
+title: "macOS Setup Guide"
+date: 2026-11-11
+tags:
+  - macos
+  - bootstrap
+  - home-manager
+  - nix
+---
 
-This document is divided into two parts:
-1. **Bootstrapping Guide (CLI)**: Install Nix, Home Manager, and apply the flake configuration.
-2. **System Preferences Setup (GUI)**: Manual settings that cannot be automated via CLI.
+# macOS Setup Guide
+
+This document has two parts:
+
+1. **CLI setup**: Install Nix and apply the Home Manager configuration.
+2. **GUI setup**: Set the macOS settings that the CLI cannot set.
 
 ---
 
-## Part 1: Bootstrapping Guide (CLI)
+## Part 1: CLI Setup
 
-### 1. Install Nix (Recommended Multi-User)
-Run the Determinate Systems Nix installer, which is sandbox-safe and comes with experimental flakes enabled by default:
+Do the steps in sequence. Use the default macOS Terminal app.
+
+### 1. Make sure that the user name is correct
+
+Each host in `flake.nix` has a fixed user name. The macOS account short name must be the same.
+
+|Machine|`HM_FLAKE_ATTR`|macOS user name|
+|---|---|---|
+|MacBook Pro|`quang.van.nguyen@Nguyens-MacBook-Pro.local`|`quang.van.nguyen`|
+|Mac mini|`quangne@Quangs-Mac-mini`|`quangne`|
+
+Run this command and compare the result with the table:
+
+```bash
+whoami
+```
+
+For a new machine, add a new entry to `homeConfigurations` in `flake.nix`. Then run `git add flake.nix`.
+
+### 2. Install the Xcode Command Line Tools
+
+The tools supply `git`.
+
+```bash
+xcode-select --install
+```
+
+Wait until the installer finishes.
+
+### 3. Install Nix
+
 ```bash
 curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install
 ```
-Follow the installer prompts and open a new terminal window after it finishes to activate the Nix environment.
 
-### 2. Clone the Nix Configuration Repository
-Clone this repository to your preferred local workspace directory (e.g., `~/code/me/nix-config`):
+Close the terminal. Open a new terminal.
+
+### 4. Clone the repository
+
+Use HTTPS. SSH does not work before step 10.
+
 ```bash
 mkdir -p ~/code/me
-git clone git@github.com:xluffy/nix-config.git ~/code/me/nix-config
+git clone https://github.com/xluffy/nix-config.git ~/code/me/nix-config
 cd ~/code/me/nix-config
 ```
 
-### 3. Initialize Local Environment Variables
-Configure your machine-specific flake configuration selector using `.envrc.local` (this file is gitignored):
+### 5. Enable flakes
+
+Some Nix installers do not enable flakes. This step enables flakes for all installers.
+
 ```bash
-cp .envrc.local.example .envrc.local
-```
-Ensure `.envrc.local` has the correct identifier:
-```bash
-# Verify or edit this line:
-export HM_FLAKE_ATTR=quang.van.nguyen@Nguyens-MacBook-Pro.local
+mkdir -p ~/.config/nix
+cp nix.conf ~/.config/nix/nix.conf
+nix config show experimental-features
 ```
 
-### 4. Bootstrap Home Manager
-Launch the Nix dev shell (which temporarily pulls in `just` and `home-manager`), then run the bootstrap task:
+The last command must show `flakes` and `nix-command`.
+
+### 6. Set the host
+
+Write the value from the table in step 1 to `.envrc.local`. Git ignores this file.
+
+MacBook Pro:
+
 ```bash
-nix develop
-just bootstrap
+echo 'export HM_FLAKE_ATTR=quang.van.nguyen@Nguyens-MacBook-Pro.local' > .envrc.local
 ```
-This builds and installs all CLI tools, development environments, and GUI tools (including macOS-specific utilities like `betterdisplay` and `karabiner-elements`).
+
+Mac mini:
+
+```bash
+echo 'export HM_FLAKE_ATTR=quangne@Quangs-Mac-mini' > .envrc.local
+```
+
+### 7. Apply the Home Manager configuration
+
+1. Start the dev shell. The dev shell supplies `home-manager` and `just`.
+
+   ```bash
+   nix develop
+   ```
+
+2. Load the host value. The dev shell does not load `.envrc.local`.
+
+   ```bash
+   source .envrc.local
+   echo "$HM_FLAKE_ATTR"
+   ```
+
+   The output must not be empty.
+
+3. Apply the configuration. The `-b backup` option renames each existing file to `<name>.backup`. Without it, the first run stops when a file such as `~/.bashrc` exists.
+
+   ```bash
+   home-manager switch -b backup --flake ".#${HM_FLAKE_ATTR}"
+   ```
+
+4. Exit the dev shell.
+
+   ```bash
+   exit
+   ```
+
+### 8. Set Bash from Nix as the login shell
+
+The configuration uses Bash. The default macOS shell is zsh.
+
+```bash
+echo "$HOME/.nix-profile/bin/bash" | sudo tee -a /etc/shells
+chsh -s "$HOME/.nix-profile/bin/bash"
+```
+
+Close the terminal. Open a new terminal.
+
+### 9. Allow direnv in the repository
+
+```bash
+cd ~/code/me/nix-config
+direnv allow
+```
+
+direnv now loads the dev shell and `.envrc.local` each time that you open the directory.
+
+### 10. Set up SSH and Git signing with 1Password
+
+On macOS, SSH and Git use the 1Password SSH agent. Home Manager installs 1Password.
+
+1. Open 1Password and sign in.
+2. Go to **Settings > Developer**. Turn on **Use the SSH agent**.
+3. Write the public key to the path that `ssh.nix` uses:
+
+   ```bash
+   echo "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAII6gzw6c40c8zowzZ6nR8iRwsYy0qg2sNvro09nFtTzF quang@2meo.com" > ~/.ssh/ssh-ed25519:quang@2meo.com.pub
+   ```
+
+4. Test the connection to GitHub:
+
+   ```bash
+   ssh -T git@github.com
+   ```
+
+5. Change the remote of the repository to SSH:
+
+   ```bash
+   git -C ~/code/me/nix-config remote set-url origin git@github.com:xluffy/nix-config.git
+   ```
+
+### 11. Apply the macOS defaults
+
+```bash
+bash ~/code/me/nix-config/bin/bootstrap.sh
+```
+
+The script sets the Finder, screenshot, and key repeat settings.
+
+### 12. Apply changes later
+
+```bash
+cd ~/code/me/nix-config
+git pull
+just switch
+```
 
 ---
 

@@ -1,6 +1,5 @@
-#!/usr/bin/env
-
-sh <(curl -L https://nixos.org/nix/install) --daemon --yes
+#!/usr/bin/env bash
+# Apply macOS defaults. Install Nix first. See docs/macOS.md.
 
 defaults write com.apple.screencapture type jpg
 # do not open previous previewed files (e.g. PDFs) when opening a new one

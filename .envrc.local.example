@@ -1,1 +1,3 @@
-export HM_FLAKE_ATTR="xluffy@Nguyens-MacBook-Pro.local"
+# Set to a homeConfigurations name in flake.nix.
+export HM_FLAKE_ATTR="quang.van.nguyen@Nguyens-MacBook-Pro.local"
+# export HM_FLAKE_ATTR="quangne@Quangs-Mac-mini"

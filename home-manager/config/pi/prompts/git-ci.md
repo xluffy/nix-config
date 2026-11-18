@@ -9,6 +9,7 @@ Rules for the commit message:
 - The first line should be a short summary of the changes, without emojis, must be 72 characters or fewer
 - Choose the correct type: feat, fix, docs, style, refactor, test, chore
 - Use bullet points for multiple changes, a maximum of 3-4 bullet points.
+- If the staged changes contain independent topics, split them into multiple commits. Each commit uses one type and the format below. Do not mix unrelated changes in one commit.
 - If there are no changes, or the input is blank - return a blank string
 
 Commit Types
@@ -40,7 +41,7 @@ Branch: <suggested-branch-name>
 Finally, ask the user to review the changes. If they approve, follow this workflow:
 
 1. Create a new branch from the current branch (do NOT checkout master/main).
-2. Commit the changes to the new branch.
+2. Commit the changes to the new branch. If you split the changes, stage and commit each group separately.
 3. Push the branch to the remote repository.
 4. Create a Pull Request (GitHub, gh) or Merge Request (GitLab, glab) for the branch.
    Use the following PR/MR description template:

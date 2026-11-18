@@ -118,6 +118,20 @@
           }
         ];
       };
+      "quangne@Quangs-Mac-mini" = mkHomeConfig {
+        system = "aarch64-darwin";
+        username = "quangne";
+        hasGUI = true;
+        extraModules = [
+          {
+            custom.shell.promptColor = {
+              primary = "33"; # Yellow
+              host = "35"; # Magenta
+              user = "38;5;51"; # Cyan username
+            };
+          }
+        ];
+      };
       "xluffy-zzbot@elbaf-sky-n100" = mkHomeConfig {
         system = "x86_64-linux";
         username = "xluffy-zzbot";

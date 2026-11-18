@@ -42,6 +42,7 @@ Home Manager configuration for macOS (MacBook Pro, aarch64-darwin) and Ubuntu/Ni
 | Host output name | System | User | GUI |
 |---|---|---|---|
 | `quang.van.nguyen@Nguyens-MacBook-Pro.local` | aarch64-darwin | quang.van.nguyen | yes |
+| `quangne@Quangs-Mac-mini` | aarch64-darwin | quangne | yes |
 | `xluffy-zzbot@elbaf-sky-n100` | x86_64-linux | xluffy-zzbot | no |
 
 Each host has custom `extraSpecialArgs`: `pkgs-unstable`, `llm-agents`, `agenix-cli`, `hasGUI`.

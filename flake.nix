@@ -6,7 +6,11 @@
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     llm-agents.url = "github:numtide/llm-agents.nix";
 
-    omp.url = "github:can1357/oh-my-pi/v18.18.1";
+    omp = {
+      url = "github:can1357/oh-my-pi/v19.0.1";
+      # omp's own locked nixpkgs lacks apple-sdk_27 (Apple Foundation Models bridge).
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
 
     home-manager = {
       url = "github:nix-community/home-manager/release-26.05";

@@ -8,7 +8,7 @@
 
     omp = {
       url = "github:can1357/oh-my-pi/v19.0.1";
-      # omp's own locked nixpkgs lacks apple-sdk_27 (Apple Foundation Models bridge).
+      # Share nixpkgs-unstable with the rest of the config.
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 

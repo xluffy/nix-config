@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  options,
   pkgs,
   ...
 }: let
@@ -48,6 +49,9 @@
 in {
   programs.omp = {
     enable = true;
+    # The Apple Foundation Models bridge needs Swift 6.4+ with a macOS 27 SDK.
+    # nixpkgs ships Swift 6.3, so the native build fails with the bridge on.
+    package = options.programs.omp.package.default.override {withAppleFm = false;};
     settings =
       minimalSettings
       // {
